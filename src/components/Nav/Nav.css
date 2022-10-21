@@ -1,4 +1,61 @@
+nav {
+    padding: 2% 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 40%;
+}
 .logo {
     font-family: 'Lessti';
     color: goldenrod;
+    font-size: 4rem;
+}
+.nav-icon {
+    color: gold;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon-filled {
+    font-variation-settings: 
+    'FILL' 1;
+}
+.nav-utilities {
+    display: flex;
+    width: 30%;
+    align-items: center;
+    gap: 10%;
+}
+.search-bar{
+    display: flex;
+    align-items: center;
+    background-color: gray;
+    border-radius: 4px;
+    padding: 1% 2% 1% 5%;
+}
+.search-bar input {
+    background-color: transparent;
+    outline: none;
+    padding-right: 5%;
+}
+.cart-container{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.cart-container div{
+    align-self: flex-start;
+    margin-left: auto;
+    background-color: gold;
+    width: 1.5rem;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    z-index: 2;
+    position: absolute;
+}
+.cart-container span{
+    z-index: 1;
+    padding: 0 0.5rem 0 0;
 }
