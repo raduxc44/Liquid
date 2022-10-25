@@ -1,9 +1,14 @@
 nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.nav-upper {
     padding: 2% 0;
     width: 100%;
     display: flex;
     justify-content: center;
-    gap: 40%;
+    gap: 25%;
 }
 .logo {
     font-family: 'Lessti';
@@ -17,7 +22,11 @@ nav {
     justify-content: center;
     align-items: center;
 }
-.icon-filled {
+.nav-icon:hover {
+    animation-name: icon-pulse;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    cursor: pointer;
     font-variation-settings: 
     'FILL' 1;
 }
@@ -25,13 +34,14 @@ nav {
     display: flex;
     width: 30%;
     align-items: center;
-    gap: 10%;
+    gap: 5%;
 }
 .search-bar{
     display: flex;
     align-items: center;
     background-color: gray;
     border-radius: 4px;
+    border: 0.3rem solid rgb(87, 87, 87);
     padding: 1% 2% 1% 5%;
 }
 .search-bar input {
@@ -43,6 +53,11 @@ nav {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+.cart-container:hover{
+    animation-name: icon-pulse;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
 }
 .cart-container div{
     align-self: flex-start;
@@ -58,4 +73,38 @@ nav {
 .cart-container span{
     z-index: 1;
     padding: 0 0.5rem 0 0;
+}
+.cart-container span:hover {
+    animation: none;
+}
+.nav-lower{
+    width: 75%;
+    padding: 2% 0 0 0;
+    background-color: transparent;
+}
+.primary-categ{
+    color: white;
+    position: relative;
+}
+.second-categ {
+    position: absolute;
+    width: 75%;
+}
+.nav-lower ul {
+    padding: 1% 0;
+    display: flex;
+    color: white;
+    justify-content: space-around;
+}
+.primary-categ ul{
+    color: gold;
+}
+.second-categ ul {
+    color: black;
+    background-color: gold;
+}
+@keyframes icon-pulse {
+    100% {
+        scale: 1.2;
+    }
 }
