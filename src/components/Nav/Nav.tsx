@@ -2,7 +2,7 @@ import './Nav.css'
 
 function Nav () {
     return(
-        <nav className='bg-black h-1/4'>
+        <nav className='bg-black'>
             <div className='nav-upper'>
                 <div>
                     <p className='logo text-5xl'>Liquid</p>
