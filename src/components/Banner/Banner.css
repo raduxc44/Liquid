@@ -1,0 +1,32 @@
+.banner-cont {
+    position: relative;
+    width: 100%;
+    height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.carousel-root {
+    height: 100%;
+}
+.carousel-root img{
+    height: 80vh
+}
+.banner-promo {
+    z-index: 3;
+    position: absolute;
+    bottom: 0;
+    font-family: 'Black Vintage';
+    background: rgb(193,190,183);
+    background: linear-gradient(0deg, rgba(182, 142, 47, 0.509) 0%, rgba(182, 142, 47, 0.699) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1%;
+    font-size: large;
+}
+.truck {
+    font-variation-settings: 
+    'wght' 300
+}
