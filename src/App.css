@@ -3,6 +3,10 @@
   font-family: 'Lessti';
   src: url(./fonts/Lessti-Regular.ttf);
 }
+@font-face {
+  font-family: 'Black Vintage';
+  src: url(./fonts/Black\ Vintage\ demo.ttf);
+}
 
 .App {
   text-align: center;
