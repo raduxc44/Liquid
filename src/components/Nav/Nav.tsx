@@ -25,6 +25,7 @@ function Nav () {
                     <ul>
                         <li>Spirits</li>
                         <li>Wine</li>
+                        <li>Champagne</li>
                         <li>Gift Baskets</li>
                         <li>Others</li>
                         <li>On Sale</li>

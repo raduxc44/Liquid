@@ -1,13 +1,10 @@
 .banner-cont {
     position: relative;
     width: 100%;
-    height: 75vh;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.carousel-root {
-    height: 100%;
+    background-color: black;
 }
 .carousel-root img{
     height: 80vh

@@ -20,6 +20,7 @@ nav {
     font-family: 'Lessti';
     color: goldenrod;
     font-size: 4rem;
+    user-select: none;
 }
 .nav-icon {
     color: gold;
