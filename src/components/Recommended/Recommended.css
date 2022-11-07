@@ -1,18 +1,30 @@
 .rec-cont {
-    height: 80vh;
     width: 75%;
+}
+.rec-item-wrapper{
+    background-color: rgb(230, 230, 230);
+    height: 50vh;
+    padding: 2%;
+    width: 100%;
+}
+.rec-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 10%;
+    height: 100%;
 }
-.rec-item{
-    background-color: gray;
-    height: 50vh;
-    padding: 5%;
+.rec-item-upper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+    gap: 1%;
+}
+.rec-item-upper img{
+    height: 30vh;
     width: 100%;
 }
-.rec-item img{
-    height: 80%;
-    width: 100%;
-}
+

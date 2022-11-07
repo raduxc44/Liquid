@@ -1,25 +1,21 @@
-.banner-cont {
+.banner-cont div{
     position: relative;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: black;
+    outline: none;
 }
-.carousel-root img{
-    height: 80vh
+.banner-img{
+    height: 70vh;
+    width: 100%;
 }
 .banner-promo {
-    z-index: 3;
+    width: 100%;
     position: absolute;
     bottom: 0;
+    left: 0;
     font-family: 'Black Vintage';
-    background: rgb(193,190,183);
-    background: linear-gradient(0deg, rgba(182, 142, 47, 0.509) 0%, rgba(182, 142, 47, 0.699) 100%);
+    background: linear-gradient(0deg, rgba(237, 171, 18, 0.738) 0%, rgba(252, 181, 15, 0.879) 100%);
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
     gap: 1%;
     font-size: large;
 }
