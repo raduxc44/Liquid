@@ -8,13 +8,15 @@ nav {
     width: 100%;
     font-family: 'Black Vintage';
     font-size: 18px;
+    background-color: black;
 }
 .nav-upper {
     padding: 1% 0 0 0;
     width: 100%;
     display: flex;
-    justify-content: center;
-    gap: 25%;
+    justify-content: space-around;
+    align-items: center;
+    background-color: black;
 }
 .logo {
     font-family: 'Lessti';
@@ -39,9 +41,10 @@ nav {
 }
 .nav-utilities {
     display: flex;
-    width: 30%;
     align-items: center;
-    gap: 5%;
+}
+.nav-utilities > div span {
+    margin: 0 1vw;
 }
 .search-bar{
     display: flex;
@@ -49,17 +52,23 @@ nav {
     background-color: gray;
     border-radius: 4px;
     border: 0.3rem solid rgb(87, 87, 87);
-    padding: 1% 2% 1% 5%;
+    padding: 1% 0 1% 2%;
+    font-size: 1rem;
+    width: 25rem;
 }
 .search-bar input {
     background-color: transparent;
     outline: none;
     padding-right: 5%;
+    width: 90%;
+    font-size: 22px;
+    height: 100%;
 }
 .cart-container{
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    padding: 0 1%;
 }
 .cart-container:hover{
     animation-name: icon-pulse;
@@ -77,21 +86,23 @@ nav {
     z-index: 2;
     position: absolute;
 }
-.cart-container span{
-    z-index: 1;
-    padding: 0 0.5rem 0 0;
-}
 .cart-container span:hover {
     animation: none;
 }
 .nav-lower{
     width: 75%;
     padding: 1% 0 0 0;
-    background-color: transparent;
+    background-color: black;
+}
+.nav-lower-mobile {
+    display: none;
 }
 .primary-categ{
     color: white;
     position: relative;
+}
+.primary-categ img {
+    display: none;
 }
 .second-categ {
     position: absolute;
@@ -113,5 +124,158 @@ nav {
 @keyframes icon-pulse {
     100% {
         scale: 1.2;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .nav-upper {
+        justify-content: space-between;
+        padding: 1% 5.5% 0 3%;
+        z-index: 2;
+    }
+    .nav-lower {
+        display: none;
+        align-self: flex-start;
+        width: 100%;
+        padding: 0 5%;
+        z-index: 1;
+        background-color: black;
+        position: absolute;
+        top: 20vh;
+    }
+    .primary-categ ul{
+        display: flex;
+        flex-direction: column;
+        height: 80vh;
+        overflow: scroll;
+        justify-content: flex-start;
+    }
+    .primary-categ li{
+        display: flex;
+        align-items: center;
+        gap: 5%;
+    }
+    .primary-categ img {
+        display: block;
+        width: 10vh;
+    }
+    .second-categ {
+        display: none;
+    }
+    .search-bar {
+        display: none;
+    }
+    .nav-lower-mobile {
+        display: block;
+        width: 100%;
+        color: gold;
+        background-color: black;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2% 4%;
+    }
+    .nav-mobile-menu {
+        gap: 10%;
+        display: flex;
+        justify-content: inherit;
+        align-items: center;
+        font-size: 30px;
+    }
+    .nav-mobile-utilities {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+    }
+    .nav-mobile-search-cont{
+        visibility: hidden;
+        margin-right: 2%;
+    }
+    .search-icon-mobile {
+        font-size: 40px;
+    }
+    .search-icon-mobile:hover {
+        animation-name: icon-pulse;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+        cursor: pointer;
+        font-variation-settings: 
+        'FILL' 1;
+    }
+
+    .nav-mobile-search-cont input {
+        width: 40vw;
+        display: flex;
+        align-items: center;
+        background-color: gray;
+        border-radius: 4px;
+        border: 0.3rem solid rgb(87, 87, 87);
+        padding: 1% 0 1% 2%;
+        font-size: 1rem;
+        width: 40vw;
+        outline: none;
+    }
+    .active {
+        display: block;
+        animation-name: animate__fadeInDown;
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+    }
+    .activating {
+        animation-name: fade-in;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+    }
+    .deactivating {
+        animation-name: fade-out;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .nav-lower {
+        top: 17vh;
+    }
+    .nav-mobile-search-cont input {
+        width: 25vw;
+    }
+    .nav-utilities div > span {
+        scale: 0.8;
+    }
+    .search-icon-mobile{
+        scale: 0.8;
+    }
+    .search-icon-mobile:hover {
+        animation: icon-pulse-small;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        
+    }
+    .primary-categ ul{
+        height: 85vh;
+    }
+}
+
+@keyframes icon-pulse-small {
+    100% {scale: 0.9}
+}
+
+@keyframes fade-in {
+    0% {
+        scale: 0.01;
+    }
+    100% {
+        visibility: visible;
+    }
+}
+@keyframes fade-out {
+    0% {
+        scale: 1;
+        visibility: visible;
+    }
+    100% {
+        scale: 0.01;
+        visibility: hidden;
     }
 }
