@@ -137,11 +137,12 @@ nav {
         display: none;
         align-self: flex-start;
         width: 100%;
-        padding: 0 5%;
-        z-index: 1;
+        padding: 2% 5%;
         background-color: black;
+        top: 16vh;
+        z-index: 1;
+        height: 85vh;
         position: absolute;
-        top: 20vh;
     }
     .primary-categ ul{
         display: flex;
@@ -174,6 +175,7 @@ nav {
         align-items: center;
         justify-content: space-between;
         padding: 2% 4%;
+        z-index: 2;
     }
     .nav-mobile-menu {
         gap: 10%;
@@ -235,7 +237,14 @@ nav {
 
 @media screen and (max-width: 500px) {
     .nav-lower {
-        top: 17vh;
+        top: 13vh;
+        z-index: 1;
+        height: 88vh;
+        position: absolute;
+    }
+    .nav-lower-mobile {
+        z-index: 2;
+        position: relative;
     }
     .nav-mobile-search-cont input {
         width: 25vw;
@@ -253,6 +262,7 @@ nav {
         
     }
     .primary-categ ul{
+        padding: 7% 0 0 0;
         height: 85vh;
     }
 }
