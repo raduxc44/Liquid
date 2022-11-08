@@ -4,36 +4,46 @@ import BasicJack from '../../images/Whisky/standard-jack.jpeg'
 
 function Nav () {
 
-    function openCategMobile () {
+
+    // Applies in and out animations on categories (mobile version only)
+
+    let categAnimationDelay:number = 0;
+    let searchAnimationDelay:number = 0;
+
+    function openCategMobile () { 
         let mobileCateg = document.querySelector('.nav-lower') as HTMLElement;
         let deactivate = () => {
             mobileCateg.style.removeProperty('display')
             mobileCateg.classList.toggle('animate__fadeOutLeft')
+            categAnimationDelay = 0
         }
-        if(mobileCateg.classList.contains('animate__fadeInLeft')) {
+        if(mobileCateg.classList.contains('animate__fadeInLeft') && categAnimationDelay === 1) {
             mobileCateg.classList.toggle('animate__fadeInLeft');
             mobileCateg.classList.toggle('animate__fadeOutLeft');
-            setTimeout(deactivate, 1000);
+            // setTimeout(deactivate, 1000);
+            setTimeout(deactivate, 1000)
         }
-        else {
+        else if(categAnimationDelay === 0 && !mobileCateg.classList.contains('animate__fadeInLeft')) {
+            setTimeout(() => {categAnimationDelay = 1}, 1000)
             mobileCateg.style.display = 'block'
             mobileCateg.classList.toggle('animate__fadeInLeft')
         }
-        
     }
 
     function openSearchMobile () {
         let mobileSearch = document.querySelector('.nav-mobile-search-cont') as HTMLElement;
         let deactivate = () => {
-            mobileSearch.classList.toggle('deactivating')
+            mobileSearch.classList.toggle('searchBoxAnimationOff')
+            searchAnimationDelay = 0;
         }
-        if(mobileSearch.classList.contains('activating')) {
-            mobileSearch.classList.toggle('activating')
-            mobileSearch.classList.toggle('deactivating')
+        if(mobileSearch.classList.contains('searchBoxAnimationOn') && searchAnimationDelay === 1) {
+            mobileSearch.classList.toggle('searchBoxAnimationOn')
+            mobileSearch.classList.toggle('searchBoxAnimationOff')
             setTimeout(deactivate, 1000);
         }
-        else {
-            mobileSearch.classList.toggle('activating')
+        else if(searchAnimationDelay === 0 && !mobileSearch.classList.contains('searchBoxAnimationOn')){
+            setTimeout(() => {searchAnimationDelay = 1}, 1000)
+            mobileSearch.classList.toggle('searchBoxAnimationOn')
         }
     }
 
@@ -41,7 +51,7 @@ function Nav () {
         <nav>
             <div className='nav-upper'>
                 <div>
-                    <p className='logo text-5xl'>Liquid</p>
+                    <p className='logo'>Liquid</p>
                 </div>
                 <div className="nav-utilities">
                     <div className='search-bar'>

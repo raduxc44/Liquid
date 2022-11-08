@@ -15,14 +15,13 @@ nav {
     width: 100%;
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    background-color: black;
 }
 .logo {
     font-family: 'Lessti';
     color: goldenrod;
     font-size: 4rem;
     user-select: none;
+    line-height: 1;
 }
 .nav-icon {
     color: gold;
@@ -49,11 +48,11 @@ nav {
 .search-bar{
     display: flex;
     align-items: center;
-    background-color: gray;
+    background-color: #8080804f;
+    color: gold;
     border-radius: 4px;
     border: 0.3rem solid rgb(87, 87, 87);
     padding: 1% 0 1% 2%;
-    font-size: 1rem;
     width: 25rem;
 }
 .search-bar input {
@@ -62,7 +61,6 @@ nav {
     padding-right: 5%;
     width: 90%;
     font-size: 22px;
-    height: 100%;
 }
 .cart-container{
     display: flex;
@@ -76,8 +74,6 @@ nav {
     animation-fill-mode: forwards;
 }
 .cart-container div{
-    align-self: flex-start;
-    margin-left: auto;
     background-color: gold;
     width: 1.5rem;
     display: flex;
@@ -85,6 +81,7 @@ nav {
     border-radius: 50%;
     z-index: 2;
     position: absolute;
+    user-select: none;
 }
 .cart-container span:hover {
     animation: none;
@@ -92,89 +89,44 @@ nav {
 .nav-lower{
     width: 75%;
     padding: 1% 0 0 0;
-    background-color: black;
 }
 .nav-lower-mobile {
     display: none;
 }
-.primary-categ{
-    color: white;
-    position: relative;
-}
 .primary-categ img {
     display: none;
+}
+.primary-categ ul{
+    color: gold;
 }
 .second-categ {
     position: absolute;
     width: 75%;
 }
-.nav-lower ul {
-    padding: 0.5% 0;
-    display: flex;
-    color: white;
-    justify-content: space-around;
-}
-.primary-categ ul{
-    color: gold;
-}
 .second-categ ul {
-    color: black;
     background-color: gold;
 }
-@keyframes icon-pulse {
-    100% {
-        scale: 1.2;
-    }
+.nav-lower ul {
+    padding: 0.8% 0;
+    display: flex;
+    justify-content: space-around;
 }
 
 @media screen and (max-width: 1000px) {
     .nav-upper {
         justify-content: space-between;
-        padding: 1% 5.5% 0 3%;
-        z-index: 2;
-    }
-    .nav-lower {
-        display: none;
-        align-self: flex-start;
-        width: 100%;
-        padding: 2% 5%;
-        background-color: black;
-        top: 16vh;
-        z-index: 1;
-        height: 85vh;
-        position: absolute;
-    }
-    .primary-categ ul{
-        display: flex;
-        flex-direction: column;
-        height: 80vh;
-        overflow: scroll;
-        justify-content: flex-start;
-    }
-    .primary-categ li{
-        display: flex;
-        align-items: center;
-        gap: 5%;
-    }
-    .primary-categ img {
-        display: block;
-        width: 10vh;
-    }
-    .second-categ {
-        display: none;
+        padding: 1% 5.5% 1.5% 3%;
     }
     .search-bar {
         display: none;
     }
     .nav-lower-mobile {
-        display: block;
         width: 100%;
         color: gold;
-        background-color: black;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 2% 4%;
+        padding: 2% 4% 1% 4%;
         z-index: 2;
     }
     .nav-mobile-menu {
@@ -193,6 +145,16 @@ nav {
         visibility: hidden;
         margin-right: 2%;
     }
+    .nav-mobile-search-cont input {
+        width: 40vw;
+        background-color: gray;
+        border-radius: 4px;
+        border: 0.3rem solid rgb(87, 87, 87);
+        padding: 1% 0 1% 2%;
+        font-size: 1rem;
+        width: 40vw;
+        outline: none;
+    }
     .search-icon-mobile {
         font-size: 40px;
     }
@@ -204,31 +166,41 @@ nav {
         font-variation-settings: 
         'FILL' 1;
     }
-
-    .nav-mobile-search-cont input {
-        width: 40vw;
+    .nav-lower {
+        display: none;
+        width: 100%;
+        padding: 2% 5%;
+        background-color: black;
+        top: 16vh;
+        z-index: 1;
+        margin-top: 2%;
+        height: 85vh;
+        position: absolute;
+    }
+    .primary-categ ul{
+        flex-direction: column;
+        height: 80vh;
+        overflow: scroll;
+        justify-content: flex-start;
+    }
+    .primary-categ li{
         display: flex;
         align-items: center;
-        background-color: gray;
-        border-radius: 4px;
-        border: 0.3rem solid rgb(87, 87, 87);
-        padding: 1% 0 1% 2%;
-        font-size: 1rem;
-        width: 40vw;
-        outline: none;
+        gap: 5%;
     }
-    .active {
+    .primary-categ img {
         display: block;
-        animation-name: animate__fadeInDown;
-        animation-duration: 2s;
-        animation-fill-mode: forwards;
+        width: 10vh;
     }
-    .activating {
+    .second-categ {
+        display: none;
+    }
+    .searchBoxAnimationOn {
         animation-name: fade-in;
         animation-duration: 1s;
         animation-fill-mode: forwards;
     }
-    .deactivating {
+    .searchBoxAnimationOff {
         animation-name: fade-out;
         animation-duration: 1s;
         animation-fill-mode: forwards;
@@ -236,12 +208,6 @@ nav {
 }
 
 @media screen and (max-width: 500px) {
-    .nav-lower {
-        top: 13vh;
-        z-index: 1;
-        height: 88vh;
-        position: absolute;
-    }
     .nav-lower-mobile {
         z-index: 2;
         position: relative;
@@ -261,16 +227,24 @@ nav {
         animation-fill-mode: forwards;
         
     }
+    .nav-lower {
+        z-index: 1;
+        height: 88vh;
+        position: absolute;
+    }
     .primary-categ ul{
-        padding: 7% 0 0 0;
-        height: 85vh;
+        height: 83vh;
     }
 }
 
+@keyframes icon-pulse {
+    100% {
+        scale: 1.2;
+    }
+}
 @keyframes icon-pulse-small {
     100% {scale: 0.9}
 }
-
 @keyframes fade-in {
     0% {
         scale: 0.01;
