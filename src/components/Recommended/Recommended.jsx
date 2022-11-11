@@ -8,7 +8,13 @@ function Recommended () {
     return(
         <div className="rec-cont">
             <div className='rec-section'>
-                <h2>Recommended products</h2>
+                <div className='rec-section-msg'>
+                    <p>Recommended products</p>
+                    <p>Only the best offers on your favorites</p>
+                </div>
+                <div>
+                    <p className='rec-section-all'>See all</p>
+                </div>
             </div>
             <Slider 
             dots = {true}
