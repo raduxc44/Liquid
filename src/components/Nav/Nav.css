@@ -141,17 +141,22 @@ nav {
         align-items: center;
     }
     .nav-mobile-search-cont{
-        visibility: hidden;
-        margin-right: 2%;
+        width: 100vw;
+        justify-content: center;
+        padding: 2% 2% 3% 2%;
+        display: none;
+        z-index: 1;
+        position: absolute;
+        top: 100%;
+        background-color: black;
     }
     .nav-mobile-search-cont input {
-        width: 40vw;
+        width: 90%;
         background-color: gray;
         border-radius: 4px;
         border: 0.3rem solid rgb(87, 87, 87);
         padding: 1% 0 1% 2%;
         font-size: 1rem;
-        width: 40vw;
         outline: none;
     }
     .search-icon-mobile {
@@ -194,25 +199,12 @@ nav {
     .second-categ {
         display: none;
     }
-    .searchBoxAnimationOn {
-        animation-name: fade-in;
-        animation-duration: 1s;
-        animation-fill-mode: forwards;
-    }
-    .searchBoxAnimationOff {
-        animation-name: fade-out;
-        animation-duration: 1s;
-        animation-fill-mode: forwards;
-    }
 }
 
 @media screen and (max-width: 500px) {
     .nav-lower-mobile {
         z-index: 2;
         position: relative;
-    }
-    .nav-mobile-search-cont input {
-        width: 25vw;
     }
     .nav-utilities div > span {
         scale: 0.8;
@@ -243,22 +235,4 @@ nav {
 }
 @keyframes icon-pulse-small {
     100% {scale: 0.9}
-}
-@keyframes fade-in {
-    0% {
-        scale: 0.01;
-    }
-    100% {
-        visibility: visible;
-    }
-}
-@keyframes fade-out {
-    0% {
-        scale: 1;
-        visibility: visible;
-    }
-    100% {
-        scale: 0.01;
-        visibility: hidden;
-    }
 }

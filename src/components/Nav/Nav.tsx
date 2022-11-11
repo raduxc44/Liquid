@@ -33,17 +33,19 @@ function Nav () {
     function openSearchMobile () {
         let mobileSearch = document.querySelector('.nav-mobile-search-cont') as HTMLElement;
         let deactivate = () => {
-            mobileSearch.classList.toggle('searchBoxAnimationOff')
+            mobileSearch.classList.toggle('animate__fadeOutUp')
+            mobileSearch.style.removeProperty('display')
             searchAnimationDelay = 0;
         }
-        if(mobileSearch.classList.contains('searchBoxAnimationOn') && searchAnimationDelay === 1) {
-            mobileSearch.classList.toggle('searchBoxAnimationOn')
-            mobileSearch.classList.toggle('searchBoxAnimationOff')
+        if(mobileSearch.classList.contains('animate__fadeInDown') && searchAnimationDelay === 1) {
+            mobileSearch.classList.toggle('animate__fadeInDown')
+            mobileSearch.classList.toggle('animate__fadeOutUp')
             setTimeout(deactivate, 1000);
         }
-        else if(searchAnimationDelay === 0 && !mobileSearch.classList.contains('searchBoxAnimationOn')){
+        else if(searchAnimationDelay === 0 && !mobileSearch.classList.contains('animate__fadeInDown')){
             setTimeout(() => {searchAnimationDelay = 1}, 1000)
-            mobileSearch.classList.toggle('searchBoxAnimationOn')
+            mobileSearch.style.display = 'flex'
+            mobileSearch.classList.toggle('animate__fadeInDown')
         }
     }
 
@@ -72,11 +74,11 @@ function Nav () {
                     <p>Products</p>
                 </div>
                 <div className='nav-mobile-utilities'>
-                    <div className='nav-mobile-search-cont'>
-                        <input type="text" placeholder='Search'/>
-                    </div>
                     <span onClick={openSearchMobile} className='material-symbols-outlined search-icon-mobile'>search</span>
                 </div>
+            </div>
+            <div className='nav-mobile-search-cont animate__animated'>
+                <input type="text" placeholder='Search'/>
             </div>
             <div className='nav-lower animate__animated'>
                 <div className='primary-categ'>
