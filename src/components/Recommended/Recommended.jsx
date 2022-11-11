@@ -9,11 +9,11 @@ function Recommended () {
         <div className="rec-cont">
             <div className='rec-section'>
                 <div className='rec-section-msg'>
-                    <p>Recommended products</p>
+                    <p className='rec-section-msg-first'>Recommended products</p>
                     <p>Only the best offers on your favorites</p>
                 </div>
-                <div>
-                    <p className='rec-section-all'>See all</p>
+                <div className='rec-section-all'>
+                    <p>See all</p>
                 </div>
             </div>
             <Slider 
