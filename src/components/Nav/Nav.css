@@ -66,7 +66,6 @@ nav {
 .cart-container{
     display: flex;
     justify-content: flex-end;
-    padding: 0 1%;
 }
 .cart-container:hover{
     animation-name: icon-pulse;
@@ -87,17 +86,11 @@ nav {
     animation: none;
 }
 .nav-lower{
-    width: 100%;
+    width: 75%;
     padding: 1% 0 0 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 .nav-lower-mobile {
     display: none;
-}
-.primary-categ {
-    width: 100%;
 }
 .primary-categ img {
     display: none;
@@ -106,7 +99,8 @@ nav {
     color: gold;
 }
 .second-categ {
-    width: 100%;
+    position: absolute;
+    width: 75%;
 }
 .second-categ ul {
     background-color: gold;
@@ -176,7 +170,7 @@ nav {
         width: 100%;
         padding: 2% 5%;
         background-color: black;
-        top: 16vh;
+        top: 13vh;
         z-index: 1;
         margin-top: 2%;
         height: 85vh;
