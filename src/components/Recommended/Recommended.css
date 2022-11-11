@@ -1,5 +1,28 @@
 .rec-cont {
-    width: 75%;
+    margin: 5% 0;
+}
+.rec-section {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 2% 0;
+}
+.rec-section-msg {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+}
+.rec-section-all {
+    border: 1px solid black;
+    padding: 0 1%;
+    font-weight: bold;
+}
+.rec-section-msg-first {
+    font-weight: bold;
+    font-size: 20px;
+}
+.rec-cont {
+    width: 90%;
 }
 .rec-item-wrapper{
     background-color: rgb(230, 230, 230);
