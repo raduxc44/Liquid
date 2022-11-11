@@ -14,7 +14,6 @@ function Banner () {
             showThumbs = {false}
             showStatus = {false}
             stopOnHover = {false}
-            swipeable = {false}
             >
                 <div className='banner-cont whisky-banner'>
                     <div className='banner-promo'>
