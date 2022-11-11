@@ -1,10 +1,6 @@
 import './Banner.css'
-import CoverSprits from '../../images/cover-sprits.jpg'
-import CoverWines from '../../images/cover-wines.jpg'
-import CoverBaskets from '../../images/cover-basket.jpg'
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import { Carousel } from 'react-responsive-carousel';
-
 
 function Banner () {
     return (
@@ -20,20 +16,17 @@ function Banner () {
             stopOnHover = {false}
             swipeable = {false}
             >
-                <div>
-                    <img className='banner-img' src={CoverSprits} alt="Sprits"/>
+                <div className='banner-cont whisky-banner'>
                     <div className='banner-promo'>
                         <span className="material-symbols-outlined truck">local_shipping</span><p>Free delivery over $20</p>
                     </div>
                 </div>
-                <div>
-                    <img className='banner-img' src={CoverWines} alt="Wines"/>
+                <div className='banner-cont wines-banner'>
                     <div className='banner-promo'>
                         <span className="material-symbols-outlined truck">local_shipping</span><p>Free delivery over $20</p>
                     </div>
                 </div>
-                <div>
-                    <img className='banner-img' src={CoverBaskets} alt="Baskets"/>
+                <div className='banner-cont champagne-banner'>
                     <div className='banner-promo'>
                         <span className="material-symbols-outlined truck">local_shipping</span><p>Free delivery over $20</p>
                     </div>
