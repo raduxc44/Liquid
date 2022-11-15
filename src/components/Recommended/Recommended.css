@@ -40,6 +40,9 @@
     padding: 15%;
     width: 100%;
 }
+.rec-item-wrapper p {
+    text-align: center;
+}
 .rec-item {
     display: flex;
     flex-direction: column;
