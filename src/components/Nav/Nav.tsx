@@ -17,8 +17,8 @@ function Nav () {
         let deactivateCateg = () => {
             mobileCateg.classList.toggle('animate__fadeOutLeft');
             setTimeout(() => {
-                mobileCateg.style.removeProperty('display')
                 mobileCateg.classList.toggle('animate__fadeOutLeft')
+                mobileCateg.style.removeProperty('display')
                 categAnimationDelay = 0
             }, 1000)   
         }
