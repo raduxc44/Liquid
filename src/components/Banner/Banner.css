@@ -24,6 +24,7 @@
     left: 0;
     font-family: 'Black Vintage';
     background: linear-gradient(0deg, rgba(237, 171, 18, 0.738) 0%, rgba(252, 181, 15, 0.879) 100%);
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
