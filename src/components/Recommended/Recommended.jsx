@@ -10,7 +10,6 @@ function Recommended () {
             <div className='rec-section'>
                 <div className='rec-section-msg'>
                     <p className='rec-section-msg-first'>Recommended products</p>
-                    <p>Only the best offers on your favorites</p>
                 </div>
                 <div className='rec-section-all'>
                     <p>See all</p>
@@ -21,7 +20,7 @@ function Recommended () {
             infinite = {true}
             slidesToShow = {4}
             slidesToScroll = {1}
-            arrows = {true}
+            arrows = {false}
             responsive = {[
                 {
                     breakpoint: 1001,
@@ -44,7 +43,7 @@ function Recommended () {
                             <p>Jack Daniel's 0.7L</p>
                             <p>70CL/40%</p>
                         </div>
-                        <p>Check it out</p>
+                        <p className='rec-item-check'>Check it out</p>
                     </div>
                 </div>
                 <div className='rec-item-wrapper'>
@@ -54,7 +53,7 @@ function Recommended () {
                             <p>Jack Daniel's 0.7L</p>
                             <p>70CL/40%</p>
                         </div>
-                        <p>Check it out</p>
+                        <p className='rec-item-check'>Check it out</p>
                     </div>
                 </div>
                 <div className='rec-item-wrapper'>
@@ -64,7 +63,7 @@ function Recommended () {
                             <p>Jack Daniel's 0.7L</p>
                             <p>70CL/40%</p>
                         </div>
-                        <p>Check it out</p>
+                        <p className='rec-item-check'>Check it out</p>
                     </div>
                 </div>
                 <div className='rec-item-wrapper'>
@@ -74,7 +73,7 @@ function Recommended () {
                             <p>Jack Daniel's 0.7L</p>
                             <p>70CL/40%</p>
                         </div>
-                        <p>Check it out</p>
+                        <p className='rec-item-check'>Check it out</p>
                     </div>
                 </div>
                 <div className='rec-item-wrapper'>
@@ -84,7 +83,7 @@ function Recommended () {
                             <p>Jack Daniel's 0.7L</p>
                             <p>70CL/40%</p>
                         </div>
-                        <p>Check it out</p>
+                        <p className='rec-item-check'>Check it out</p>
                     </div>
                 </div>
                 <div className='rec-item-wrapper'>
@@ -94,7 +93,7 @@ function Recommended () {
                             <p>Jack Daniel's 0.7L</p>
                             <p>70CL/40%</p>
                         </div>
-                        <p>Check it out</p>
+                        <p className='rec-item-check'>Check it out</p>
                     </div>
                 </div>
             </Slider>
