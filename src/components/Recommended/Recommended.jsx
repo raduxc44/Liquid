@@ -53,7 +53,7 @@ function Recommended () {
                     <div className='rec-item-wrapper'>
                     <div className='rec-item'>
                         <div className='rec-item-upper'>
-                            <img className='carousel-img' src={require(`../../images/Whisky/${whisky.imageTag}.jpg`)} alt={whisky.name}/>
+                            <img className='carousel-img' src={require(`../../images/Whisky-low-res/${whisky.imageTag}.jpg`)} alt={whisky.name}/>
                             <p>{whisky.name}</p>
                             <p>{whisky.quantity}/{whisky.strength}</p>
                         </div>
