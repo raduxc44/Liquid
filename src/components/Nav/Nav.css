@@ -101,7 +101,8 @@ nav {
 }
 .primary-categ ul{
     color: gold;
-    border: 1px solid gold;
+    border: 3px solid gold;
+    border-radius: 5px;
     border-bottom: none;
 }
 .second-categ {
@@ -110,6 +111,9 @@ nav {
 }
 .second-categ ul {
     background-color: gold;
+    border: 3px solid black;
+    border-top: none;
+    border-radius: 5px;
     color: black;
 }
 .nav-lower ul {

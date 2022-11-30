@@ -1,6 +1,6 @@
 import './Nav.css'
 import 'animate.css';
-import BasicJack from '../../images/Whisky/jack.jpg'
+import BasicJack from '../../images/Whisky-high-res/jack.jpg'
 
 function Nav () {
 

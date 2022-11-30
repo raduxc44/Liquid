@@ -37,7 +37,7 @@
 .rec-item-wrapper{
     background-color: goldenrod;
     color: black;
-    padding: 15%;
+    padding: 10%;
     width: 100%;
 }
 .rec-item-wrapper p {
@@ -48,15 +48,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5%;
     height: 100%;
+    gap: 10px;
 }
 .rec-item-upper {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1%;
+    gap: 5px;
     font-family: 'Roboto';
 }
 .rec-item-check {
@@ -71,7 +71,7 @@
     animation-fill-mode: forwards;
 }
 .rec-item-upper img{
-    height: 30vh;
+    height: 35vh;
     width: 15vw;
     object-fit: cover;
 }
