@@ -1,0 +1,58 @@
+{"categories": {
+        "spirits":{
+            "whisky":{
+                "jack": {
+                    "name":"Jack Daniel's",
+                    "imageTag":"standard-jack.jpeg",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":15
+                },
+                "red-label":{
+                    "name":"Red Label",
+                    "imageTag":"red-label.jpg",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":10.5
+                },
+                "gallantry":{
+                    "name":"Gallantry",
+                    "imageTag":"gallantry.jpg",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":13
+                },
+                "glenfiddich":{
+                    "name":"Glenfiddich",
+                    "imageTag":"glenfiddich.jpg",
+                    "quantity":"0.5L",
+                    "strength":"40%",
+                    "price":15
+                },
+                "chivas":{
+                    "name":"Chivas Regal",
+                    "imageTag":"chivas.jpg",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":27
+                }
+            },
+            "vodka":{},
+            "cognac":{},
+            "gin":{},
+            "rum":{},
+            "tequila":{},
+            "liquor":{}
+        },
+        "wine":{
+            "red wine":{},
+            "white wine": {},
+            "rose wine": {}
+        },
+        "champagne":{},
+        "baskets":{},
+        "others":{},
+        "on-sale":{},
+        "daily-offer":{}
+    }   
+}
