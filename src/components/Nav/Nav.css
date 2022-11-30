@@ -101,6 +101,8 @@ nav {
 }
 .primary-categ ul{
     color: gold;
+    border: 1px solid gold;
+    border-bottom: none;
 }
 .second-categ {
     position: absolute;
@@ -163,6 +165,9 @@ nav {
         padding: 1% 0 1% 2%;
         font-size: 1rem;
         outline: none;
+    }
+    .primary-categ ul {
+        border: none;
     }
     .search-icon-mobile {
         font-size: 40px;
