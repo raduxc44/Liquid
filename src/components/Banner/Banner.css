@@ -22,6 +22,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
+    height: 10%;
     font-family: 'Black Vintage';
     background: linear-gradient(0deg, rgba(237, 171, 18, 0.738) 0%, rgba(252, 181, 15, 0.879) 100%);
     color: black;
@@ -42,10 +43,5 @@
     }
     .banner-cont > *{
         object-fit: scale-down;
-    }
-}
-@media screen and (max-width: 750px) {
-    .banner-promo{
-        height: 10%;
     }
 }
