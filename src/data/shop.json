@@ -1,40 +1,96 @@
 {"categories": {
         "spirits":{
             "whisky":{
-                "jack": {
-                    "name":"Jack Daniel's",
-                    "imageTag":"standard-jack.jpeg",
+                "bowmore":{
+                    "name":"Bowmore",
+                    "imageTag":"bowmore",
                     "quantity":"0.7L",
                     "strength":"40%",
-                    "price":15
+                    "price":40
                 },
-                "red-label":{
-                    "name":"Red Label",
-                    "imageTag":"red-label.jpg",
+                "chivas":{
+                    "name":"Chivas Regal",
+                    "imageTag":"chivas",
                     "quantity":"0.7L",
                     "strength":"40%",
-                    "price":10.5
+                    "price":27
+                },
+                "four-roses": {
+                    "name":"Four Roses",
+                    "imageTag":"four-roses",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":18
                 },
                 "gallantry":{
                     "name":"Gallantry",
-                    "imageTag":"gallantry.jpg",
+                    "imageTag":"gallantry",
                     "quantity":"0.7L",
                     "strength":"40%",
                     "price":13
                 },
                 "glenfiddich":{
                     "name":"Glenfiddich",
-                    "imageTag":"glenfiddich.jpg",
+                    "imageTag":"glenfiddich",
                     "quantity":"0.5L",
                     "strength":"40%",
                     "price":15
                 },
-                "chivas":{
-                    "name":"Chivas Regal",
-                    "imageTag":"chivas.jpg",
+                "jack": {
+                    "name":"Jack Daniel's",
+                    "imageTag":"jack",
                     "quantity":"0.7L",
                     "strength":"40%",
-                    "price":27
+                    "price":15
+                },
+                "green-label": {
+                    "name":"Green Label",
+                    "imageTag":"green-label",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":47
+                },
+                "macallan": {
+                    "name":"Macallan",
+                    "imageTag":"macallan",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":95
+                },
+                "monkey-shoulder": {
+                    "name":"Monkey Shoulder",
+                    "imageTag":"monkey-shoulder",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":39
+                },
+                "red-label":{
+                    "name":"Red Label",
+                    "imageTag":"red-label",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":10.5
+                },
+                "sazerac":{
+                    "name":"Sazerac Rye",
+                    "imageTag":"sazerac",
+                    "quantity":"0.7L",
+                    "strength":"45%",
+                    "price":56
+                },
+                "talisker":{
+                    "name":"Talisker",
+                    "imageTag":"talisker",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":255
+                },
+                "the-glenlivet":{
+                    "name":"The Glenlivet",
+                    "imageTag":"the-glenlivet",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":38
                 }
             },
             "vodka":{},

@@ -8,12 +8,13 @@ let randomWhiskyArr = [];
 (function randomizer () {
     let items = require('../../data/shop.json');
     let keys = Object.keys(items.categories.spirits.whisky);
-    while(randomWhiskyArr.length < 5) {
+    while(randomWhiskyArr.length < 8) {
             let randomWhisky = keys[Math.floor(Math.random() * keys.length)];
             let randomWhiskyItem = items.categories.spirits.whisky[randomWhisky];
             if(!randomWhiskyArr.includes(randomWhiskyItem)) {randomWhiskyArr.push(randomWhiskyItem);
         } 
     }
+    console.log(randomWhiskyArr)
 })()
 
 function Recommended () {
@@ -52,7 +53,7 @@ function Recommended () {
                     <div className='rec-item-wrapper'>
                     <div className='rec-item'>
                         <div className='rec-item-upper'>
-                            <img className='carousel-img' src={require(`../../images/Whisky/${whisky.imageTag}`)} alt={whisky.name}/>
+                            <img className='carousel-img' src={require(`../../images/Whisky/${whisky.imageTag}.jpg`)} alt={whisky.name}/>
                             <p>{whisky.name}</p>
                             <p>{whisky.quantity}/{whisky.strength}</p>
                         </div>

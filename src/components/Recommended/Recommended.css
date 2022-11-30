@@ -72,7 +72,8 @@
 }
 .rec-item-upper img{
     height: 30vh;
-    width: 100%;
+    width: 15vw;
+    object-fit: cover;
 }
 
 .slick-dots {
@@ -91,9 +92,20 @@
         color: goldenrod;
     }
 }
-
+@media screen and (max-width: 1000px) {
+    .rec-item-upper img{
+        height: 35vh;
+        width: 30vw;
+        object-fit: cover;
+    }
+}
 @media screen and (max-width: 500px) {
     .rec-cont {
         margin: 10% 0;
+    }
+    .rec-item-upper img{
+        height: 30vh;
+        width: 40vw;
+        object-fit: cover;
     }
 }
