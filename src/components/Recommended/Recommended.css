@@ -35,7 +35,7 @@
     width: 90%;
 }
 .rec-item-wrapper{
-    background-color: gold;
+    background-color: goldenrod;
     color: black;
     padding: 15%;
     width: 100%;
@@ -76,7 +76,7 @@
 }
 
 .slick-dots {
-    background-color: gold;
+    background-color: goldenrod;
 }
 
 @keyframes see-all-color {
@@ -88,7 +88,7 @@
 @keyframes check-out-color {
     100% {
         background-color: black;
-        color: gold;
+        color: goldenrod;
     }
 }
 

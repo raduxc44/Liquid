@@ -1,8 +1,20 @@
 import './Recommended.css'
-import BasicJack from '../../images/Whisky/standard-jack.jpeg'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
+
+let randomWhiskyArr = [];
+
+(function randomizer () {
+    let items = require('../../data/shop.json');
+    let keys = Object.keys(items.categories.spirits.whisky);
+    while(randomWhiskyArr.length < 5) {
+            let randomWhisky = keys[Math.floor(Math.random() * keys.length)];
+            let randomWhiskyItem = items.categories.spirits.whisky[randomWhisky];
+            if(!randomWhiskyArr.includes(randomWhiskyItem)) {randomWhiskyArr.push(randomWhiskyItem);
+        } 
+    }
+})()
 
 function Recommended () {
     return(
@@ -36,66 +48,18 @@ function Recommended () {
                 }
             ]}
             >
-                <div className='rec-item-wrapper'>
+                {randomWhiskyArr.map((whisky) => (
+                    <div className='rec-item-wrapper'>
                     <div className='rec-item'>
                         <div className='rec-item-upper'>
-                            <img className='carousel-img' src={BasicJack} alt="Sprits"/>
-                            <p>Jack Daniel's 0.7L</p>
-                            <p>70CL/40%</p>
+                            <img className='carousel-img' src={require(`../../images/Whisky/${whisky.imageTag}`)} alt={whisky.name}/>
+                            <p>{whisky.name}</p>
+                            <p>{whisky.quantity}/{whisky.strength}</p>
                         </div>
                         <p className='rec-item-check'>Check it out</p>
                     </div>
-                </div>
-                <div className='rec-item-wrapper'>
-                    <div className='rec-item'>
-                        <div className='rec-item-upper'>
-                            <img className='carousel-img' src={BasicJack} alt="Sprits"/>
-                            <p>Jack Daniel's 0.7L</p>
-                            <p>70CL/40%</p>
-                        </div>
-                        <p className='rec-item-check'>Check it out</p>
                     </div>
-                </div>
-                <div className='rec-item-wrapper'>
-                    <div className='rec-item'>
-                        <div className='rec-item-upper'>
-                            <img className='carousel-img' src={BasicJack} alt="Sprits"/>
-                            <p>Jack Daniel's 0.7L</p>
-                            <p>70CL/40%</p>
-                        </div>
-                        <p className='rec-item-check'>Check it out</p>
-                    </div>
-                </div>
-                <div className='rec-item-wrapper'>
-                    <div className='rec-item'>
-                        <div className='rec-item-upper'>
-                            <img className='carousel-img' src={BasicJack} alt="Sprits"/>
-                            <p>Jack Daniel's 0.7L</p>
-                            <p>70CL/40%</p>
-                        </div>
-                        <p className='rec-item-check'>Check it out</p>
-                    </div>
-                </div>
-                <div className='rec-item-wrapper'>
-                    <div className='rec-item'>
-                        <div className='rec-item-upper'>
-                            <img className='carousel-img' src={BasicJack} alt="Sprits"/>
-                            <p>Jack Daniel's 0.7L</p>
-                            <p>70CL/40%</p>
-                        </div>
-                        <p className='rec-item-check'>Check it out</p>
-                    </div>
-                </div>
-                <div className='rec-item-wrapper'>
-                    <div className='rec-item'>
-                        <div className='rec-item-upper'>
-                            <img className='carousel-img' src={BasicJack} alt="Sprits"/>
-                            <p>Jack Daniel's 0.7L</p>
-                            <p>70CL/40%</p>
-                        </div>
-                        <p className='rec-item-check'>Check it out</p>
-                    </div>
-                </div>
+                ))}
             </Slider>
         </div>
     )
