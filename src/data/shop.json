@@ -1,6 +1,6 @@
 {"categories": {
         "spirits":{
-            "whisky":{
+            "Whisky":{
                 "bowmore":{
                     "name":"Bowmore",
                     "imageTag":"bowmore",
@@ -93,21 +93,34 @@
                     "price":38
                 }
             },
-            "vodka":{},
-            "cognac":{},
-            "gin":{},
-            "rum":{},
-            "tequila":{},
-            "liquor":{}
+            "Vodka":{},
+            "Cognac":{},
+            "Gin":{},
+            "Rum":{},
+            "Tequila":{},
+            "Liquor":{}
         },
         "wine":{
-            "red wine":{},
-            "white wine": {},
-            "rose wine": {}
+            "Red Wine":{},
+            "White Wine": {},
+            "Rose Wine": {}
         },
         "champagne":{},
         "baskets":{},
-        "others":{},
+        "others":{
+            "Beer":{
+
+            },
+            "Ready-to-drink":{
+
+            },
+            "Coffee":{
+
+            },
+            "Tea":{
+
+            }
+        },
         "on-sale":{},
         "daily-offer":{}
     }   

@@ -7,10 +7,10 @@ let randomWhiskyArr = [];
 
 (function randomizer () {
     let items = require('../../data/shop.json');
-    let keys = Object.keys(items.categories.spirits.whisky);
+    let keys = Object.keys(items.categories.spirits.Whisky);
     while(randomWhiskyArr.length < 8) {
             let randomWhisky = keys[Math.floor(Math.random() * keys.length)];
-            let randomWhiskyItem = items.categories.spirits.whisky[randomWhisky];
+            let randomWhiskyItem = items.categories.spirits.Whisky[randomWhisky];
             if(!randomWhiskyArr.includes(randomWhiskyItem)) {randomWhiskyArr.push(randomWhiskyItem);
         } 
     }
