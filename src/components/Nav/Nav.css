@@ -88,7 +88,7 @@ nav {
 }
 .nav-lower{
     width: 75%;
-    padding: 1% 0 0 0;
+    padding: 2% 0 0 0;
 }
 .nav-lower-mobile {
     display: none;
@@ -105,6 +105,20 @@ nav {
     border-radius: 5px;
     border-bottom: none;
 }
+.primary-categ-item {
+    background-color: black;
+    padding: 1% 0 ;
+    width: calc(75vw / 7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.primary-categ-item:hover {
+    cursor: pointer;
+    animation-name: primary-categ-selecting;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
 .second-categ {
     position: absolute;
     width: 75%;
@@ -114,12 +128,35 @@ nav {
     border: 3px solid black;
     border-top: none;
     border-radius: 5px;
+}
+.secondary-categ-item {
+    background-color: gold;
+    padding: 0.5% 0 ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.three-categs {
+    width: calc(75vw / 3);
+}
+.four-categs {
+    width: calc(75vw / 4);
+}
+.seven-categs {
+    width: calc(75vw / 7);
+}
+.secondary-categ-item:hover {
+    cursor: pointer;
+    animation-name: secondary-categ-selecting;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+.second-categ ul {
     color: black;
 }
 .nav-lower ul {
-    padding: 0.8% 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 @media screen and (max-width: 1000px) {
@@ -250,4 +287,16 @@ nav {
 }
 @keyframes icon-pulse-small {
     100% {scale: 0.9}
+}
+@keyframes primary-categ-selecting {
+    100% {
+        background-color: gold;
+        color: black;
+    }
+}
+@keyframes secondary-categ-selecting {
+    100% {
+        background-color: black;
+        color: gold;
+    }
 }

@@ -74,9 +74,15 @@ function Nav () {
         let secondCategList: HTMLElement = document.querySelector('ul.second-categ-list')!;
         secondCategList.innerHTML = ''
         for(let i = 0; i < shownCategories.length; i++) {
+            let listItemDiv: HTMLElement = document.createElement('div');
             let listItem: HTMLElement = document.createElement('li');
             listItem.innerHTML = shownCategories[i];
-            secondCategList.appendChild(listItem);
+            secondCategList.appendChild(listItemDiv);
+            listItemDiv.appendChild(listItem)
+            listItemDiv.classList.add('secondary-categ-item');
+            if(selectedCategories === 'spirits')    {listItemDiv.classList.add('seven-categs')}
+            else if(selectedCategories === 'wines') {listItemDiv.classList.add('three-categs')}
+            else if(selectedCategories === 'others'){listItemDiv.classList.add('four-categs')}
         }
     }, [selectedCategories, shownCategories])
 
@@ -114,43 +120,43 @@ function Nav () {
             <div className='nav-lower animate__animated'>
                 <div className='primary-categ'>
                     <ul>
-                        <div onClick={() => {setSelectedCategories('spirits')}}>
+                        <div className='primary-categ-item' onClick={() => {setSelectedCategories('spirits')}}>
                             <li>
                                 <img src={BasicJack} alt="Whisky" />
                                 <p>Spirits</p>
                             </li>
                         </div>
-                        <div onClick={() => {setSelectedCategories('wines')}}>
+                        <div className='primary-categ-item' onClick={() => {setSelectedCategories('wines')}}>
                             <li>
                                 <img src={BasicJack} alt="Whisky" />
                                 <p>Wine</p>
                             </li>
                         </div>
-                        <div>
+                        <div className='primary-categ-item'>
                             <li>
                                 <img src={BasicJack} alt="Whisky" />
                                 <p>Champagne</p>
                             </li>
                         </div>
-                        <div>
+                        <div className='primary-categ-item'>
                             <li>
                                 <img src={BasicJack} alt="Whisky" />
                                 <p>Gift Baskets</p>
                             </li>
                         </div>
-                        <div onClick={() => {setSelectedCategories('others')}}>
+                        <div className='primary-categ-item' onClick={() => {setSelectedCategories('others')}}>
                             <li>
                                 <img src={BasicJack} alt="Whisky" />
                                 <p>Others</p>
                             </li>
                         </div>
-                        <div>
+                        <div className='primary-categ-item'>
                             <li>
                                 <img src={BasicJack} alt="Whisky" />
                                 <p>On sale</p>
                             </li>
                         </div>
-                        <div>
+                        <div className='primary-categ-item'>
                             <li>
                                 <img src={BasicJack} alt="Whisky" />
                                 <p>Daily Offer</p>
