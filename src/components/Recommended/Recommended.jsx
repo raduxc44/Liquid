@@ -14,7 +14,6 @@ let randomWhiskyArr = [];
             if(!randomWhiskyArr.includes(randomWhiskyItem)) {randomWhiskyArr.push(randomWhiskyItem);
         } 
     }
-    console.log(randomWhiskyArr)
 })()
 
 function Recommended () {
@@ -49,8 +48,8 @@ function Recommended () {
                 }
             ]}
             >
-                {randomWhiskyArr.map((whisky) => (
-                    <div className='rec-item-wrapper'>
+                {randomWhiskyArr.map((whisky, index) => (
+                    <div key={index} className='rec-item-wrapper'>
                     <div className='rec-item'>
                         <div className='rec-item-upper'>
                             <img className='carousel-img' src={require(`../../images/Whisky-low-res/${whisky.imageTag}.jpg`)} alt={whisky.name}/>

@@ -74,6 +74,7 @@
     height: 35vh;
     width: 15vw;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 .slick-dots {
