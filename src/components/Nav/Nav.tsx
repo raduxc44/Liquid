@@ -1,18 +1,28 @@
 import './Nav.css'
 import 'animate.css';
 import BasicJack from '../../images/Whisky-high-res/jack.jpg'
+import { useEffect, useMemo, useState } from 'react';
+import Shop from '../../data/shop.json'
+
 
 function Nav () {
 
-    // Applies in and out animations on categories (mobile version only)
+    //Functionality for the second nav menu
+    const [selectedCategories, setSelectedCategories] = useState('spirits');
+    const shownCategories: string[] = useMemo(() => {
+        if(selectedCategories === 'spirits')        return Object.keys(Shop.categories.spirits)
+        else if(selectedCategories === 'wines')     return Object.keys(Shop.categories.wine)
+        else if(selectedCategories === 'others')    return Object.keys(Shop.categories.others)
+    }, [selectedCategories])!
 
+    // Applies in and out animations on categories (mobile version only)
     let categAnimationDelay:number = 0;
     let searchAnimationDelay:number = 0;
 
     function openMobileAnim (item:string) { 
 
-        let mobileCateg = document.querySelector('.nav-lower') as HTMLElement;
-        let mobileSearch = document.querySelector('.nav-mobile-search-cont') as HTMLElement;
+        let mobileCateg: HTMLElement = document.querySelector('.nav-lower')!;
+        let mobileSearch: HTMLElement = document.querySelector('.nav-mobile-search-cont')!;
 
         let deactivateCateg = () => {
             mobileCateg.classList.toggle('animate__fadeOutLeft');
@@ -59,6 +69,16 @@ function Nav () {
             }
         }
     }
+    
+    useEffect(() => {
+        let secondCategList: HTMLElement = document.querySelector('ul.second-categ-list')!;
+        secondCategList.innerHTML = ''
+        for(let i = 0; i < shownCategories.length; i++) {
+            let listItem: HTMLElement = document.createElement('li');
+            listItem.innerHTML = shownCategories[i];
+            secondCategList.appendChild(listItem);
+        }
+    }, [selectedCategories, shownCategories])
 
     return(
         <nav>
@@ -94,43 +114,52 @@ function Nav () {
             <div className='nav-lower animate__animated'>
                 <div className='primary-categ'>
                     <ul>
-                        <li>
-                            <img src={BasicJack} alt="Whisky" />
-                            <p>Spirits</p>
-                        </li>
-                        <li>
-                            <img src={BasicJack} alt="Whisky" />
-                            <p>Wine</p>
-                        </li>
-                        <li>
-                            <img src={BasicJack} alt="Whisky" />
-                            <p>Champagne</p>
-                        </li>
-                        <li>
-                            <img src={BasicJack} alt="Whisky" />
-                            <p>Gift Baskets</p>
-                        </li>
-                        <li>
-                            <img src={BasicJack} alt="Whisky" />
-                            <p>Others</p>
-                        </li>
-                        <li>
-                            <img src={BasicJack} alt="Whisky" />
-                            <p>On sale</p>
-                        </li>
-                        <li>
-                            <img src={BasicJack} alt="Whisky" />
-                            <p>Daily Offer</p>
-                        </li>
+                        <div onClick={() => {setSelectedCategories('spirits')}}>
+                            <li>
+                                <img src={BasicJack} alt="Whisky" />
+                                <p>Spirits</p>
+                            </li>
+                        </div>
+                        <div onClick={() => {setSelectedCategories('wines')}}>
+                            <li>
+                                <img src={BasicJack} alt="Whisky" />
+                                <p>Wine</p>
+                            </li>
+                        </div>
+                        <div>
+                            <li>
+                                <img src={BasicJack} alt="Whisky" />
+                                <p>Champagne</p>
+                            </li>
+                        </div>
+                        <div>
+                            <li>
+                                <img src={BasicJack} alt="Whisky" />
+                                <p>Gift Baskets</p>
+                            </li>
+                        </div>
+                        <div onClick={() => {setSelectedCategories('others')}}>
+                            <li>
+                                <img src={BasicJack} alt="Whisky" />
+                                <p>Others</p>
+                            </li>
+                        </div>
+                        <div>
+                            <li>
+                                <img src={BasicJack} alt="Whisky" />
+                                <p>On sale</p>
+                            </li>
+                        </div>
+                        <div>
+                            <li>
+                                <img src={BasicJack} alt="Whisky" />
+                                <p>Daily Offer</p>
+                            </li>
+                        </div>
                     </ul>
                 </div>
                 <div className='second-categ'>
-                    <ul>
-                        <li>Whisky</li>
-                        <li>Vodka</li>
-                        <li>Rum</li>
-                        <li>Tequila</li>
-                        <li>Liqeur</li>
+                    <ul className='second-categ-list'>
                     </ul>
                 </div>
             </div>
