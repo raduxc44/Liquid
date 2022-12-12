@@ -27,40 +27,42 @@ function Recommended () {
                     <p>See all</p>
                 </div>
             </div>
-            <Slider 
-            dots = {true}
-            infinite = {true}
-            slidesToShow = {4}
-            slidesToScroll = {1}
-            arrows = {false}
-            responsive = {[
-                {
-                    breakpoint: 1001,
-                    settings: {
-                        slidesToShow: 3,
+            <div className='carousel-wrapper'>
+                <Slider 
+                dots = {true}
+                infinite = {true}
+                slidesToShow = {4}
+                slidesToScroll = {1}
+                arrows = {false}
+                responsive = {[
+                    {
+                        breakpoint: 1001,
+                        settings: {
+                            slidesToShow: 3,
+                        }
+                    },
+                    {
+                        breakpoint: 501,
+                        settings: {
+                            slidesToShow: 2
+                        }
                     }
-                },
-                {
-                    breakpoint: 501,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                }
-            ]}
-            >
-                {randomWhiskyArr.map((whisky, index) => (
-                    <div key={index} className='rec-item-wrapper'>
-                    <div className='rec-item'>
-                        <div className='rec-item-upper'>
-                            <img className='carousel-img' src={require(`../../images/Whisky-low-res/${whisky.imageTag}.jpg`)} alt={whisky.name}/>
-                            <p>{whisky.name}</p>
-                            <p>{whisky.quantity}/{whisky.strength}</p>
+                ]}
+                >
+                    {randomWhiskyArr.map((whisky, index) => (
+                        <div key={index} className='rec-item-wrapper'>
+                        <div className='rec-item'>
+                            <div className='rec-item-upper'>
+                                <img className='carousel-img' src={require(`../../images/Spirits/Whisky/low-res/${whisky.imageTag}.jpg`)} alt={whisky.name}/>
+                                <p>{whisky.name}</p>
+                                <p>{whisky.quantity}/{whisky.strength}</p>
+                            </div>
+                            <p className='rec-card-check check-out-btn'>Check it out</p>
                         </div>
-                        <p className='rec-item-check'>Check it out</p>
-                    </div>
-                    </div>
-                ))}
-            </Slider>
+                        </div>
+                    ))}
+                </Slider>
+            </div>
         </div>
     )
 }
