@@ -1,6 +1,6 @@
 import './Nav.css'
 import 'animate.css';
-import BasicJack from '../../images/Whisky-high-res/jack.jpg'
+import BasicJack from '../../images/Spirits/Whisky/high-res/jack-standard.jpg'
 import { useEffect, useMemo, useState } from 'react';
 import Shop from '../../data/shop.json'
 
@@ -82,7 +82,7 @@ function Nav () {
             listItemDiv.classList.add('secondary-categ-item');
             if(selectedCategories === 'spirits')    {listItemDiv.classList.add('seven-categs')}
             else if(selectedCategories === 'wines') {listItemDiv.classList.add('three-categs')}
-            else if(selectedCategories === 'others'){listItemDiv.classList.add('four-categs')}
+            else if(selectedCategories === 'others'){listItemDiv.classList.add('two-categs')}
         }
     }, [selectedCategories, shownCategories])
 

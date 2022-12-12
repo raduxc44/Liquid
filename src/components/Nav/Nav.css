@@ -47,6 +47,7 @@ nav {
 }
 .search-bar{
     display: flex;
+    font-family: 'Roboto';
     align-items: center;
     background-color: #8080804f;
     color: gold;
@@ -139,8 +140,8 @@ nav {
 .three-categs {
     width: calc(75vw / 3);
 }
-.four-categs {
-    width: calc(75vw / 4);
+.two-categs {
+    width: calc(75vw / 2);
 }
 .seven-categs {
     width: calc(75vw / 7);
