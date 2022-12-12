@@ -36,19 +36,26 @@
                     "strength":"40%",
                     "price":15
                 },
-                "jack": {
-                    "name":"Jack Daniel's",
-                    "imageTag":"jack",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":15
-                },
                 "green-label": {
                     "name":"Green Label",
                     "imageTag":"green-label",
                     "quantity":"0.7L",
                     "strength":"40%",
                     "price":47
+                },
+                "jack-honey": {
+                    "name":"Jack Daniel's Honey",
+                    "imageTag":"jack-honey",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":17
+                },
+                "jack-standard": {
+                    "name":"Jack Daniel's",
+                    "imageTag":"jack-standard",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":15
                 },
                 "macallan": {
                     "name":"Macallan",
@@ -93,7 +100,78 @@
                     "price":38
                 }
             },
-            "Vodka":{},
+            "Vodka":{
+                "flirt":{
+                    "name":"Flirt",
+                    "imageTag":"flirt",
+                    "quantity":"0.7L",
+                    "strength":"37,5%",
+                    "price":10
+                },
+                "purity":{
+                    "name":"Purity",
+                    "imageTag":"purity",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":50
+                },
+                "esbjaerg":{
+                    "name":"EsbjÆrg",
+                    "imageTag":"esbjaerg",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":12
+                },
+                "finlandia":{
+                    "name":"Finlandia",
+                    "imageTag":"finlandia",
+                    "quantity":"1L",
+                    "strength":"40%",
+                    "price":15
+                },
+                "oginsky":{
+                    "name":"Oginsky",
+                    "imageTag":"oginsky",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":35
+                },
+                "hendrix":{
+                    "name":"Hendrix Electric",
+                    "imageTag":"hendrix",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":700
+                },
+                "ciroc":{
+                    "name":"Cîroc",
+                    "imageTag":"ciroc",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":27
+                },
+                "poliakov":{
+                    "name":"Poliakov",
+                    "imageTag":"poliakov",
+                    "quantity":"0.7L",
+                    "strength":"37.5%",
+                    "price":10
+                },
+                "smirnoff":{
+                    "name":"Smirnoff",
+                    "imageTag":"smirnoff",
+                    "quantity":"0.7L",
+                    "strength":"40%",
+                    "price":15
+                },
+                "dixon":{
+                    "name":"Dixon's",
+                    "imageTag":"dixon",
+                    "quantity":"0.75L",
+                    "strength":"40%",
+                    "price":35
+                }
+            },
             "Cognac":{},
             "Gin":{},
             "Rum":{},
@@ -111,13 +189,7 @@
             "Beer":{
 
             },
-            "Ready-to-drink":{
-
-            },
-            "Coffee":{
-
-            },
-            "Tea":{
+            "Beverages":{
 
             }
         },
