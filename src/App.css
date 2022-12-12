@@ -20,4 +20,5 @@
   align-items: center;
   justify-content: center;
   font-family: 'Roboto';
+  user-select: none;
 }
