@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css"
 import Nav from './components/Nav/Nav';
 import Banner from './components/Banner/Banner';
 import Recommended from './components/Recommended/Recommended';
-import About from './components/About/About';
+import About from './components/Categories/Categories';
 
 function App() {
   return (
