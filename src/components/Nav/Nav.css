@@ -164,11 +164,18 @@ nav {
     .nav-upper {
         justify-content: space-between;
         padding: 1% 5.5% 1.5% 3%;
+        height: 10svh;
+    }
+    .logo-cont {
+        display: flex;
+        justify-content: center;
+        align-self: center;
     }
     .search-bar {
         display: none;
     }
     .nav-lower-mobile {
+        height: 8svh;
         width: 100%;
         color: gold;
         display: flex;
@@ -232,17 +239,15 @@ nav {
     .nav-lower {
         display: none;
         width: 100%;
-        padding: 2% 1%;
         background-color: black;
-        top: 80%;
+        top: 18svh;
         z-index: 1;
-        margin-top: 2%;
-        height: 85vh;
+        height: 82svh;
         position: absolute;
     }
     .primary-categ ul{
         flex-direction: column;
-        height: 80vh;
+        height: 80svh;
         overflow: scroll;
         justify-content: flex-start;
     }
@@ -279,15 +284,9 @@ nav {
         animation-fill-mode: forwards;
         
     }
-    .nav-lower {
-        z-index: 1;
-        top: 90%;
-        height: 88vh;
-        position: absolute;
-    }
-    .primary-categ ul{
+    /* .primary-categ ul{
         height: 83vh;
-    }
+    } */
 }
 
 @keyframes icon-pulse {
