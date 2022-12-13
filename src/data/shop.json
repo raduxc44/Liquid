@@ -464,18 +464,244 @@
             }
         },
         "wine":{
-            "Red Wine":{},
-            "White Wine": {},
-            "Rose Wine": {}
+            "Red Wine":{
+                "canaletto":{
+                    "name":"Canaletto Montepulciano D'Abruzzo",
+                    "origin":"Italy",
+                    "imageTag":"canaletto",
+                    "quantity":"0.75L",
+                    "strength":"13%",
+                    "price":11
+                },
+                "grand-barossa":{
+                    "name":"Grand Barossa Shiraz",
+                    "origin":"Australia",
+                    "imageTag":"grand-barossa",
+                    "quantity":"0.75L",
+                    "strength":"12%",
+                    "price":18
+                },
+                "limestone-coast":{
+                    "name":"Jacob's Creek Limestone Coast",
+                    "origin":"Australia",
+                    "imageTag":"limestone-coast",
+                    "quantity":"0.75L",
+                    "strength":"14.5%",
+                    "price":15
+                },
+                "samtrot-spatlese":{
+                    "name":"Samtrot Spätlese",
+                    "origin":"Germany",
+                    "imageTag":"samtrot-spatlese",
+                    "quantity":"0.75L",
+                    "strength":"10%",
+                    "price":8
+                }
+            },
+            "White Wine": {
+                "fratelli":{
+                    "name":"Fratelli",
+                    "origin":"India",
+                    "imageTag":"fratelli",
+                    "quantity":"0.75L",
+                    "strength":"12.5%",
+                    "price":12
+                },
+                "morning-fog-chardonnay":{
+                    "name":"Wente Morning Fog Chardonnay",
+                    "origin":"San Francisco, US",
+                    "imageTag":"morning-fog-chardonnay",
+                    "quantity":"0.75L",
+                    "strength":"13.5%",
+                    "price":0
+                },
+                "muni":{
+                    "name":"Muni Montemagro",
+                    "origin":"Italy",
+                    "imageTag":"muni",
+                    "quantity":"0.75L",
+                    "strength":"13%",
+                    "price":22
+                },
+                "palacio-de-menade":{
+                    "name":"Palacio de Menade Rueda",
+                    "origin":"Spain",
+                    "imageTag":"palacio-de-menade",
+                    "quantity":"0.75L",
+                    "strength":"13%",
+                    "price":4
+                },
+                "sauvignon-blanc.jpg":{
+                    "name":"Cimarosa Sauvignon Blanc Marlborough",
+                    "origin":"New Zealand",
+                    "imageTag":"sauvignon-blanc.jpg",
+                    "quantity":"0.75L",
+                    "strength":"14%",
+                    "price":5
+                }
+            },
+            "Rose Wine": {
+                "cave-amadeu":{
+                    "name":"Cave Amadeu",
+                    "origin":"Brazil",
+                    "imageTag":"cave-amadeu",
+                    "quantity":"0.75L",
+                    "strength":"12%",
+                    "price":40
+                },
+                "apriori":{
+                    "name":"Apriori",
+                    "origin":"Romania",
+                    "imageTag":"apriori",
+                    "quantity":"0.75L",
+                    "strength":"12%",
+                    "price":32
+                }
+            }
         },
-        "champagne":{},
-        "baskets":{},
+        "champagne":{
+            "dom-perignon":{
+                "name":"Dom Pérignon Vintage",
+                "origin":"France",
+                "imageTag":"dom-perignon",
+                "quantity":"0.75L",
+                "strength":"12.5%",
+                "price":485
+            },
+            "ferrari":{
+                "name":"Ferrari Maximum",
+                "origin":"Italy",
+                "imageTag":"ferrari",
+                "quantity":"0.75L",
+                "strength":"12.5%",
+                "price":24
+            },
+            "millesime":{
+                "name":"Radgonska Penina Millésime",
+                "origin":"Slovenia",
+                "imageTag":"millesime",
+                "quantity":"0.75L",
+                "strength":"12%",
+                "price":37
+            },
+            "moet":{
+                "name":"Moët & Chandon Impérial",
+                "origin":"France",
+                "imageTag":"moet",
+                "quantity":"0.75L",
+                "strength":"12%",
+                "price":51
+            },
+            "veuve-clicquot":{
+                "name":"Veuve Clicquot",
+                "origin":"France",
+                "imageTag":"veuve-clicquot",
+                "quantity":"0.75L",
+                "strength":"12%",
+                "price":59
+            }
+        },
+        "gift-cards":{},
         "others":{
             "Beer":{
-
+                "desperados":{
+                    "name":"Desperados",
+                    "origin":"Netherlands",
+                    "imageTag":"desperados",
+                    "quantity":["0.4L"],
+                    "strength": "5.9%",
+                    "price":3.5
+                },
+                "heineken":{
+                    "name":"Heineken",
+                    "origin":"Netherlands",
+                    "imageTag":"heineken",
+                    "quantity":"0.33L",
+                    "strength": "5%",
+                    "price":3
+                },
+                "peroni":{
+                    "name":"Peroni",
+                    "origin":"Italy",
+                    "imageTag":"peroni",
+                    "quantity":"0.33L",
+                    "strength": "4.7%",
+                    "price":5
+                },
+                "stark":{
+                    "name":"Stark",
+                    "origin":"Bali",
+                    "imageTag":"stark",
+                    "quantity":"0.33L",
+                    "strength": "4.99%",
+                    "price":3
+                },
+                "stella-artois":{
+                    "name":"Stella Artois",
+                    "origin":"Belgium",
+                    "imageTag":"stella-artois",
+                    "quantity":"0.33L",
+                    "strength": "5%",
+                    "price":7
+                }
             },
             "Beverages":{
-
+                "arizona":{
+                    "name":"Arizona Iced Tea",
+                    "origin":"US",
+                    "imageTag":"arizona",
+                    "quantity":"0.5L",
+                    "flavor":["lemon", "green", "peach", "raspberry", "cranberry"],
+                    "price":3
+                },
+                "coca-cola":{
+                    "name":"Coca Cola",
+                    "origin":"US",
+                    "imageTag":"coca-cola",
+                    "quantity":"0.33L",
+                    "flavor":["standard", "zero", "lemon"],
+                    "price":2
+                },
+                "fanta":{
+                    "name":"Fanta",
+                    "origin":"US",
+                    "imageTag":"fanta",
+                    "quantity":"0.3L",
+                    "flavor":["orange", "lemon", "strawberry"],
+                    "price":1.8
+                },
+                "jarritos":{
+                    "name":"Jarritos",
+                    "origin":"Mexico",
+                    "imageTag":"jarritos",
+                    "quantity":"0.37L",
+                    "flavor":["grapefruit", "fruit punch", "passion fruit", "pineapple", "guava", "mango", "lime", "mandarin"],
+                    "price":4
+                },
+                "lemonade":{
+                    "name":"Fentimans Rose Lemonade",
+                    "origin":"UK",
+                    "imageTag":"lemonade",
+                    "quantity":"0.275L",
+                    "strength": "0%",
+                    "price":2.2
+                },
+                "morning-kicks":{
+                    "name":"Morning Kicks Cold Brew",
+                    "origin":"US",
+                    "imageTag":"morning-kicks",
+                    "quantity":"0.5L",
+                    "strength":"0%",
+                    "price":6
+                },
+                "sprite":{
+                    "name":"Sprite",
+                    "origin":"US",
+                    "imageTag":"sprite",
+                    "quantity":"0.355L",
+                    "strength":"0%",
+                    "price":2
+                }
             }
         },
         "on-sale":{},
