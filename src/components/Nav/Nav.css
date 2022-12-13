@@ -211,6 +211,13 @@ nav {
     .primary-categ ul {
         border: none;
     }
+    .primary-categ-item {
+        width: 100%;
+        justify-content: flex-start;
+        padding: 2%;
+        border-radius: 10px;
+        font-size: 30px;
+    }
     .search-icon-mobile {
         font-size: 40px;
     }
@@ -225,7 +232,7 @@ nav {
     .nav-lower {
         display: none;
         width: 100%;
-        padding: 2% 5%;
+        padding: 2% 1%;
         background-color: black;
         top: 80%;
         z-index: 1;
@@ -241,8 +248,10 @@ nav {
     }
     .primary-categ li{
         display: flex;
+        width: 100%;
         align-items: center;
         gap: 5%;
+        margin: 2% 0;
     }
     .primary-categ img {
         display: block;
