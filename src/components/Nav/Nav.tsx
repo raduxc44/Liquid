@@ -1,9 +1,7 @@
 import './Nav.css'
 import 'animate.css';
-import BasicJack from '../../images/Spirits/Whisky/high-res/jack-standard.jpg'
 import { useEffect, useMemo, useState } from 'react';
 import Shop from '../../data/shop.json'
-
 
 function Nav () {
 
@@ -23,6 +21,12 @@ function Nav () {
 
         let mobileCateg: HTMLElement = document.querySelector('.nav-lower')!;
         let mobileSearch: HTMLElement = document.querySelector('.nav-mobile-search-cont')!;
+
+        if(item === 'categ') {
+            let body: HTMLElement = document.querySelector('body')!;
+            if(body.style.overflow === 'hidden') body.style.overflow = 'visible';
+            else body.style.overflow = 'hidden';  
+        }
 
         let deactivateCateg = () => {
             mobileCateg.classList.toggle('animate__fadeOutLeft');
@@ -89,7 +93,7 @@ function Nav () {
     return(
         <nav>
             <div className='nav-upper'>
-                <div>
+                <div className='logo-cont'>
                     <p className='logo'>Liquid</p>
                 </div>
                 <div className="nav-utilities">
@@ -122,43 +126,43 @@ function Nav () {
                     <ul>
                         <div className='primary-categ-item' onClick={() => {setSelectedCategories('spirits')}}>
                             <li>
-                                <img src={BasicJack} alt="Whisky" />
+                                <img src={require(`../../images/Spirits/Whisky/low-res/jack-honey.jpg`)} alt="Whisky" />
                                 <p>Spirits</p>
                             </li>
                         </div>
                         <div className='primary-categ-item' onClick={() => {setSelectedCategories('wines')}}>
                             <li>
-                                <img src={BasicJack} alt="Whisky" />
+                                <img src={require(`../../images/Wine/low-res/Red/samtrot-spatlese.jpg`)} alt="Whisky" />
                                 <p>Wine</p>
                             </li>
                         </div>
                         <div className='primary-categ-item'>
                             <li>
-                                <img src={BasicJack} alt="Whisky" />
+                                <img src={require(`../../images/Champagne/low-res/ferrari.jpg`)} alt="Whisky" />
                                 <p>Champagne</p>
-                            </li>
-                        </div>
-                        <div className='primary-categ-item'>
-                            <li>
-                                <img src={BasicJack} alt="Whisky" />
-                                <p>Gift Baskets</p>
                             </li>
                         </div>
                         <div className='primary-categ-item' onClick={() => {setSelectedCategories('others')}}>
                             <li>
-                                <img src={BasicJack} alt="Whisky" />
+                                <img src={require(`../../images/Others/Beer/low-res/desperados.jpg`)} alt="Others" />
                                 <p>Others</p>
                             </li>
                         </div>
                         <div className='primary-categ-item'>
                             <li>
-                                <img src={BasicJack} alt="Whisky" />
+                                <img src={require(`../../images/Gift Cards/100off.png`)} alt="Gift Cards" />
+                                <p>Gift Cards</p>
+                            </li>
+                        </div>
+                        <div className='primary-categ-item'>
+                            <li>
+                                <img src={require(`../../images/on-sale-high-res.jpg`)} alt="On Sale" />
                                 <p>On sale</p>
                             </li>
                         </div>
                         <div className='primary-categ-item'>
                             <li>
-                                <img src={BasicJack} alt="Whisky" />
+                                <img src={require(`../../images/daily-offer-high-res.jpg`)} alt="Daily Offer" />
                                 <p>Daily Offer</p>
                             </li>
                         </div>
