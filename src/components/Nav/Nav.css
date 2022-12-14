@@ -137,6 +137,9 @@ nav {
     justify-content: center;
     align-items: center;
 }
+.secondary-categ-item img {
+    display: none;
+}
 .three-categs {
     width: calc(75vw / 3);
 }
@@ -215,16 +218,6 @@ nav {
         font-size: 1rem;
         outline: none;
     }
-    .primary-categ ul {
-        border: none;
-    }
-    .primary-categ-item {
-        width: 100%;
-        justify-content: flex-start;
-        padding: 2%;
-        border-radius: 10px;
-        font-size: 30px;
-    }
     .search-icon-mobile {
         font-size: 40px;
     }
@@ -246,10 +239,22 @@ nav {
         position: absolute;
     }
     .primary-categ ul{
+        position: absolute;
+        z-index: 2;
+        border: none;
+        width: 100%;
         flex-direction: column;
         height: 80svh;
         overflow: scroll;
         justify-content: flex-start;
+    }
+    .primary-categ-item {
+        width: 95%;
+        justify-content: flex-start;
+        padding: 2%;
+        margin: 2%;
+        border-radius: 10px;
+        font-size: 30px;
     }
     .primary-categ li{
         display: flex;
@@ -260,10 +265,56 @@ nav {
     }
     .primary-categ img {
         display: block;
-        width: 10vh;
+        width: 15vw;
+        border-radius: 10px;
     }
     .second-categ {
+        width: 100%;
+        height: inherit;
+    }
+    .second-categ ul {
+        background-color: black;
         display: none;
+        align-items: center;
+        position: absolute;
+        z-index: 2;
+        border: none;
+        width: 100%;
+        flex-direction: column;
+        height: 100%;
+        overflow: scroll;
+        justify-content: flex-start;
+    }
+    .secondary-categ-item {
+        background-color: inherit;
+        color: gold;
+        width: 95%;
+        justify-content: flex-start;
+        padding: 2%;
+        margin: 2% 0;
+        border-radius: 10px;
+        font-size: 30px;
+    }
+    .secondary-categ-item:hover {
+        animation-name: primary-categ-selecting;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
+    .second-categ li {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        gap: 5%;
+    }
+    .second-categ img {
+        display: block;
+        object-fit: cover;
+        width: 15vw;
+        border-radius: 10px;
+    }
+    .primary-categ {
+        display: block;
     }
 }
 
@@ -284,9 +335,13 @@ nav {
         animation-fill-mode: forwards;
         
     }
-    /* .primary-categ ul{
-        height: 83vh;
-    } */
+    .primary-categ img {
+        width: 25svw;
+    }
+    .second-categ img {
+        width: 25svw;
+        height: 20svh;
+    }
 }
 
 @keyframes icon-pulse {
