@@ -7,7 +7,7 @@ function Nav () {
 
     //Functionality for the second desktop nav menu
     const alreadyOpenedCateg = useRef(false)
-    const [selectedCategories, setSelectedCategories] = useState('wines');
+    const [selectedCategories, setSelectedCategories] = useState('spirits');
     const shownCategories: string[] = useMemo(() => {
         if(selectedCategories === 'spirits')        return Object.keys(Shop.categories.spirits)
         else if(selectedCategories === 'wines')     return Object.keys(Shop.categories.wine)
@@ -22,14 +22,16 @@ function Nav () {
         let primaryCategList: HTMLElement = document.querySelector('div.primary-categ > ul')!;
         let secondCategList: HTMLElement = document.querySelector('div.second-categ > ul')!;
         let mobileCateg: HTMLElement = document.querySelector('div.nav-lower')!;
-        mobileCateg.classList.toggle('animate__fadeOutLeft')         
-        setTimeout(() => {
-            if(primaryCategList.style.display === 'none')   primaryCategList.style.display = 'block';
-            if(secondCategList.style.display !== 'none')    secondCategList.style.display = 'none';
-            mobileCateg.classList.toggle('animate__fadeOutLeft')
-            mobileCateg.style.removeProperty('display')
-            categAnimationDelay = 0
-        }, 1000)   
+        if(!mobileCateg.classList.contains('animate__fadeOutLeft')) {
+            mobileCateg.classList.add('animate__fadeOutLeft')         
+            setTimeout(() => {
+                if(primaryCategList.style.display === 'none')   primaryCategList.style.display = 'block';
+                if(secondCategList.style.display !== 'none')    secondCategList.style.display = 'none';
+                mobileCateg.classList.remove('animate__fadeOutLeft')
+                mobileCateg.style.removeProperty('display')
+                categAnimationDelay = 0
+            }, 1000)   
+        }
 
     }
     let deactivateSearch = () => {
@@ -54,9 +56,8 @@ function Nav () {
                 else body.style.overflow = 'hidden';  
             }
             if(button === 'categ') {
-                
                 if(categAnimationDelay === 1 ) {
-                    categAnimationDelay = 1.5
+                    categAnimationDelay = 1.5;
                 }
                 else if(categAnimationDelay === 0) {
                     categAnimationDelay = 0.5
@@ -75,15 +76,18 @@ function Nav () {
                 else if(searchAnimationDelay === 0){
                     searchAnimationDelay = 0.5
                     deactivateCateg()
+                    alreadyOpenedCateg.current = false;
                     setTimeout(() => {searchAnimationDelay = 1}, 1000)
                     mobileSearch.style.display = 'flex'
                     mobileSearch.classList.toggle('animate__fadeInDown');
                     setTimeout(() => mobileSearch.classList.toggle('animate__fadeInDown'), 1000)
                 }
             }
-            if(alreadyOpenedCateg.current === true) {
+            if(alreadyOpenedCateg.current === true && !mobileCateg.classList.contains('animate__fadeInLeft')) {
                 deactivateCateg()
             }
+            if(!alreadyOpenedCateg.current) alreadyOpenedCateg.current = true;
+            else if(alreadyOpenedCateg.current) alreadyOpenedCateg.current = false;
         } 
     }
     
@@ -175,14 +179,14 @@ function Nav () {
             <div className='nav-lower-mobile'>
                 <div className='nav-mobile-menu'>
                     <span onClick={() => {
-                        openMobileAnim('categ')
-                        if(!alreadyOpenedCateg.current) alreadyOpenedCateg.current = true
-                        else alreadyOpenedCateg.current = false
+                        openMobileAnim('categ');
                         }} className="material-symbols-outlined">menu</span>
                     <p>Products</p>
                 </div>
                 <div className='nav-mobile-utilities'>
-                    <span onClick={() => {openMobileAnim('search')}} className='material-symbols-outlined search-icon-mobile'>search</span>
+                    <span onClick={() => {
+                        openMobileAnim('search')
+                        }} className='material-symbols-outlined search-icon-mobile'>search</span>
                 </div>
             </div>
             <div className='nav-mobile-search-cont animate__animated'>
