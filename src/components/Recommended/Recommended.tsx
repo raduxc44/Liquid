@@ -3,7 +3,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
 
-let randomWhiskyArr = [];
+type Whisky = {
+    name: string,
+    strength: string,
+    quantity: string,
+    imageTag: string,
+    price: number,
+}
+let randomWhiskyArr: Whisky[] = [];
 
 (function randomizer () {
     let items = require('../../data/shop.json');
