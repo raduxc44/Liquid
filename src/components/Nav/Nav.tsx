@@ -172,14 +172,14 @@ function Nav () {
             <div className='nav-lower-mobile'>
                 <div className='nav-mobile-menu'>
                     <span onClick={() => {
-                        openMobileAnim('categ')
-                        if(!alreadyOpenedCateg.current) alreadyOpenedCateg.current = true
-                        else alreadyOpenedCateg.current = false
+                        openMobileAnim('categ');
                         }} className="material-symbols-outlined">menu</span>
                     <p>Products</p>
                 </div>
                 <div className='nav-mobile-utilities'>
-                    <span onClick={() => {openMobileAnim('search')}} className='material-symbols-outlined search-icon-mobile'>search</span>
+                    <span onClick={() => {
+                        openMobileAnim('search')
+                        }} className='material-symbols-outlined search-icon-mobile'>search</span>
                 </div>
             </div>
             <div className='nav-mobile-search-cont animate__animated'>
