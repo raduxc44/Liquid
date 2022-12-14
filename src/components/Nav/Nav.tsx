@@ -7,7 +7,7 @@ function Nav () {
 
     //Functionality for the second desktop nav menu
     const alreadyOpenedCateg = useRef(false)
-    const [selectedCategories, setSelectedCategories] = useState('wines');
+    const [selectedCategories, setSelectedCategories] = useState('spirits');
     const shownCategories: string[] = useMemo(() => {
         if(selectedCategories === 'spirits')        return Object.keys(Shop.categories.spirits)
         else if(selectedCategories === 'wines')     return Object.keys(Shop.categories.wine)
@@ -15,8 +15,8 @@ function Nav () {
     }, [selectedCategories])!
 
     // Applies in and out animations on categories (mobile version only)
-    let categAnimationDelay:number = 0;
-    let searchAnimationDelay:number = 0;
+    let categAnimationDelay = useRef(0)
+    let searchAnimationDelay = useRef(0)
 
     let deactivateCateg = () => {
         let primaryCategList: HTMLElement = document.querySelector('div.primary-categ > ul')!;
@@ -28,7 +28,7 @@ function Nav () {
             if(secondCategList.style.display !== 'none')    secondCategList.style.display = 'none';
             mobileCateg.classList.toggle('animate__fadeOutLeft')
             mobileCateg.style.removeProperty('display')
-            categAnimationDelay = 0
+            categAnimationDelay.current = 0
         }, 1000)   
 
     }
@@ -38,7 +38,7 @@ function Nav () {
         setTimeout(() => {
             mobileSearch.classList.toggle('animate__fadeOutUp')
             mobileSearch.style.removeProperty('display')
-            searchAnimationDelay = 0;
+            searchAnimationDelay.current = 0;
         }, 1000);    
     }
 
@@ -54,35 +54,32 @@ function Nav () {
                 else body.style.overflow = 'hidden';  
             }
             if(button === 'categ') {
-                
-                if(categAnimationDelay === 1 ) {
-                    categAnimationDelay = 1.5
+                if(categAnimationDelay.current === 1 ) {
+                    categAnimationDelay.current = 1.5;
+                    deactivateCateg();
                 }
-                else if(categAnimationDelay === 0) {
-                    categAnimationDelay = 0.5
+                else if(categAnimationDelay.current === 0) {
+                    categAnimationDelay.current = 0.5
                     deactivateSearch();
-                    setTimeout(() => {categAnimationDelay = 1}, 1000)
+                    setTimeout(() => {categAnimationDelay.current = 1}, 1000)
                     mobileCateg.style.display = 'block'
                     mobileCateg.classList.toggle('animate__fadeInLeft')
                     setTimeout(() => mobileCateg.classList.toggle('animate__fadeInLeft'), 1000)
                 }
             }
             else if(button === 'search') {
-                if(searchAnimationDelay === 1) {
-                    searchAnimationDelay = 1.5
+                if(searchAnimationDelay.current === 1) {
+                    searchAnimationDelay.current = 1.5
                     deactivateSearch();
                 }
-                else if(searchAnimationDelay === 0){
-                    searchAnimationDelay = 0.5
+                else if(searchAnimationDelay.current === 0){
+                    searchAnimationDelay.current = 0.5
                     deactivateCateg()
-                    setTimeout(() => {searchAnimationDelay = 1}, 1000)
+                    setTimeout(() => {searchAnimationDelay.current = 1}, 1000)
                     mobileSearch.style.display = 'flex'
                     mobileSearch.classList.toggle('animate__fadeInDown');
                     setTimeout(() => mobileSearch.classList.toggle('animate__fadeInDown'), 1000)
                 }
-            }
-            if(alreadyOpenedCateg.current === true) {
-                deactivateCateg()
             }
         } 
     }
