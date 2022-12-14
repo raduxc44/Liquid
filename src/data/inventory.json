@@ -601,7 +601,11 @@
                 "price":59
             }
         },
-        "gift-cards":{},
+        "giftCards":{
+            "10off":{
+                "name":"10"
+            }
+        },
         "others":{
             "Beer":{
                 "desperados":{
@@ -704,7 +708,7 @@
                 }
             }
         },
-        "on-sale":{},
-        "daily-offer":{}
+        "onSale":{},
+        "dailyOffer":{}
     }   
 }

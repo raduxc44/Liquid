@@ -13,7 +13,7 @@ type Whisky = {
 let randomWhiskyArr: Whisky[] = [];
 
 (function randomizer () {
-    let items = require('../../data/shop.json');
+    let items = require('../../data/inventory.json');
     let keys = Object.keys(items.categories.spirits.Whisky);
     while(randomWhiskyArr.length < 8) {
             let randomWhisky = keys[Math.floor(Math.random() * keys.length)];

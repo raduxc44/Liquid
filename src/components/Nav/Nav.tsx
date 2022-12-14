@@ -1,7 +1,7 @@
 import './Nav.css'
 import 'animate.css';
 import { useEffect, useMemo, useState, useRef } from 'react';
-import Shop from '../../data/shop.json'
+import Inventory from '../../data/inventory.json'
 
 function Nav () {
 
@@ -9,9 +9,13 @@ function Nav () {
     const alreadyOpenedCateg = useRef(false)
     const [selectedCategories, setSelectedCategories] = useState('spirits');
     const shownCategories: string[] = useMemo(() => {
-        if(selectedCategories === 'spirits')        return Object.keys(Shop.categories.spirits)
-        else if(selectedCategories === 'wines')     return Object.keys(Shop.categories.wine)
-        else if(selectedCategories === 'others')    return Object.keys(Shop.categories.others)
+        if(selectedCategories === 'spirits')            return Object.keys(Inventory.categories.spirits)
+        else if(selectedCategories === 'wines')         return Object.keys(Inventory.categories.wine)
+        else if(selectedCategories === 'champagne')     return Object.keys(Inventory.categories.champagne)
+        else if(selectedCategories === 'others')        return Object.keys(Inventory.categories.others)
+        else if(selectedCategories === 'gift-cards')    return Object.keys(Inventory.categories.giftCards)
+        else if(selectedCategories === 'on-sale')       return Object.keys(Inventory.categories.onSale)
+        else if(selectedCategories === 'daily-offer')   return Object.keys(Inventory.categories.dailyOffer)
     }, [selectedCategories])!
 
     // Applies in and out animations on categories (mobile version only)
@@ -206,7 +210,10 @@ function Nav () {
                                 <p>Wine</p>
                             </li>
                         </div>
-                        <div className='primary-categ-item'>
+                        <div className='primary-categ-item' onClick={() => {
+                            setSelectedCategories('champagne')
+                            deactivateCateg()
+                            }}>
                             <li>
                                 <img src={require(`../../images/Champagne/low-res/ferrari.jpg`)} alt="Whisky" />
                                 <p>Champagne</p>
@@ -221,19 +228,28 @@ function Nav () {
                                 <p>Others</p>
                             </li>
                         </div>
-                        <div className='primary-categ-item'>
+                        <div className='primary-categ-item' onClick={() => {
+                            setSelectedCategories('gift-cards')
+                            deactivateCateg()
+                            }}>
                             <li>
                                 <img src={require(`../../images/Gift Cards/100off.png`)} alt="Gift Cards" />
                                 <p>Gift Cards</p>
                             </li>
                         </div>
-                        <div className='primary-categ-item'>
+                        <div className='primary-categ-item' onClick={() => {
+                            setSelectedCategories('on-sale')
+                            deactivateCateg()
+                            }}>
                             <li>
                                 <img src={require(`../../images/on-sale-high-res.jpg`)} alt="On Sale" />
                                 <p>On sale</p>
                             </li>
                         </div>
-                        <div className='primary-categ-item'>
+                        <div className='primary-categ-item' onClick={() => {
+                            setSelectedCategories('daily-offer')
+                            deactivateCateg()
+                            }}>
                             <li>
                                 <img src={require(`../../images/daily-offer-high-res.jpg`)} alt="Daily Offer" />
                                 <p>Daily Offer</p>
