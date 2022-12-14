@@ -1,18 +1,17 @@
 import './App.css';
 import "slick-carousel/slick/slick.css"
-import Nav from './components/Nav/Nav';
-import Banner from './components/Banner/Banner';
-import Recommended from './components/Recommended/Recommended';
-import About from './components/Categories/Categories';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from './pages/home';
+import ShoppingCart from './pages/shoppingCart';
 
 function App() {
   return (
-    <>
-    <Nav></Nav>
-    <Banner></Banner>
-    <Recommended></Recommended>
-    <About></About>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route index element= {<Home />}></Route>
+        <Route path='/shopping-cart' element= {<ShoppingCart />}></Route>
+      </Routes>
+    </BrowserRouter>
     
   );  
 }

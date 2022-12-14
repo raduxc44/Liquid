@@ -19,8 +19,10 @@ function Nav () {
     }, [selectedCategories])!
 
     // Applies in and out animations on categories (mobile version only)
+    // Delay refs are used to avoid animation bugging when pressing their buttons rapidly
     let categAnimationDelay = useRef(0)
     let searchAnimationDelay = useRef(0)
+
 
     let deactivateCateg = () => {
         let primaryCategList: HTMLElement = document.querySelector('div.primary-categ > ul')!;
@@ -228,7 +230,7 @@ function Nav () {
                                 <p>Others</p>
                             </li>
                         </div>
-                        <div className='primary-categ-item' onClick={() => {
+                        <a href="/shopping-cart"><div className='primary-categ-item' onClick={() => {
                             setSelectedCategories('gift-cards')
                             deactivateCateg()
                             }}>
@@ -236,7 +238,7 @@ function Nav () {
                                 <img src={require(`../../images/Gift Cards/100off.png`)} alt="Gift Cards" />
                                 <p>Gift Cards</p>
                             </li>
-                        </div>
+                        </div></a>
                         <div className='primary-categ-item' onClick={() => {
                             setSelectedCategories('on-sale')
                             deactivateCateg()
