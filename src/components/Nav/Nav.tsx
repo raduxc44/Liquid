@@ -54,12 +54,12 @@ function Nav () {
             let mobileSearch: HTMLElement = document.querySelector('.nav-mobile-search-cont')!;
 
             //Obstructs interacting with the main body instead of the navbar
-            if(button === 'categ') {                
+            if(button === 'categ') {
                 let body: HTMLElement = document.querySelector('body')!;
                 if(body.style.overflow === 'hidden') body.style.overflow = 'visible';
                 else body.style.overflow = 'hidden';  
-            }
-            if(button === 'categ') {
+                
+                //Prevents the user from rappidly pressing the opening button for categ/search
                 if(categAnimationDelay.current === 1 ) {
                     categAnimationDelay.current = 1.5;
                     deactivateCateg();
@@ -90,6 +90,7 @@ function Nav () {
         } 
     }
     
+    //Handles the secondary menu animations - mobile
     function switchMenus () {
         let primaryCategList: HTMLElement = document.querySelector('div.primary-categ > ul')!;
         let secondCategList: HTMLElement = document.querySelector('div.second-categ > ul')!;
@@ -230,7 +231,7 @@ function Nav () {
                                 <p>Others</p>
                             </li>
                         </div>
-                        <a href="/shopping-cart"><div className='primary-categ-item' onClick={() => {
+                        <div className='primary-categ-item' onClick={() => {
                             setSelectedCategories('gift-cards')
                             deactivateCateg()
                             }}>
@@ -238,7 +239,7 @@ function Nav () {
                                 <img src={require(`../../images/Gift Cards/100off.png`)} alt="Gift Cards" />
                                 <p>Gift Cards</p>
                             </li>
-                        </div></a>
+                        </div>
                         <div className='primary-categ-item' onClick={() => {
                             setSelectedCategories('on-sale')
                             deactivateCateg()
