@@ -25,18 +25,21 @@ function Nav () {
 
 
     let deactivateCateg = () => {
-        let primaryCategList: HTMLElement = document.querySelector('div.primary-categ > ul')!;
-        let secondCategList: HTMLElement = document.querySelector('div.second-categ > ul')!;
-        let mobileCateg: HTMLElement = document.querySelector('div.nav-lower')!;
-        mobileCateg.classList.toggle('animate__fadeOutLeft')         
-        setTimeout(() => {
-            if(primaryCategList.style.display === 'none')   primaryCategList.style.display = 'block';
-            if(secondCategList.style.display !== 'none')    secondCategList.style.display = 'none';
-            mobileCateg.classList.toggle('animate__fadeOutLeft')
-            mobileCateg.style.removeProperty('display')
-            categAnimationDelay.current = 0
-        }, 1000)   
-
+        if(window.innerWidth < 1000) {
+            let body: HTMLElement = document.querySelector('body')!;
+            body.style.overflow = 'visible';  
+            let primaryCategList: HTMLElement = document.querySelector('div.primary-categ > ul')!;
+            let secondCategList: HTMLElement = document.querySelector('div.second-categ > ul')!;
+            let mobileCateg: HTMLElement = document.querySelector('div.nav-lower')!;
+            mobileCateg.classList.toggle('animate__fadeOutLeft')         
+            setTimeout(() => {
+                if(primaryCategList.style.display === 'none')   primaryCategList.style.display = 'block';
+                if(secondCategList.style.display !== 'none')    secondCategList.style.display = 'none';
+                mobileCateg.classList.toggle('animate__fadeOutLeft')
+                mobileCateg.style.removeProperty('display')
+                categAnimationDelay.current = 0
+            }, 1000)   
+        }
     }
     let deactivateSearch = () => {
         let mobileSearch:HTMLElement = document.querySelector('div.nav-mobile-search-cont')!;
@@ -55,16 +58,14 @@ function Nav () {
 
             //Obstructs interacting with the main body instead of the navbar
             if(button === 'categ') {
-                let body: HTMLElement = document.querySelector('body')!;
-                if(body.style.overflow === 'hidden') body.style.overflow = 'visible';
-                else body.style.overflow = 'hidden';  
-                
                 //Prevents the user from rappidly pressing the opening button for categ/search
                 if(categAnimationDelay.current === 1 ) {
                     categAnimationDelay.current = 1.5;
                     deactivateCateg();
                 }
                 else if(categAnimationDelay.current === 0) {
+                    let body: HTMLElement = document.querySelector('body')!;
+                    body.style.overflow = 'hidden';
                     categAnimationDelay.current = 0.5
                     deactivateSearch();
                     setTimeout(() => {categAnimationDelay.current = 1}, 1000)
@@ -136,26 +137,36 @@ function Nav () {
                 firstCategListElements[1].onclick = switchMenus;
                 firstCategListElements[3].onclick = switchMenus;
                 if(selectedCategories === 'spirits') {
-                    listImagesArr[0].src = require(`../../images/Spirits/Whisky/low-res/jack-standard.jpg`);
-                    listImagesArr[1].src = require(`../../images/Spirits/Vodka/low-res/absolut.jpg`);
-                    listImagesArr[2].src = require(`../../images/Spirits/Cognac/low-res/hennessy.jpg`);
-                    listImagesArr[3].src = require(`../../images/Spirits/Gin/low-res/koval.jpg`);
-                    listImagesArr[4].src = require(`../../images/Spirits/Rum/low-res/the-kraken.jpg`);
-                    listImagesArr[5].src = require(`../../images/Spirits/Tequila/low-res/jose-cuervo-reposado.jpg`);
-                    listImagesArr[6].src = require(`../../images/Spirits/Liquor/low-res/disaronno.jpg`)
+                    listImagesArr[0].src = require(`../../images/Spirits/Whisky/mobile-res/jack-standard.webp`);
+                    listImagesArr[1].src = require(`../../images/Spirits/Vodka/mobile-res/absolut.webp`);
+                    listImagesArr[2].src = require(`../../images/Spirits/Cognac/mobile-res/hennessy.webp`);
+                    listImagesArr[3].src = require(`../../images/Spirits/Gin/mobile-res/koval.webp`);
+                    listImagesArr[4].src = require(`../../images/Spirits/Rum/mobile-res/the-kraken.webp`);
+                    listImagesArr[5].src = require(`../../images/Spirits/Tequila/mobile-res/jose-cuervo-reposado.webp`);
+                    listImagesArr[6].src = require(`../../images/Spirits/Liquor/mobile-res/disaronno.webp`)
                 
                 }
                 else if(selectedCategories === 'wines') {                    
-                    listImagesArr[0].src = require(`../../images/Wine/low-res/Red/samtrot-spatlese.jpg`);
-                    listImagesArr[1].src = require(`../../images/Wine/low-res/White/muni.jpg`);
-                    listImagesArr[2].src = require(`../../images/Wine/low-res/Rose/cave-amadeu.jpg`);
+                    listImagesArr[0].src = require(`../../images/Wine/mobile-res/Red/samtrot-spatlese.webp`);
+                    listImagesArr[1].src = require(`../../images/Wine/mobile-res/White/muni.webp`);
+                    listImagesArr[2].src = require(`../../images/Wine/mobile-res/Rose/cave-amadeu.webp`);
                 }
                 else if(selectedCategories === 'others') {
-                    listImagesArr[0].src = require(`../../images/Others/Beer/low-res/desperados.jpg`);
-                    listImagesArr[1].src = require(`../../images/Others/Beverages/low-res/coca-cola.jpg`);
+                    listImagesArr[0].src = require(`../../images/Others/Beer/mobile-res/desperados.webp`);
+                    listImagesArr[1].src = require(`../../images/Others/Beverages/mobile-res/coca-cola.webp`);
                 }
             }
-    }, [selectedCategories, shownCategories])    
+    }, [selectedCategories, shownCategories])
+
+    function searchFunc () {
+        let searchInput:HTMLInputElement = document.querySelector('div.nav-mobile-search-cont > input')!;
+        console.log(searchInput.value);
+        let resultsDiv = document.createElement('div');
+        let resultsArr = [];
+        let a = Object.getOwnPropertyNames(Inventory)
+        console.log(a);
+        
+    }
 
     return(
         <nav>
@@ -190,7 +201,7 @@ function Nav () {
                 </div>
             </div>
             <div className='nav-mobile-search-cont animate__animated'>
-                <input type="text" placeholder='Search'/>
+                <input onChange= {() => searchFunc()} type="text" placeholder='Search'/>
             </div>
             <div className='nav-lower animate__animated'>
                 <div className='primary-categ'>
@@ -200,7 +211,7 @@ function Nav () {
                             alreadyOpenedCateg.current = true;
                             }}>
                             <li>
-                                <img src={require(`../../images/Spirits/Whisky/low-res/jack-honey.jpg`)} alt="Whisky" />
+                                <img src={require(`../../images/Spirits/Whisky/mobile-res/jack-honey.webp`)} alt="Whisky" />
                                 <p>Spirits</p>
                             </li>
                         </div>
@@ -209,7 +220,7 @@ function Nav () {
                             alreadyOpenedCateg.current = true;
                             }}>
                             <li>
-                                <img src={require(`../../images/Wine/low-res/Red/samtrot-spatlese.jpg`)} alt="Whisky" />
+                                <img src={require(`../../images/Wine/mobile-res/Red/samtrot-spatlese.webp`)} alt="Whisky" />
                                 <p>Wine</p>
                             </li>
                         </div>
@@ -218,7 +229,7 @@ function Nav () {
                             deactivateCateg()
                             }}>
                             <li>
-                                <img src={require(`../../images/Champagne/low-res/ferrari.jpg`)} alt="Whisky" />
+                                <img src={require(`../../images/Champagne/mobile-res/ferrari.webp`)} alt="Whisky" />
                                 <p>Champagne</p>
                             </li>
                         </div>
@@ -227,7 +238,7 @@ function Nav () {
                             alreadyOpenedCateg.current = true;
                             }}>
                             <li>
-                                <img src={require(`../../images/Others/Beer/low-res/desperados.jpg`)} alt="Others" />
+                                <img src={require(`../../images/Others/Beer/mobile-res/desperados.webp`)} alt="Others" />
                                 <p>Others</p>
                             </li>
                         </div>
@@ -236,7 +247,7 @@ function Nav () {
                             deactivateCateg()
                             }}>
                             <li>
-                                <img src={require(`../../images/Gift Cards/100off.png`)} alt="Gift Cards" />
+                                <img src={require(`../../images/GiftCards/mobile-res/100off.webp`)} alt="Gift Cards" />
                                 <p>Gift Cards</p>
                             </li>
                         </div>
@@ -245,7 +256,7 @@ function Nav () {
                             deactivateCateg()
                             }}>
                             <li>
-                                <img src={require(`../../images/on-sale-high-res.jpg`)} alt="On Sale" />
+                                <img src={require(`../../images/on-sale-mobile-res.webp`)} alt="On Sale" />
                                 <p>On sale</p>
                             </li>
                         </div>
@@ -254,7 +265,7 @@ function Nav () {
                             deactivateCateg()
                             }}>
                             <li>
-                                <img src={require(`../../images/daily-offer-high-res.jpg`)} alt="Daily Offer" />
+                                <img src={require(`../../images/daily-offer-mobile-res.webp`)} alt="Daily Offer" />
                                 <p>Daily Offer</p>
                             </li>
                         </div>

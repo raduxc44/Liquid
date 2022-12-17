@@ -60,7 +60,14 @@ function Recommended () {
                         <div key={index} className='rec-item-wrapper'>
                         <div className='rec-item'>
                             <div className='rec-item-upper'>
-                                <img className='carousel-img' src={require(`../../images/Spirits/Whisky/low-res/${whisky.imageTag}.jpg`)} alt={whisky.name}/>
+                                {/* <img className='carousel-img' src={require(`../../images/Spirits/Whisky/low-res/${whisky.imageTag}.jpg`)} alt={whisky.name}/>
+                                <p>{whisky.name}</p> */}
+                                <picture> <source srcSet={require(`../../images/Spirits/Whisky/full-res/${whisky.imageTag}.jpg`)} 
+                                media="(min-width: 600px)"/> <img 
+                                src={require(`../../images/Spirits/Whisky/mobile-res/${whisky.imageTag}.webp`)} alt={whisky.name}
+                                height={900} width={1360}
+                                loading={'lazy'}
+                                /> </picture>
                                 <p>{whisky.name}</p>
                                 <p>{whisky.quantity}/{whisky.strength}</p>
                             </div>

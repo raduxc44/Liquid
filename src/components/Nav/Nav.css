@@ -8,6 +8,7 @@ nav {
     width: 100%;
     font-family: 'Black Vintage';
     font-size: 18px;
+    background-color: black;
 }
 .nav-upper {
     padding: 1% 4% 0 5%;
