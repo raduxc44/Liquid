@@ -5,16 +5,16 @@
     background-size: cover;
 }
 .whisky-banner{
-    background-image: url('../../images/Covers/full-res/spirits-cover.jpg');
+    background-image: url('../../images/Covers/desktop/spirits-cover.webp');
     background-position: center;
     background-position: top 30% right 25%;
 }
 .wines-banner{
-    background-image: url('../../images/Covers/full-res/wine-cover.jpg');
+    background-image: url('../../images/Covers/desktop/wine-cover.webp');
     background-position: top 60% right 25%;
 }
 .champagne-banner{
-    background-image: url('../../images/Covers/full-res/champagne-cover.jpg');
+    background-image: url('../../images/Covers/desktop/champagne-cover.webp');
     background-position: top 50% right 25%;
 }
 .banner-promo {
@@ -39,9 +39,21 @@
 
 @media screen and (max-width: 1000px) {
     .banner-cont{
-        height: 60vh;
+        height: 280px
     }
     .banner-cont > *{
         object-fit: scale-down;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .whisky-banner {
+        background-image: url('../../images/Covers/mobile/spirits-cover.webp');
+    }
+    .wines-banner {
+        background-image: url('../../images/Covers/mobile/wine-cover.webp');
+    }
+    .champagne-banner {
+        background-image: url('../../images/Covers/mobile/champagne-cover.webp');
     }
 }

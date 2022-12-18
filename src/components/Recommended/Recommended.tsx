@@ -62,11 +62,10 @@ function Recommended () {
                             <div className='rec-item-upper'>
                                 {/* <img className='carousel-img' src={require(`../../images/Spirits/Whisky/low-res/${whisky.imageTag}.jpg`)} alt={whisky.name}/>
                                 <p>{whisky.name}</p> */}
-                                <picture> <source srcSet={require(`../../images/Spirits/Whisky/full-res/${whisky.imageTag}.jpg`)} 
+                                <picture> <source srcSet={require(`../../images/Spirits/Whisky/desktop/${whisky.imageTag}.webp`)} 
                                 media="(min-width: 600px)"/> <img 
-                                src={require(`../../images/Spirits/Whisky/mobile-res/${whisky.imageTag}.webp`)} alt={whisky.name}
-                                height={900} width={1360}
-                                loading={'lazy'}
+                                src={require(`../../images/Spirits/Whisky/mobile/${whisky.imageTag}.webp`)} alt={whisky.name}
+                                
                                 /> </picture>
                                 <p>{whisky.name}</p>
                                 <p>{whisky.quantity}/{whisky.strength}</p>

@@ -137,23 +137,23 @@ function Nav () {
                 firstCategListElements[1].onclick = switchMenus;
                 firstCategListElements[3].onclick = switchMenus;
                 if(selectedCategories === 'spirits') {
-                    listImagesArr[0].src = require(`../../images/Spirits/Whisky/mobile-res/jack-standard.webp`);
-                    listImagesArr[1].src = require(`../../images/Spirits/Vodka/mobile-res/absolut.webp`);
-                    listImagesArr[2].src = require(`../../images/Spirits/Cognac/mobile-res/hennessy.webp`);
-                    listImagesArr[3].src = require(`../../images/Spirits/Gin/mobile-res/koval.webp`);
-                    listImagesArr[4].src = require(`../../images/Spirits/Rum/mobile-res/the-kraken.webp`);
-                    listImagesArr[5].src = require(`../../images/Spirits/Tequila/mobile-res/jose-cuervo-reposado.webp`);
-                    listImagesArr[6].src = require(`../../images/Spirits/Liquor/mobile-res/disaronno.webp`)
+                    listImagesArr[0].src = require(`../../images/Spirits/Whisky/mobile/jack-standard.webp`);
+                    listImagesArr[1].src = require(`../../images/Spirits/Vodka/mobile/absolut.webp`);
+                    listImagesArr[2].src = require(`../../images/Spirits/Cognac/mobile/hennessy.webp`);
+                    listImagesArr[3].src = require(`../../images/Spirits/Gin/mobile/koval.webp`);
+                    listImagesArr[4].src = require(`../../images/Spirits/Rum/mobile/the-kraken.webp`);
+                    listImagesArr[5].src = require(`../../images/Spirits/Tequila/mobile/jose-cuervo-reposado.webp`);
+                    listImagesArr[6].src = require(`../../images/Spirits/Liquor/mobile/disaronno.webp`)
                 
                 }
                 else if(selectedCategories === 'wines') {                    
-                    listImagesArr[0].src = require(`../../images/Wine/mobile-res/Red/samtrot-spatlese.webp`);
-                    listImagesArr[1].src = require(`../../images/Wine/mobile-res/White/muni.webp`);
-                    listImagesArr[2].src = require(`../../images/Wine/mobile-res/Rose/cave-amadeu.webp`);
+                    listImagesArr[0].src = require(`../../images/Wine/mobile/Red/samtrot-spatlese.webp`);
+                    listImagesArr[1].src = require(`../../images/Wine/mobile/White/muni.webp`);
+                    listImagesArr[2].src = require(`../../images/Wine/mobile/Rose/cave-amadeu.webp`);
                 }
                 else if(selectedCategories === 'others') {
-                    listImagesArr[0].src = require(`../../images/Others/Beer/mobile-res/desperados.webp`);
-                    listImagesArr[1].src = require(`../../images/Others/Beverages/mobile-res/coca-cola.webp`);
+                    listImagesArr[0].src = require(`../../images/Others/Beer/mobile/desperados.webp`);
+                    listImagesArr[1].src = require(`../../images/Others/Beverages/mobile/coca-cola.webp`);
                 }
             }
     }, [selectedCategories, shownCategories])
@@ -211,7 +211,7 @@ function Nav () {
                             alreadyOpenedCateg.current = true;
                             }}>
                             <li>
-                                <img src={require(`../../images/Spirits/Whisky/mobile-res/jack-honey.webp`)} alt="Whisky" />
+                                <img src={require(`../../images/Spirits/Whisky/mobile/jack-honey.webp`)} alt="Whisky" />
                                 <p>Spirits</p>
                             </li>
                         </div>
@@ -220,7 +220,7 @@ function Nav () {
                             alreadyOpenedCateg.current = true;
                             }}>
                             <li>
-                                <img src={require(`../../images/Wine/mobile-res/Red/samtrot-spatlese.webp`)} alt="Whisky" />
+                                <img src={require(`../../images/Wine/mobile/Red/samtrot-spatlese.webp`)} alt="Whisky" />
                                 <p>Wine</p>
                             </li>
                         </div>
@@ -229,7 +229,7 @@ function Nav () {
                             deactivateCateg()
                             }}>
                             <li>
-                                <img src={require(`../../images/Champagne/mobile-res/ferrari.webp`)} alt="Whisky" />
+                                <img src={require(`../../images/Champagne/mobile/ferrari.webp`)} alt="Whisky" />
                                 <p>Champagne</p>
                             </li>
                         </div>
@@ -238,7 +238,7 @@ function Nav () {
                             alreadyOpenedCateg.current = true;
                             }}>
                             <li>
-                                <img src={require(`../../images/Others/Beer/mobile-res/desperados.webp`)} alt="Others" />
+                                <img src={require(`../../images/Others/Beer/mobile/desperados.webp`)} alt="Others" />
                                 <p>Others</p>
                             </li>
                         </div>
@@ -247,7 +247,7 @@ function Nav () {
                             deactivateCateg()
                             }}>
                             <li>
-                                <img src={require(`../../images/GiftCards/mobile-res/100off.webp`)} alt="Gift Cards" />
+                                <img src={require(`../../images/GiftCards/mobile/100off.webp`)} alt="Gift Cards" />
                                 <p>Gift Cards</p>
                             </li>
                         </div>
