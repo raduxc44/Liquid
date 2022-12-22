@@ -66,6 +66,7 @@
 .categ-pic-lg{
     height: 40vh;
     width: 30vw;
+    object-fit: cover;
     border-radius: 10px;
 }
 .categ-large-card-check:hover {

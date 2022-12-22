@@ -22,19 +22,19 @@ function Categories () {
                         <p className='categ-card-title'>Vodka</p>
                         <p>Silent, yet deadly.</p>
                     </div>
-                    <picture> <source srcSet={require(`../../images/Spirits/Vodka/desktop/absolut.webp`)} 
+                    <picture> <source srcSet={require(`../../images/Vodka/desktop/absolut.webp`)} 
                         media="(min-width: 600px)"/> <img 
                         className='categ-pic-sm'
-                        src={require(`../../images/Spirits/Vodka/mobile/absolut.webp`)} alt="Vodka"
+                        src={require(`../../images/Vodka/mobile/absolut.webp`)} alt="Vodka"
                         loading={'lazy'}
                     /> </picture>
                     <div className='check-out-btn categ-small-card-check'>Check it out</div>
                 </div>
                 <div className='categ-card-sm'>
-                    <picture> <source srcSet={require(`../../images/Spirits/Rum/desktop/the-kraken.webp`)} 
+                    <picture> <source srcSet={require(`../../images/Rum/desktop/the-kraken.webp`)} 
                             media="(min-width: 600px)"/> <img 
                             className='categ-pic-sm'
-                            src={require(`../../images/Spirits/Rum/mobile/the-kraken.webp`)} alt="Rum"
+                            src={require(`../../images/Rum/mobile/the-kraken.webp`)} alt="Rum"
                             loading={'lazy'}
                     /> </picture>
                     <div>
@@ -48,10 +48,10 @@ function Categories () {
                         <p className='categ-card-title'>Wine</p>
                         <p>Wine placeholder text</p>
                     </div>
-                    <picture> <source srcSet={require(`../../images/Wine/desktop/White/muni.webp`)} 
+                    <picture> <source srcSet={require(`../../images/White-Wine/desktop/muni.webp`)} 
                         media="(min-width: 600px)"/> <img 
                         className='categ-pic-sm'
-                        src={require(`../../images/Wine/mobile/White/muni.webp`)} alt="Wine"
+                        src={require(`../../images/White-Wine/mobile/muni.webp`)} alt="Wine"
                         loading={'lazy'}
                     /> </picture>
                     <div className='check-out-btn categ-small-card-check'>Check it out</div>
@@ -72,10 +72,10 @@ function Categories () {
                     <div className='check-out-btn categ-large-card-check'>Check it out</div>
                 </div>
                 <div className='categ-card-lg'>
-                    <picture> <source srcSet={require(`../../images/Spirits/Whisky/desktop/red-label.webp`)} 
+                    <picture> <source srcSet={require(`../../images/Whisky/desktop/red-label.webp`)} 
                         media="(min-width: 600px)"/> <img 
                         className='categ-pic-lg'
-                        src={require(`../../images/Spirits/Whisky/mobile/red-label.webp`)} alt="Whisky"
+                        src={require(`../../images/Whisky/mobile/red-label.webp`)} alt="Whisky"
                         loading={'lazy'}
                     /> </picture>
                     <div>
