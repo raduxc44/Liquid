@@ -198,41 +198,47 @@ function Nav () {
                 else if(selectedCategories === 'wines') listItemDiv.classList.toggle('three-categs');
                 else if(selectedCategories === 'others') listItemDiv.classList.toggle('two-categs');
                 }
+                let listCategoryNamesArr: HTMLElement[] = Array.from(document.querySelectorAll('div.secondary-categ-item > li > p'))
+                if(selectedCategories === 'spirits') {
+                    listCategoryNamesArr[0].innerText = 'Whisky';
+                    listCategoryNamesArr[1].innerText = 'Vodka';
+                    listCategoryNamesArr[2].innerText = 'Cognac';
+                    listCategoryNamesArr[3].innerText = 'Gin';
+                    listCategoryNamesArr[4].innerText = 'Rum';
+                    listCategoryNamesArr[5].innerText = 'Tequila';
+                    listCategoryNamesArr[6].innerText = 'Liquor'
+                }
+                else if(selectedCategories === 'wines') {
+                    listCategoryNamesArr[0].innerText = 'Red Wine';
+                    listCategoryNamesArr[1].innerText = 'White Wine';
+                    listCategoryNamesArr[2].innerText = 'Rose Wine';
+                }
+                else if(selectedCategories === 'others') {
+                    listCategoryNamesArr[0].innerText = 'Beer';
+                    listCategoryNamesArr[1].innerText = 'Beverages';
+                }
                 if(window.innerWidth < 1000) {
-                    let listCategoryNamesArr: HTMLElement[] = Array.from(document.querySelectorAll('div.secondary-categ-item > li > p'))
                     let listImagesArr: HTMLImageElement[] = Array.from(document.querySelectorAll('div.secondary-categ-item > li > img'))!;
                     let firstCategListElements: HTMLElement[] = Array.from(document.querySelectorAll('div.primary-categ-item'))!;
                     firstCategListElements[0].onclick = switchMenus;
                     firstCategListElements[1].onclick = switchMenus;
                     firstCategListElements[3].onclick = switchMenus;
                     if(selectedCategories === 'spirits') {
-                        listCategoryNamesArr[0].innerText = 'Whisky'
                         listImagesArr[0].src = require(`../../images/Whisky/mobile/jack-standard.webp`);
-                        listCategoryNamesArr[1].innerText = 'Vodka'
                         listImagesArr[1].src = require(`../../images/Vodka/mobile/absolut.webp`);
-                        listCategoryNamesArr[2].innerText = 'Cognac'
                         listImagesArr[2].src = require(`../../images/Cognac/mobile/hennessy.webp`);
-                        listCategoryNamesArr[3].innerText = 'Gin'
                         listImagesArr[3].src = require(`../../images/Gin/mobile/koval.webp`);
-                        listCategoryNamesArr[4].innerText = 'Rum'
                         listImagesArr[4].src = require(`../../images/Rum/mobile/the-kraken.webp`);
-                        listCategoryNamesArr[5].innerText = 'Tequila'
                         listImagesArr[5].src = require(`../../images/Tequila/mobile/jose-cuervo-reposado.webp`);
-                        listCategoryNamesArr[6].innerText = 'Liquor'
                         listImagesArr[6].src = require(`../../images/Liquor/mobile/disaronno.webp`)
                     }
                     else if(selectedCategories === 'wines') {    
-                        listCategoryNamesArr[0].innerText = 'Red Wine'                
                         listImagesArr[0].src = require(`../../images/Red-Wine/mobile/samtrot-spatlese.webp`);
-                        listCategoryNamesArr[1].innerText = 'White Wine'
                         listImagesArr[1].src = require(`../../images/White-Wine/mobile/muni.webp`);
-                        listCategoryNamesArr[2].innerText = 'Rose Wine'
                         listImagesArr[2].src = require(`../../images/Rose-Wine/mobile/cave-amadeu.webp`);
                     }
                     else if(selectedCategories === 'others') {
-                        listCategoryNamesArr[0].innerText = 'Beer'
                         listImagesArr[0].src = require(`../../images/Beer/mobile/desperados.webp`);
-                        listCategoryNamesArr[1].innerText = 'Beverages'
                         listImagesArr[1].src = require(`../../images/Beverage/mobile/coca-cola.webp`);
                     }
                 }
@@ -244,7 +250,13 @@ function Nav () {
         let searchInput:HTMLInputElement = document.querySelector('div.nav-mobile-search-cont > input')!;
         console.log(searchInput.value);
         let resultsDiv = document.createElement('div');
+        resultsDiv.classList.add('search-results-cont');
+        resultsDiv.style.display = 'flex'
         let resultsArr = [];
+        let inventory = [];
+        Object.entries(Inventory.Items).forEach(item => {
+            inventory.push(item[1]);
+        })
         let a = Object.getOwnPropertyNames(Inventory)
         console.log(a);
         
