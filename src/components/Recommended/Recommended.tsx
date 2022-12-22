@@ -2,25 +2,81 @@ import './Recommended.css'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
+import Inventory from '../../data/inventory.json'
 
-type Whisky = {
+type Item = {
     name: string,
-    strength: string,
-    quantity: string,
-    imageTag: string,
-    price: number,
+    category: string,
+    origin?: string,
+    imageTag?: string,
+    quantity?: string,
+    flavor?: string[],
+    strength?: string,
+    price: number
 }
-let randomWhiskyArr: Whisky[] = [];
+let randomItemsArr: Item[] = [];
 
+// Picks one random of each: Whisky, Vodka, Cognac, Rum, Liquor, Red & Wine, Champagne, Beer, Beverage
 (function randomizer () {
-    let items = require('../../data/inventory.json');
-    let keys = Object.keys(items.categories.spirits.Whisky);
-    while(randomWhiskyArr.length < 8) {
-            let randomWhisky = keys[Math.floor(Math.random() * keys.length)];
-            let randomWhiskyItem = items.categories.spirits.Whisky[randomWhisky];
-            if(!randomWhiskyArr.includes(randomWhiskyItem)) {randomWhiskyArr.push(randomWhiskyItem);
-        } 
-    }
+    let whiskyChosen: boolean = false;
+    let vodkaChosen: boolean = false;
+    let cognacChosen: boolean = false;
+    let rumChosen: boolean = false;
+    let liquorChosen: boolean = false;
+    let redWineChosen: boolean = false;
+    let whiteWineChosen: boolean = false;
+    let champagneChosen: boolean = false;
+    let beerChosen: boolean = false;
+    let beverageChosen: boolean = false
+            
+        let itemsArr:Item[] = [];
+        
+        Object.entries(Inventory.Items).forEach(item => {
+            itemsArr.push(item[1]);
+        })
+        while(randomItemsArr.length < 10) {
+            let randomItemIndex = Math.floor(Math.random() * itemsArr.length);
+            if(itemsArr[randomItemIndex].category === 'Whisky' && !whiskyChosen) {
+                whiskyChosen = true;
+                randomItemsArr.push(itemsArr[randomItemIndex])
+            }
+            else if(itemsArr[randomItemIndex].category === 'Vodka' && !vodkaChosen) {
+                vodkaChosen = true;
+                randomItemsArr.push(itemsArr[randomItemIndex])
+            }
+            else if(itemsArr[randomItemIndex].category === 'Cognac' && !cognacChosen) {
+                cognacChosen = true;
+                randomItemsArr.push(itemsArr[randomItemIndex])
+            }
+            else if(itemsArr[randomItemIndex].category === 'Rum' && !rumChosen) {
+                rumChosen = true;
+                randomItemsArr.push(itemsArr[randomItemIndex])
+            }
+            else if(itemsArr[randomItemIndex].category === 'Liquor' && !liquorChosen) {
+                liquorChosen = true;
+                randomItemsArr.push(itemsArr[randomItemIndex])
+            }
+            else if(itemsArr[randomItemIndex].category === 'White-Wine' && !whiteWineChosen) {
+                whiteWineChosen = true;
+                randomItemsArr.push(itemsArr[randomItemIndex])
+            }
+            else if(itemsArr[randomItemIndex].category === 'Red-Wine' && !redWineChosen) {
+                redWineChosen = true;
+                randomItemsArr.push(itemsArr[randomItemIndex])
+            }
+            else if(itemsArr[randomItemIndex].category === 'Champagne' && !champagneChosen) {
+                champagneChosen = true;
+                randomItemsArr.push(itemsArr[randomItemIndex])
+            }
+            else if(itemsArr[randomItemIndex].category === 'Beer' && !beerChosen) {
+                beerChosen = true;
+                randomItemsArr.push(itemsArr[randomItemIndex])
+            }
+            else if(itemsArr[randomItemIndex].category === 'Beverage' && !beverageChosen) {
+                beverageChosen = true;
+                randomItemsArr.push(itemsArr[randomItemIndex])
+            }
+        }    
 })()
 
 function Recommended () {
@@ -56,19 +112,18 @@ function Recommended () {
                     }
                 ]}
                 >
-                    {randomWhiskyArr.map((whisky, index) => (
+                    {randomItemsArr.map((item, index) => (
                         <div key={index} className='rec-item-wrapper'>
                         <div className='rec-item'>
                             <div className='rec-item-upper'>
-                                {/* <img className='carousel-img' src={require(`../../images/Spirits/Whisky/low-res/${whisky.imageTag}.jpg`)} alt={whisky.name}/>
-                                <p>{whisky.name}</p> */}
-                                <picture> <source srcSet={require(`../../images/Spirits/Whisky/desktop/${whisky.imageTag}.webp`)} 
+                                <img className='carousel-img' src={require(`../../images/${item.category}/desktop/${item.imageTag}.webp`)} alt={item.name}/>
+                                {/* <p>{item.name}</p> */}
+                                {/* <picture> <source srcSet={require(`../../images/Spirits/${item.category}/desktop/${item.imageTag}.webp`)} 
                                 media="(min-width: 600px)"/> <img 
-                                src={require(`../../images/Spirits/Whisky/mobile/${whisky.imageTag}.webp`)} alt={whisky.name}
-                                
-                                /> </picture>
-                                <p>{whisky.name}</p>
-                                <p>{whisky.quantity}/{whisky.strength}</p>
+                                // src={require(`../../images/Spirits/${item.category}/mobile/${item.imageTag}.webp`)} alt={item.name}
+                                /> </picture> */}
+                                <p>{item.name}</p>
+                                <p>{item.quantity}/{item.strength}</p>
                             </div>
                             <p className='rec-card-check check-out-btn'>Check it out</p>
                         </div>
