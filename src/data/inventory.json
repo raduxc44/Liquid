@@ -1,714 +1,784 @@
-{"categories": {
-        "spirits":{
-            "Whisky":{
-                "bowmore":{
-                    "name":"Bowmore",
-                    "origin":"Scotland",
-                    "imageTag":"bowmore",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":40
-                },
-                "chivas":{
-                    "name":"Chivas Regal",
-                    "origin":"Scotland",
-                    "imageTag":"chivas",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":27
-                },
-                "four-roses": {
-                    "name":"Four Roses",
-                    "origin":"Sweden",
-                    "imageTag":"four-roses",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":18
-                },
-                "gallantry":{
-                    "name":"Gallantry",
-                    "origin":"Ireland",
-                    "imageTag":"gallantry",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":13
-                },
-                "glenfiddich":{
-                    "name":"Glenfiddich",
-                    "origin":"Scotland",
-                    "imageTag":"glenfiddich",
-                    "quantity":"0.5L",
-                    "strength":"40%",
-                    "price":15
-                },
-                "green-label": {
-                    "name":"Green Label",
-                    "origin":"Scotland",
-                    "imageTag":"green-label",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":47
-                },
-                "jack-honey": {
-                    "name":"Jack Daniel's Honey",
-                    "origin":"USA",
-                    "imageTag":"jack-honey",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":17
-                },
-                "jack-standard": {
-                    "name":"Jack Daniel's",
-                    "origin":"USA",
-                    "imageTag":"jack-standard",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":15
-                },
-                "macallan": {
-                    "name":"Macallan",
-                    "origin":"Scotland",
-                    "imageTag":"macallan",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":95
-                },
-                "monkey-shoulder": {
-                    "name":"Monkey Shoulder",
-                    "origin":"Scotland",
-                    "imageTag":"monkey-shoulder",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":39
-                },
-                "red-label":{
-                    "name":"Red Label",
-                    "origin":"Scotland",
-                    "imageTag":"red-label",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":10.5
-                },
-                "sazerac":{
-                    "name":"Sazerac Rye",
-                    "origin":"USA",
-                    "imageTag":"sazerac",
-                    "quantity":"0.7L",
-                    "strength":"45%",
-                    "price":56
-                },
-                "talisker":{
-                    "name":"Talisker",
-                    "origin":"Scotland",
-                    "imageTag":"talisker",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":255
-                },
-                "the-glenlivet":{
-                    "name":"The Glenlivet",
-                    "origin":"Scotland",
-                    "imageTag":"the-glenlivet",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":38
-                }
-            },
-            "Vodka":{
-                "ciroc":{
-                    "name":"Cîroc",
-                    "origin":"France",
-                    "imageTag":"ciroc",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":27
-                },
-                "dixon":{
-                    "name":"Dixon's",
-                    "origin":"Ontario, Canada",
-                    "imageTag":"dixon",
-                    "quantity":"0.75L",
-                    "strength":"40%",
-                    "price":35
-                },
-                "esbjaerg":{
-                    "name":"EsbjÆrg",
-                    "origin":"Netherlands",
-                    "imageTag":"esbjaerg",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":12
-                },
-                "finlandia":{
-                    "name":"Finlandia",
-                    "origin":"Finland",
-                    "imageTag":"finlandia",
-                    "quantity":"1L",
-                    "strength":"40%",
-                    "price":15
-                },
-                "flirt":{
-                    "name":"Flirt",
-                    "origin":"Bulgaria",
-                    "imageTag":"flirt",
-                    "quantity":"0.7L",
-                    "strength":"37,5%",
-                    "price":10
-                },
-                "hendrix":{
-                    "name":"Hendrix Electric",
-                    "origin":"USA",
-                    "imageTag":"hendrix",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":700
-                },
-                "oginsky":{
-                    "name":"Oginsky",
-                    "origin":"Poland",
-                    "imageTag":"oginsky",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":35
-                },
-                "poliakov":{
-                    "name":"Poliakov",
-                    "origin":"France",
-                    "imageTag":"poliakov",
-                    "quantity":"0.7L",
-                    "strength":"37.5%",
-                    "price":10
-                },
-                "purity":{
-                    "name":"Purity",
-                    "origin":"Sweden",
-                    "imageTag":"purity",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":50
-                },
-                "smirnoff":{
-                    "name":"Smirnoff",
-                    "origin":"Russia",
-                    "imageTag":"smirnoff",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":15
-                }
-            },
-            "Cognac":{
-                "courvoisier":{
-                    "name":"Courvoisier",
-                    "origin":"France",
-                    "imageTag":"courvoisier",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":50
-                },
-                "delamain":{
-                    "name":"Delamain",
-                    "origin":"France",
-                    "imageTag":"delamain",
-                    "quantity":"0.7L",
-                    "strength":"45%",
-                    "price":200
-                },
-                "hennessy":{
-                    "name":"Hennessy",
-                    "origin":"France",
-                    "imageTag":"hennessy",
-                    "quantity":"0.5L",
-                    "strength":"40%",
-                    "price":25
-                },
-                "martell":{
-                    "name":"Martell",
-                    "origin":"France",
-                    "imageTag":"martell",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":180
-                },
-                "remy-martin":{
-                    "name":"Remy Martin",
-                    "origin":"France",
-                    "imageTag":"remy-martin",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":50
-                }
-            },
-            "Gin":{
-                "birds":{
-                    "name":"Birds",
-                    "origin":"Germany",
-                    "imageTag":"birds",
-                    "quantity":"0.7L",
-                    "strength":"42%",
-                    "price":38
-                },
-                "bombay-sapphire":{
-                    "name":"Bombay Sapphire",
-                    "origin":"UK",
-                    "imageTag":"bombay-sapphire",
-                    "quantity":["0.05L","0.7L","1L"],
-                    "strength":"40%",
-                    "price":[2, 18, 24]
-                },                
-                "deer":{
-                    "name":"Deer",
-                    "origin":"Italy",
-                    "imageTag":"deer",
-                    "quantity":"0.7L",
-                    "strength":"46%",
-                    "price":40
-                },
-                "hardshore":{
-                    "name":"Hardshore",
-                    "origin":"Oregon, USA",
-                    "imageTag":"hardshore",
-                    "quantity":"0.75L",
-                    "strength":"46%",
-                    "price":37
-                },
-                "koval":{
-                    "name":"Koval",
-                    "origin":"Chicago, USA",
-                    "imageTag":"koval",
-                    "quantity":"0.5L",
-                    "strength":"47%",
-                    "price":37
-                },
-                "monkey47":{
-                    "name":"Monkey 47",
-                    "origin":"Germany",
-                    "imageTag":"monkey47",
-                    "quantity":"0.5L",
-                    "strength":"47%",
-                    "price":28
-                },
-                "purity":{
-                    "name":"Purity 34",
-                    "origin":"Sweden",
-                    "imageTag":"purity",
-                    "quantity":"0.7L",
-                    "strength":"57.1%",
-                    "price":32
-                },
-                "sipsmith":{
-                    "name":"Sipsmith",
-                    "origin":"UK",
-                    "imageTag":"sipsmith",
-                    "quantity":"1L",
-                    "strength":"44.1%",
-                    "price":50
-                },
-                "the-botanist":{
-                    "name":"The Botanist Islay",
-                    "origin":"UK",
-                    "imageTag":"the-botanist",
-                    "quantity":"0.7L",
-                    "strength":"46%",
-                    "price":25
-                },
-                "tuckombil":{
-                    "name":"Tuckombil",
-                    "origin":"Australia",
-                    "imageTag":"tuckombil",
-                    "quantity":"0.5L",
-                    "strength":"42%",
-                    "price":38
-                },
-                "woody-creek":{
-                    "name":"Woody Creek",
-                    "origin":"Colorado, USA",
-                    "imageTag":"woody-creek",
-                    "quantity":"0.75L",
-                    "strength":"47%",
-                    "price":35
-                },
-                "woodys":{
-                    "name":"Woody's",
-                    "origin":"Canada",
-                    "imageTag":"woodys",
-                    "quantity":"0.75L",
-                    "strength":"40%",
-                    "price":30
-                }
-            },
-            "Rum":{
-                "angostura":{
-                    "name":"Angostura Reserva",
-                    "origin":"Trinidad & Tobago",
-                    "imageTag":"angostura",
-                    "quantity":"0.7L",
-                    "strength":"37.5%",
-                    "price":20
-                },
-                "bacardi":{
-                    "name":"Bacardi 151",
-                    "origin":"Puerto Rico",
-                    "imageTag":"bacardi",
-                    "quantity":"1L",
-                    "strength":"75.5%",
-                    "price":29
-                },
-                "havana":{
-                    "name":"Havana Club",
-                    "origin":"Cuba",
-                    "imageTag":"havana",
-                    "quantity":["0.7L","1L"],
-                    "strength":"40%",
-                    "price":[14, 18]
-                },
-                "marlin-spike":{
-                    "name":"Marlin Spike",
-                    "origin":"Belgium",
-                    "imageTag":"marlin-spike",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":46
-                },
-                "shellback":{
-                    "name":"Shellback",
-                    "origin":"Caribbean Islands",
-                    "imageTag":"shellback",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":15
-                },
-                "the-kraken":{
-                    "name":"The Kraken Black",
-                    "origin":"Caribbean Islands",
-                    "imageTag":"the-kraken",
-                    "quantity":"0.7L",
-                    "strength":"40%",
-                    "price":26
-                }
-            },
-            "Tequila":{
-                "don-angel":{
-                    "name":"Don Angel Blanco",
-                    "origin":"Mexico",
-                    "imageTag":"don-angel",
-                    "quantity":"0.75L",
-                    "strength":"38%",
-                    "price":20
-                },
-                "jose-cuervo-reposado":{
-                    "name":"Jose Cuervo Reposado",
-                    "origin":"Mexico",
-                    "imageTag":"jose-cuervo-reposado",
-                    "quantity":"0.7L",
-                    "strength":"38%",
-                    "price":20
-                },
-                "jose-cuervo-silver":{
-                    "name":"Jose Cuervo Silver",
-                    "origin":"Mexico",
-                    "imageTag":"jose-cuervo-silver",
-                    "quantity":"0.7L",
-                    "strength":"38%",
-                    "price":20
-                }
-            },
-            "Liquor":{
-                "absinthe":{
-                    "name":"Lucid Absinthe",
-                    "origin":"France",
-                    "imageTag":"absinthe",
-                    "quantity":"0.75L",
-                    "strength":"62%",
-                    "price":60
-                },
-                "aperol":{
-                    "name":"Aperol",
-                    "origin":"Italy",
-                    "imageTag":"aperol",
-                    "quantity":["0.75L", "1L"],
-                    "strength":"11%",
-                    "price":[10, 12]
-                },
-                "disaronno":{
-                    "name":"Disaronno Originale",
-                    "origin":"Italy",
-                    "imageTag":"disaronno",
-                    "quantity":"0.7L",
-                    "strength":"28%",
-                    "price":22
-                },
-                "jagermeister":{
-                    "name":"Jagermeister",
-                    "origin":"Germany",
-                    "imageTag":"jagermeister",
-                    "quantity":["0.5L", "0.7L", "1.75L"],
-                    "strength":"35%",
-                    "price":[12, 18, 24] 
-                },
-                "sheridan":{
-                    "name":"Sheridan's",
-                    "origin":"Ireland",
-                    "imageTag":"sheridan",
-                    "quantity":["0.5L", "0.7L", "1L"],
-                    "strength":"15.5%",
-                    "price":[15, 21, 26]
-                },
-                "v&a":{
-                    "name":"V&A Imperial Cream",
-                    "origin":"Kenya",
-                    "imageTag":"v&a",
-                    "quantity":"0.75L",
-                    "strength":"20%",
-                    "price":8
-                }
-            }
+{"Items": {
+    "bowmore":{
+        "name":"Bowmore",
+        "category": "Whisky",
+        "origin":"Scotland",
+        "imageTag":"bowmore",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":40
         },
-        "wine":{
-            "Red Wine":{
-                "canaletto":{
-                    "name":"Canaletto Montepulciano D'Abruzzo",
-                    "origin":"Italy",
-                    "imageTag":"canaletto",
-                    "quantity":"0.75L",
-                    "strength":"13%",
-                    "price":11
-                },
-                "grand-barossa":{
-                    "name":"Grand Barossa Shiraz",
-                    "origin":"Australia",
-                    "imageTag":"grand-barossa",
-                    "quantity":"0.75L",
-                    "strength":"12%",
-                    "price":18
-                },
-                "limestone-coast":{
-                    "name":"Jacob's Creek Limestone Coast",
-                    "origin":"Australia",
-                    "imageTag":"limestone-coast",
-                    "quantity":"0.75L",
-                    "strength":"14.5%",
-                    "price":15
-                },
-                "samtrot-spatlese":{
-                    "name":"Samtrot Spätlese",
-                    "origin":"Germany",
-                    "imageTag":"samtrot-spatlese",
-                    "quantity":"0.75L",
-                    "strength":"10%",
-                    "price":8
-                }
-            },
-            "White Wine": {
-                "fratelli":{
-                    "name":"Fratelli",
-                    "origin":"India",
-                    "imageTag":"fratelli",
-                    "quantity":"0.75L",
-                    "strength":"12.5%",
-                    "price":12
-                },
-                "morning-fog-chardonnay":{
-                    "name":"Wente Morning Fog Chardonnay",
-                    "origin":"San Francisco, US",
-                    "imageTag":"morning-fog-chardonnay",
-                    "quantity":"0.75L",
-                    "strength":"13.5%",
-                    "price":0
-                },
-                "muni":{
-                    "name":"Muni Montemagro",
-                    "origin":"Italy",
-                    "imageTag":"muni",
-                    "quantity":"0.75L",
-                    "strength":"13%",
-                    "price":22
-                },
-                "palacio-de-menade":{
-                    "name":"Palacio de Menade Rueda",
-                    "origin":"Spain",
-                    "imageTag":"palacio-de-menade",
-                    "quantity":"0.75L",
-                    "strength":"13%",
-                    "price":4
-                },
-                "sauvignon-blanc.jpg":{
-                    "name":"Cimarosa Sauvignon Blanc Marlborough",
-                    "origin":"New Zealand",
-                    "imageTag":"sauvignon-blanc.jpg",
-                    "quantity":"0.75L",
-                    "strength":"14%",
-                    "price":5
-                }
-            },
-            "Rose Wine": {
-                "cave-amadeu":{
-                    "name":"Cave Amadeu",
-                    "origin":"Brazil",
-                    "imageTag":"cave-amadeu",
-                    "quantity":"0.75L",
-                    "strength":"12%",
-                    "price":40
-                },
-                "apriori":{
-                    "name":"Apriori",
-                    "origin":"Romania",
-                    "imageTag":"apriori",
-                    "quantity":"0.75L",
-                    "strength":"12%",
-                    "price":32
-                }
-            }
-        },
-        "champagne":{
-            "dom-perignon":{
-                "name":"Dom Pérignon Vintage",
-                "origin":"France",
-                "imageTag":"dom-perignon",
-                "quantity":"0.75L",
-                "strength":"12.5%",
-                "price":485
-            },
-            "ferrari":{
-                "name":"Ferrari Maximum",
-                "origin":"Italy",
-                "imageTag":"ferrari",
-                "quantity":"0.75L",
-                "strength":"12.5%",
-                "price":24
-            },
-            "millesime":{
-                "name":"Radgonska Penina Millésime",
-                "origin":"Slovenia",
-                "imageTag":"millesime",
-                "quantity":"0.75L",
-                "strength":"12%",
-                "price":37
-            },
-            "moet":{
-                "name":"Moët & Chandon Impérial",
-                "origin":"France",
-                "imageTag":"moet",
-                "quantity":"0.75L",
-                "strength":"12%",
-                "price":51
-            },
-            "veuve-clicquot":{
-                "name":"Veuve Clicquot",
-                "origin":"France",
-                "imageTag":"veuve-clicquot",
-                "quantity":"0.75L",
-                "strength":"12%",
-                "price":59
-            }
-        },
-        "giftCards":{
-            "10off":{
-                "name":"10"
-            }
-        },
-        "others":{
-            "Beer":{
-                "desperados":{
-                    "name":"Desperados",
-                    "origin":"Netherlands",
-                    "imageTag":"desperados",
-                    "quantity":["0.4L"],
-                    "strength": "5.9%",
-                    "price":3.5
-                },
-                "heineken":{
-                    "name":"Heineken",
-                    "origin":"Netherlands",
-                    "imageTag":"heineken",
-                    "quantity":"0.33L",
-                    "strength": "5%",
-                    "price":3
-                },
-                "peroni":{
-                    "name":"Peroni",
-                    "origin":"Italy",
-                    "imageTag":"peroni",
-                    "quantity":"0.33L",
-                    "strength": "4.7%",
-                    "price":5
-                },
-                "stark":{
-                    "name":"Stark",
-                    "origin":"Bali",
-                    "imageTag":"stark",
-                    "quantity":"0.33L",
-                    "strength": "4.99%",
-                    "price":3
-                },
-                "stella-artois":{
-                    "name":"Stella Artois",
-                    "origin":"Belgium",
-                    "imageTag":"stella-artois",
-                    "quantity":"0.33L",
-                    "strength": "5%",
-                    "price":7
-                }
-            },
-            "Beverages":{
-                "arizona":{
-                    "name":"Arizona Iced Tea",
-                    "origin":"US",
-                    "imageTag":"arizona",
-                    "quantity":"0.5L",
-                    "flavor":["lemon", "green", "peach", "raspberry", "cranberry"],
-                    "price":3
-                },
-                "coca-cola":{
-                    "name":"Coca Cola",
-                    "origin":"US",
-                    "imageTag":"coca-cola",
-                    "quantity":"0.33L",
-                    "flavor":["standard", "zero", "lemon"],
-                    "price":2
-                },
-                "fanta":{
-                    "name":"Fanta",
-                    "origin":"US",
-                    "imageTag":"fanta",
-                    "quantity":"0.3L",
-                    "flavor":["orange", "lemon", "strawberry"],
-                    "price":1.8
-                },
-                "jarritos":{
-                    "name":"Jarritos",
-                    "origin":"Mexico",
-                    "imageTag":"jarritos",
-                    "quantity":"0.37L",
-                    "flavor":["grapefruit", "fruit punch", "passion fruit", "pineapple", "guava", "mango", "lime", "mandarin"],
-                    "price":4
-                },
-                "lemonade":{
-                    "name":"Fentimans Rose Lemonade",
-                    "origin":"UK",
-                    "imageTag":"lemonade",
-                    "quantity":"0.275L",
-                    "strength": "0%",
-                    "price":2.2
-                },
-                "morning-kicks":{
-                    "name":"Morning Kicks Cold Brew",
-                    "origin":"US",
-                    "imageTag":"morning-kicks",
-                    "quantity":"0.5L",
-                    "strength":"0%",
-                    "price":6
-                },
-                "sprite":{
-                    "name":"Sprite",
-                    "origin":"US",
-                    "imageTag":"sprite",
-                    "quantity":"0.355L",
-                    "strength":"0%",
-                    "price":2
-                }
-            }
-        },
-        "onSale":{},
-        "dailyOffer":{}
-    }   
-}
+    "chivas":{
+        "name":"Chivas Regal",
+        "category": "Whisky",
+        "origin":"Scotland",
+        "imageTag":"chivas",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":27
+    },
+    "four-roses": {
+        "name":"Four Roses",
+        "category": "Whisky",
+        "origin":"Sweden",
+        "imageTag":"four-roses",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":18
+    },
+    "gallantry":{
+        "name":"Gallantry",
+        "category": "Whisky",
+        "origin":"Ireland",
+        "imageTag":"gallantry",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":13
+    },
+    "glenfiddich":{
+        "name":"Glenfiddich",
+        "category": "Whisky",
+        "origin":"Scotland",
+        "imageTag":"glenfiddich",
+        "quantity":"0.5L",
+        "strength":"40%",
+        "price":15
+    },
+    "green-label": {
+        "name":"Green Label",
+        "category": "Whisky",
+        "origin":"Scotland",
+        "imageTag":"green-label",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":47
+    },
+    "jack-honey": {
+        "name":"Jack Daniel's Honey",
+        "category": "Whisky",
+        "origin":"USA",
+        "imageTag":"jack-honey",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":17
+    },
+    "jack-standard": {
+        "name":"Jack Daniel's Standard",
+        "category": "Whisky",
+        "origin":"USA",
+        "imageTag":"jack-standard",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":15
+    },
+    "macallan": {
+        "name":"Macallan",
+        "category": "Whisky",
+        "origin":"Scotland",
+        "imageTag":"macallan",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":95
+    },
+    "monkey-shoulder": {
+        "name":"Monkey Shoulder",
+        "category": "Whisky",
+        "origin":"Scotland",
+        "imageTag":"monkey-shoulder",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":39
+    },
+    "red-label":{
+        "name":"Red Label",
+        "category": "Whisky",
+        "origin":"Scotland",
+        "imageTag":"red-label",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":10.5
+    },
+    "sazerac":{
+        "name":"Sazerac Rye",
+        "category": "Whisky",
+        "origin":"USA",
+        "imageTag":"sazerac",
+        "quantity":"0.7L",
+        "strength":"45%",
+        "price":56
+    },
+    "talisker":{
+        "name":"Talisker",
+        "category": "Whisky",
+        "origin":"Scotland",
+        "imageTag":"talisker",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":255
+    },
+    "the-glenlivet":{
+        "name":"The Glenlivet",
+        "category": "Whisky",
+        "origin":"Scotland",
+        "imageTag":"the-glenlivet",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":38
+    },
+    "ciroc":{
+        "name":"Cîroc",
+        "category": "Vodka",
+        "origin":"France",
+        "imageTag":"ciroc",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":27
+    },
+    "dixon":{
+        "name":"Dixon's",
+        "category": "Vodka",
+        "origin":"Ontario, Canada",
+        "imageTag":"dixon",
+        "quantity":"0.75L",
+        "strength":"40%",
+        "price":35
+    },
+    "esbjaerg":{
+        "name":"EsbjÆrg",
+        "category": "Vodka",
+        "origin":"Netherlands",
+        "imageTag":"esbjaerg",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":12
+    },
+    "finlandia":{
+        "name":"Finlandia",
+        "category": "Vodka",
+        "origin":"Finland",
+        "imageTag":"finlandia",
+        "quantity":"1L",
+        "strength":"40%",
+        "price":15
+    },
+    "flirt":{
+        "name":"Flirt",
+        "category": "Vodka",
+        "origin":"Bulgaria",
+        "imageTag":"flirt",
+        "quantity":"0.7L",
+        "strength":"37,5%",
+        "price":10
+    },
+    "hendrix":{
+        "name":"Hendrix Electric",
+        "category": "Vodka",
+        "origin":"USA",
+        "imageTag":"hendrix",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":700
+    },
+    "oginski":{
+        "name":"Oginski",
+        "category": "Vodka",
+        "origin":"Poland",
+        "imageTag":"oginski",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":35
+    },
+    "poliakov":{
+        "name":"Poliakov",
+        "category": "Vodka",
+        "origin":"France",
+        "imageTag":"poliakov",
+        "quantity":"0.7L",
+        "strength":"37.5%",
+        "price":10
+    },
+    "purity-vodka":{
+        "name":"Purity",
+        "category": "Vodka",
+        "origin":"Sweden",
+        "imageTag":"purity-vodka",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":50
+    },
+    "smirnoff":{
+        "name":"Smirnoff",
+        "category": "Vodka",
+        "origin":"Russia",
+        "imageTag":"smirnoff",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":15
+    },
+    "courvoisier":{
+        "name":"Courvoisier",
+        "category": "Cognac",
+        "origin":"France",
+        "imageTag":"courvoisier",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":50
+    },
+    "delamain":{
+        "name":"Delamain",
+        "category": "Cognac",
+        "origin":"France",
+        "imageTag":"delamain",
+        "quantity":"0.7L",
+        "strength":"45%",
+        "price":200
+    },
+    "hennessy":{
+        "name":"Hennessy",
+        "category": "Cognac",
+        "origin":"France",
+        "imageTag":"hennessy",
+        "quantity":"0.5L",
+        "strength":"40%",
+        "price":25
+    },
+    "martell":{
+        "name":"Martell",
+        "category": "Cognac",
+        "origin":"France",
+        "imageTag":"martell",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":180
+    },
+    "remy-martin":{
+        "name":"Remy Martin",
+        "category": "Cognac",
+        "origin":"France",
+        "imageTag":"remy-martin",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":50
+    },
+    "birds":{
+        "name":"Birds",
+        "category": "Gin",
+        "origin":"Germany",
+        "imageTag":"birds",
+        "quantity":"0.7L",
+        "strength":"42%",
+        "price":38
+    },
+    "bombay-sapphire":{
+        "name":"Bombay Sapphire",
+        "category": "Gin",
+        "origin":"UK",
+        "imageTag":"bombay-sapphire",
+        "quantity":"1L",
+        "strength":"40%",
+        "price":24
+    },                
+    "deer":{
+        "name":"Deer",
+        "category": "Gin",
+        "origin":"Italy",
+        "imageTag":"deer",
+        "quantity":"0.7L",
+        "strength":"46%",
+        "price":40
+    },
+    "hardshore":{
+        "name":"Hardshore",
+        "category": "Gin",
+        "origin":"Oregon, USA",
+        "imageTag":"hardshore",
+        "quantity":"0.75L",
+        "strength":"46%",
+        "price":37
+    },
+    "koval":{
+        "name":"Koval",
+        "category": "Gin",
+        "origin":"Chicago, USA",
+        "imageTag":"koval",
+        "quantity":"0.5L",
+        "strength":"47%",
+        "price":37
+    },
+    "monkey47":{
+        "name":"Monkey 47",
+        "category": "Gin",
+        "origin":"Germany",
+        "imageTag":"monkey47",
+        "quantity":"0.5L",
+        "strength":"47%",
+        "price":28
+    },
+    "purity-gin":{
+        "name":"Purity 34",
+        "category": "Gin",
+        "origin":"Sweden",
+        "imageTag":"purity",
+        "quantity":"0.7L",
+        "strength":"57.1%",
+        "price":32
+    },
+    "sipsmith":{
+        "name":"Sipsmith",
+        "category": "Gin",
+        "origin":"UK",
+        "imageTag":"sipsmith",
+        "quantity":"1L",
+        "strength":"44.1%",
+        "price":50
+    },
+    "the-botanist":{
+        "name":"The Botanist Islay",
+        "category": "Gin",
+        "origin":"UK",
+        "imageTag":"the-botanist",
+        "quantity":"0.7L",
+        "strength":"46%",
+        "price":25
+    },
+    "tuckombil":{
+        "name":"Tuckombil",
+        "category": "Gin",
+        "origin":"Australia",
+        "imageTag":"tuckombil",
+        "quantity":"0.5L",
+        "strength":"42%",
+        "price":38
+    },
+    "woody-creek":{
+        "name":"Woody Creek",
+        "category": "Gin",
+        "origin":"Colorado, USA",
+        "imageTag":"woody-creek",
+        "quantity":"0.75L",
+        "strength":"47%",
+        "price":35
+    },
+    "woodys":{
+        "name":"Woody's",
+        "category": "Gin",
+        "origin":"Canada",
+        "imageTag":"woodys",
+        "quantity":"0.75L",
+        "strength":"40%",
+        "price":30
+    },
+    "angostura":{
+        "name":"Angostura Reserva",
+        "category": "Rum",
+        "origin":"Trinidad & Tobago",
+        "imageTag":"angostura",
+        "quantity":"0.7L",
+        "strength":"37.5%",
+        "price":20
+    },
+    "bacardi":{
+        "name":"Bacardi 151",
+        "category": "Rum",
+        "origin":"Puerto Rico",
+        "imageTag":"bacardi",
+        "quantity":"1L",
+        "strength":"75.5%",
+        "price":29
+    },
+    "havana":{
+        "name":"Havana Club",
+        "category": "Rum",
+        "origin":"Cuba",
+        "imageTag":"havana",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":14
+    },
+    "marlin-spike":{
+        "name":"Marlin Spike",
+        "category": "Rum",
+        "origin":"Belgium",
+        "imageTag":"marlin-spike",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":46
+    },
+    "shellback":{
+        "name":"Shellback",
+        "category": "Rum",
+        "origin":"Caribbean Islands",
+        "imageTag":"shellback",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":15
+    },
+    "the-kraken":{
+        "name":"The Kraken Black",
+        "category": "Rum",
+        "origin":"Caribbean Islands",
+        "imageTag":"the-kraken",
+        "quantity":"0.7L",
+        "strength":"40%",
+        "price":26
+    },
+    "don-angel":{
+        "name":"Don Angel Blanco",
+        "category": "Tequila",
+        "origin":"Mexico",
+        "imageTag":"don-angel",
+        "quantity":"0.75L",
+        "strength":"38%",
+        "price":20
+    },
+    "jose-cuervo-reposado":{
+        "name":"Jose Cuervo Reposado",
+        "category": "Tequila",
+        "origin":"Mexico",
+        "imageTag":"jose-cuervo-reposado",
+        "quantity":"0.7L",
+        "strength":"38%",
+        "price":20
+    },
+    "jose-cuervo-silver":{
+        "name":"Jose Cuervo Silver",
+        "category": "Tequila",
+        "origin":"Mexico",
+        "imageTag":"jose-cuervo-silver",
+        "quantity":"0.7L",
+        "strength":"38%",
+        "price":20
+    },
+    "absinthe":{
+        "name":"Lucid Absinthe",
+        "category": "Liquor",
+        "origin":"France",
+        "imageTag":"absinthe",
+        "quantity":"0.75L",
+        "strength":"62%",
+        "price":60
+    },
+    "aperol":{
+        "name":"Aperol",
+        "category": "Liquor",
+        "origin":"Italy",
+        "imageTag":"aperol",
+        "quantity":"0.75L",
+        "strength":"11%",
+        "price":10
+    },
+    "disaronno":{
+        "name":"Disaronno Originale",
+        "category": "Liquor",
+        "origin":"Italy",
+        "imageTag":"disaronno",
+        "quantity":"0.7L",
+        "strength":"28%",
+        "price":22
+    },
+    "jagermeister":{
+        "name":"Jagermeister",
+        "category": "Liquor",
+        "origin":"Germany",
+        "imageTag":"jagermeister",
+        "quantity":"0.7L",
+        "strength":"35%",
+        "price": 18
+    },
+    "sheridan":{
+        "name":"Sheridan's",
+        "category": "Liquor",
+        "origin":"Ireland",
+        "imageTag":"sheridan",
+        "quantity":"0.5L",
+        "strength":"15.5%",
+        "price":15
+    },
+    "v&a":{
+        "name":"V&A Imperial Cream",
+        "category": "Liquor",
+        "origin":"Kenya",
+        "imageTag":"v&a",
+        "quantity":"0.75L",
+        "strength":"20%",
+        "price":8
+    },
+    "canaletto":{
+        "name":"Canaletto Montepulciano D'Abruzzo",
+        "category": "Red-Wine",
+        "origin":"Italy",
+        "imageTag":"canaletto",
+        "quantity":"0.75L",
+        "strength":"13%",
+        "price":11
+    },
+    "grand-barossa":{
+        "name":"Grand Barossa Shiraz",
+        "category": "Red-Wine",
+        "origin":"Australia",
+        "imageTag":"grand-barossa",
+        "quantity":"0.75L",
+        "strength":"12%",
+        "price":18
+    },
+    "limestone-coast":{
+        "name":"Jacob's Creek Limestone Coast",
+        "category": "Red-Wine",
+        "origin":"Australia",
+        "imageTag":"limestone-coast",
+        "quantity":"0.75L",
+        "strength":"14.5%",
+        "price":15
+    },
+    "samtrot-spatlese":{
+        "name":"Samtrot Spätlese",
+        "category": "Red-Wine",
+        "origin":"Germany",
+        "imageTag":"samtrot-spatlese",
+        "quantity":"0.75L",
+        "strength":"10%",
+        "price":8
+    },
+    "fratelli":{
+        "name":"Fratelli",
+        "category": "White-Wine",
+        "origin":"India",
+        "imageTag":"fratelli",
+        "quantity":"0.75L",
+        "strength":"12.5%",
+        "price":12
+    },
+    "morning-fog-chardonnay":{
+        "name":"Wente Morning Fog Chardonnay",
+        "category": "White-Wine",
+        "origin":"San Francisco, US",
+        "imageTag":"morning-fog-chardonnay",
+        "quantity":"0.75L",
+        "strength":"13.5%",
+        "price":0
+    },
+    "muni":{
+        "name":"Muni Montemagro",
+        "category": "White-Wine",
+        "origin":"Italy",
+        "imageTag":"muni",
+        "quantity":"0.75L",
+        "strength":"13%",
+        "price":22
+    },
+    "palacio-de-menade":{
+        "name":"Palacio de Menade Rueda",
+        "category": "White-Wine",
+        "origin":"Spain",
+        "imageTag":"palacio-de-menade",
+        "quantity":"0.75L",
+        "strength":"13%",
+        "price":4
+    },
+    "sauvignon-blanc":{
+        "name":"Cimarosa Sauvignon Blanc Marlborough",
+        "category": "White-Wine",
+        "origin":"New Zealand",
+        "imageTag":"sauvignon-blanc",
+        "quantity":"0.75L",
+        "strength":"14%",
+        "price":5
+    },
+    "cave-amadeu":{
+        "name":"Cave Amadeu",
+        "category": "Rose-Wine",
+        "origin":"Brazil",
+        "imageTag":"cave-amadeu",
+        "quantity":"0.75L",
+        "strength":"12%",
+        "price":40
+    },
+    "apriori":{
+        "name":"Apriori",
+        "category": "Rose-Wine",
+        "origin":"Romania",
+        "imageTag":"apriori",
+        "quantity":"0.75L",
+        "strength":"12%",
+        "price":32
+    },
+    "dom-perignon":{
+        "name":"Dom Pérignon Vintage",
+        "category": "Champagne",
+        "origin":"France",
+        "imageTag":"dom-perignon",
+        "quantity":"0.75L",
+        "strength":"12.5%",
+        "price":485
+    },
+    "ferrari":{
+        "name":"Ferrari Maximum",
+        "category": "Champagne",
+        "origin":"Italy",
+        "imageTag":"ferrari",
+        "quantity":"0.75L",
+        "strength":"12.5%",
+        "price":24 
+    },
+    "millesime":{
+        "name":"Radgonska Penina Millésime",
+        "category": "Champagne",
+        "origin":"Slovenia",
+        "imageTag":"millesime",
+        "quantity":"0.75L",
+        "strength":"12%",
+        "price":37
+    },
+    "moet":{
+        "name":"Moët & Chandon Impérial",
+        "category": "Champagne",
+        "origin":"France",
+        "imageTag":"moet",
+        "quantity":"0.75L",
+        "strength":"12%",
+        "price":51
+    },
+    "veuve-clicquot":{
+        "name":"Veuve Clicquot",
+        "category": "Champagne",
+        "origin":"France",
+        "imageTag":"veuve-clicquot",
+        "quantity":"0.75L",
+        "strength":"12%",
+        "price":59
+    },
+    "10off":{
+        "name":"10off",
+        "category": "Gift-Card",
+        "imageTag": "10off",
+        "value": 10,
+        "price": 10
+    },
+    "25off":{
+        "name":"25off",
+        "category": "Gift-Card",
+        "imageTag": "25off",
+        "value": 25,
+        "price": 25
+    },
+    "50off":{
+        "name":"50off",
+        "category": "Gift-Card",
+        "value": 50,
+        "price": 50
+    },
+    "100off":{
+        "name":"100off",
+        "category": "Gift-Card",
+        "value": 100,
+        "price": 100
+    },
+    "desperados":{
+        "name":"Desperados",
+        "category": "Beer",
+        "origin":"Netherlands",
+        "imageTag":"desperados",
+        "quantity":"0.4L",
+        "strength": "5.9%",
+        "price":3.5
+    },
+    "heineken":{
+        "name":"Heineken",
+        "category": "Beer",
+        "origin":"Netherlands",
+        "imageTag":"heineken",
+        "quantity":"0.33L",
+        "strength": "5%",
+        "price":3
+    },
+    "peroni":{
+        "name":"Peroni",
+        "category": "Beer",
+        "origin":"Italy",
+        "imageTag":"peroni",
+        "quantity":"0.33L",
+        "strength": "4.7%",
+        "price":5
+    },
+    "stark":{
+        "name":"Stark",
+        "category": "Beer",
+        "origin":"Bali",
+        "imageTag":"stark",
+        "quantity":"0.33L",
+        "strength": "4.99%",
+        "price":3
+    },
+    "stella-artois":{
+        "name":"Stella Artois",
+        "category": "Beer",
+        "origin":"Belgium",
+        "imageTag":"stella-artois",
+        "quantity":"0.33L",
+        "strength": "5%",
+        "price":7
+    },
+    "arizona":{
+        "name":"Arizona Iced Tea",
+        "category": "Beverage",
+        "origin":"US",
+        "imageTag":"arizona",
+        "quantity":"0.5L",
+        "flavor":["lemon", "green", "peach", "raspberry", "cranberry"],
+        "price":3
+    },
+    "coca-cola":{
+        "name":"Coca Cola",
+        "category": "Beverage",
+        "origin":"US",
+        "imageTag":"coca-cola",
+        "quantity":"0.33L",
+        "flavor":["standard", "zero", "lemon"],
+        "price":2
+    },
+    "fanta":{
+        "name":"Fanta",
+        "category": "Beverage",
+        "origin":"US",
+        "imageTag":"fanta",
+        "quantity":"0.3L",
+        "flavor":["orange", "lemon", "strawberry"],
+        "price":1.8
+    },
+    "jarritos":{
+        "name":"Jarritos",
+        "category": "Beverage",
+        "origin":"Mexico",
+        "imageTag":"jarritos",
+        "quantity":"0.37L",
+        "flavor":["grapefruit", "fruit punch", "passion fruit", "pineapple", "guava", "mango", "lime", "mandarin"],
+        "price":4
+    },
+    "lemonade":{
+        "name":"Fentimans Rose Lemonade",
+        "category": "Beverage",
+        "origin":"UK",
+        "imageTag":"lemonade",
+        "quantity":"0.275L",
+        "strength": "0%",
+        "price":2.2
+    },
+    "morning-kicks":{
+        "name":"Morning Kicks Cold Brew",
+        "category": "Beverage",
+        "origin":"US",
+        "imageTag":"morning-kicks",
+        "quantity":"0.5L",
+        "strength":"0%",
+        "price":6
+    },
+    "sprite":{
+        "name":"Sprite",
+        "category": "Beverage",
+        "origin":"US",
+        "imageTag":"sprite",
+        "quantity":"0.355L",
+        "strength":"0%",
+        "price":2
+    }
+}}
