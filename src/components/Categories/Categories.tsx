@@ -63,10 +63,10 @@ function Categories () {
                         <p className='categ-card-title'>Gift Cards</p>
                         <p>Gift Cards placeholder text</p>
                     </div>
-                    <picture> <source srcSet={require(`../../images/GiftCards/desktop/100off.webp`)} 
+                    <picture> <source srcSet={require(`../../images/Gift-Card/desktop/100off.webp`)} 
                         media="(min-width: 600px)"/> <img 
                         className='categ-pic-lg'
-                        src={require(`../../images/GiftCards/mobile/100off.webp`)} alt="GiftCards"
+                        src={require(`../../images/Gift-Card/mobile/100off.webp`)} alt="GiftCards"
                         loading={'lazy'}
                     /> </picture>
                     <div className='check-out-btn categ-large-card-check'>Check it out</div>
