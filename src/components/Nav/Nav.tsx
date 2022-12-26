@@ -295,36 +295,63 @@ function Nav () {
 
     function searchFunc (deviceType : string) {
         if(deviceType === 'desktop') {
-            let searchBox:HTMLElement = document.querySelector('div.search-bar')!;
-            let searchInput:HTMLInputElement = document.querySelector('div.nav-mobile-search-cont > input')!;
-            let resultsDiv:HTMLElement = document.querySelector('div.search-results-container')!;
-            setTimeout(() => searchBox.style.borderBottom = 'none')
-            resultsDiv.classList.add('search-results-container-anim');
-            let resultsArr = [];
-            let inventory = [];
-            Object.entries(Inventory.Items).forEach(item => {
-                inventory.push(item[1]);
-            })
-        }
-        else if(deviceType === 'mobile') {
-            searchResultsArr = [];
-            let searchBox:HTMLElement = document.querySelector('div.nav-mobile-search-cont')!;
-            let searchInput:HTMLInputElement = document.querySelector('div.mobile-search-bar > input')!;
-            let resultsList:HTMLElement = document.querySelector('div.mobile-search-results > ul')!;
-            setTimeout(() => searchBox.style.borderBottom = 'none')
+            let searchInput:HTMLInputElement = document.querySelector('div.search-bar > input')!;
+            let resultsList:HTMLElement = document.querySelector('div.search-results-container > ul')!;
             resultsList.classList.add('search-results-container-anim');
             searchResultsArr = []
             resultsList.innerHTML = ''
             let inventory: string[] = [];
-            let inputValue = searchInput.value
-            if(inputValue !== '') {
+            if(searchInput.value !== '') {
                 Object.entries(Inventory.Items).forEach(item => {
                     inventory.push(item[0]);
-                    if(item[0].toLowerCase().includes(inputValue.toLowerCase())) searchResultsArr.push(item[1])
+                    if(item[0].toLowerCase().includes(searchInput.value.toLowerCase())) 
+                    {searchResultsArr.push(item[1])}
                 })
             }
-            for(let i = 0; i < searchResultsArr.length; i++) {
-                let item = searchResultsArr[i]
+            searchResultsArr.forEach((item) =>  {
+                let resultItemCont = document.createElement('div')
+                let resultItem = document.createElement('li')
+                let resultItemImage = document.createElement('img')
+                let resultItemDetails = document.createElement('div')
+                let resultItemP = document.createElement('p')
+                resultItemImage.src = require(`../../images/${item.category}/desktop/${item.imageTag}.webp`)
+                if(!item.quantity && !item.strength) {
+                    resultItemDetails.innerHTML = 
+                    `<p style='font-weight: bold'>${item.name}</p>
+                    <p>$${item.price}</p>`
+                }
+                else if(item.quantity && item.strength) {
+                    resultItemDetails.innerHTML = 
+                    `<p style='font-weight: bold'>${item.name}</p>
+                    <p>${item.quantity}/${item.strength}</p>
+                    <p>$${item.price}</p>`
+                }
+                resultItemCont.classList.add('search-results-list-container')
+                resultItemDetails.classList.add('search-result-details')
+                resultItemP.innerText = `${item.name}`
+                resultsList.appendChild(resultItemCont)
+                resultItemCont.appendChild(resultItem)
+                resultItem.appendChild(resultItemDetails)
+                resultItem.appendChild(resultItemImage)
+            })
+        }
+        else if(deviceType === 'mobile') {
+            let searchBox:HTMLElement = document.querySelector('div.nav-mobile-search-cont')!;
+            searchBox.style.borderBottom = 'none';
+            let searchInput:HTMLInputElement = document.querySelector('div.mobile-search-bar > input')!;
+            let resultsList:HTMLElement = document.querySelector('div.mobile-search-results > ul')!;
+            resultsList.classList.add('search-results-container-anim');
+            searchResultsArr = []
+            resultsList.innerHTML = ''
+            let inventory: string[] = [];
+            if(searchInput.value !== '') {
+                Object.entries(Inventory.Items).forEach(item => {
+                    inventory.push(item[0]);
+                    if(item[0].toLowerCase().includes(searchInput.value.toLowerCase())) 
+                    {searchResultsArr.push(item[1])}
+                })
+            }
+            searchResultsArr.forEach((item) =>  {
                 let resultItemCont = document.createElement('div')
                 let resultItem = document.createElement('li')
                 let resultItemImage = document.createElement('img')
@@ -344,13 +371,13 @@ function Nav () {
                 }
                 resultItemCont.classList.add('search-results-list-container')
                 resultItemDetails.classList.add('search-result-details-mobile')
-                resultItemP.innerText = `${searchResultsArr[i].name}`
+                resultItemP.innerText = `${item.name}`
                 
                 resultsList.appendChild(resultItemCont)
                 resultItemCont.appendChild(resultItem)
                 resultItem.appendChild(resultItemDetails)
                 resultItem.appendChild(resultItemImage)
-            }
+            })
         }
     }
 
@@ -365,20 +392,13 @@ function Nav () {
                         <div className='search-bar'>
                             <input 
                             onFocus={() => searchResultsAnim('desktop', 'start')}
-                            // onBlur={() => searchResultsAnim('desktop', 'end')}
+                            onBlur={() => searchResultsAnim('desktop', 'end')}
                             onChange={() => searchFunc('desktop')} 
                             type="text" placeholder='Search for a product'/>
                             <span className="material-icons nav-icon">search</span>
                         </div>
                         <div className='search-results-container animate__faster animate__animated'>
                             <ul className='search-results-list'>
-                                <li>aaa</li>
-                                <li>aaa</li>
-                                <li>aaa</li>
-                                <li>aaa</li>
-                                <li>aaa</li>
-                                <li>aaa</li>
-                                <li>aaa</li>
                             </ul>
                         </div>
                     </div>
