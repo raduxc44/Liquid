@@ -117,11 +117,6 @@ function Recommended () {
                         <div className='rec-item'>
                             <div className='rec-item-upper'>
                                 <img className='carousel-img' src={require(`../../images/${item.category}/desktop/${item.imageTag}.webp`)} alt={item.name}/>
-                                {/* <p>{item.name}</p> */}
-                                {/* <picture> <source srcSet={require(`../../images/Spirits/${item.category}/desktop/${item.imageTag}.webp`)} 
-                                media="(min-width: 600px)"/> <img 
-                                // src={require(`../../images/Spirits/${item.category}/mobile/${item.imageTag}.webp`)} alt={item.name}
-                                /> </picture> */}
                                 <p>{item.name}</p>
                                 <p>{item.quantity}/{item.strength}</p>
                             </div>
