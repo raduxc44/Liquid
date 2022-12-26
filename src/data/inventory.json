@@ -318,7 +318,7 @@
         "name":"Purity 34",
         "category": "Gin",
         "origin":"Sweden",
-        "imageTag":"purity",
+        "imageTag":"purity-gin",
         "quantity":"0.7L",
         "strength":"57.1%",
         "price":32
@@ -664,12 +664,14 @@
     "50off":{
         "name":"50off",
         "category": "Gift-Card",
+        "imageTag": "50off",
         "value": 50,
         "price": 50
     },
     "100off":{
         "name":"100off",
         "category": "Gift-Card",
+        "imageTag": "100off",
         "value": 100,
         "price": 100
     },
