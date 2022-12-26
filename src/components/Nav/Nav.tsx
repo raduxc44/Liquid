@@ -88,6 +88,19 @@ function Nav () {
     // Delay refs are used to avoid animation bugging when pressing their buttons rapidly
     let categAnimationDelay = useRef(0)
     let searchAnimationDelay = useRef(0)
+    let searchResultsAnimationDelay = useRef(0);
+    let searchResultsArr: searchResult[] = [];
+
+    type searchResult = {
+        name: string,
+        category: string,
+        origin?: string,
+        imageTag?: string,
+        quantity?: string,
+        flavor?: string[],
+        strength?: string,
+        price: number
+    }
 
 
     let deactivateCateg = () => {
@@ -246,20 +259,99 @@ function Nav () {
         
     }, [selectedCategories, shownCategories])
 
-    function searchFunc () {
-        let searchInput:HTMLInputElement = document.querySelector('div.nav-mobile-search-cont > input')!;
-        console.log(searchInput.value);
-        let resultsDiv = document.createElement('div');
-        resultsDiv.classList.add('search-results-cont');
-        resultsDiv.style.display = 'flex'
-        let resultsArr = [];
-        let inventory = [];
-        Object.entries(Inventory.Items).forEach(item => {
-            inventory.push(item[1]);
-        })
-        let a = Object.getOwnPropertyNames(Inventory)
-        console.log(a);
-        
+    function searchResultsAnim (type:string, time:string) {
+        if(type === 'desktop') {
+            let resultsDiv:HTMLElement = document.querySelector('div.search-results-container')!;
+            if(time === 'start' && searchResultsAnimationDelay.current === 0) {
+                resultsDiv.classList.toggle('animate__fadeIn');
+                resultsDiv.style.display = 'flex'
+                setTimeout(() => {
+                    resultsDiv.classList.toggle('animate__fadeIn')
+                    searchResultsAnimationDelay.current = 1
+                }, 500)
+            }
+            else if(time === 'end' && searchResultsAnimationDelay.current === 1) {
+                resultsDiv.classList.toggle('animate__fadeOut');
+                setTimeout(() => {
+                    resultsDiv.style.display = 'none'
+                    resultsDiv.classList.toggle('animate__fadeOut')
+                    searchResultsAnimationDelay.current = 0
+                }, 500)
+            }
+        }
+        else if(type === 'mobile') {
+            let resultsDiv:HTMLElement = document.querySelector('div.mobile-search-results')!;
+            if(time === 'start' && searchResultsAnimationDelay.current === 0) { 
+                document.querySelector('body')!.style.overflow = 'hidden';
+                resultsDiv.classList.toggle('animate__fadeIn');
+                resultsDiv.style.display = 'flex'
+                setTimeout(() => {
+                    resultsDiv.classList.toggle('animate__fadeIn')
+                    searchResultsAnimationDelay.current = 1
+                }, 500)
+            }
+        }
+    }
+
+    function searchFunc (deviceType : string) {
+        if(deviceType === 'desktop') {
+            let searchBox:HTMLElement = document.querySelector('div.search-bar')!;
+            let searchInput:HTMLInputElement = document.querySelector('div.nav-mobile-search-cont > input')!;
+            let resultsDiv:HTMLElement = document.querySelector('div.search-results-container')!;
+            setTimeout(() => searchBox.style.borderBottom = 'none')
+            resultsDiv.classList.add('search-results-container-anim');
+            let resultsArr = [];
+            let inventory = [];
+            Object.entries(Inventory.Items).forEach(item => {
+                inventory.push(item[1]);
+            })
+        }
+        else if(deviceType === 'mobile') {
+            searchResultsArr = [];
+            let searchBox:HTMLElement = document.querySelector('div.nav-mobile-search-cont')!;
+            let searchInput:HTMLInputElement = document.querySelector('div.mobile-search-bar > input')!;
+            let resultsList:HTMLElement = document.querySelector('div.mobile-search-results > ul')!;
+            setTimeout(() => searchBox.style.borderBottom = 'none')
+            resultsList.classList.add('search-results-container-anim');
+            searchResultsArr = []
+            resultsList.innerHTML = ''
+            let inventory: string[] = [];
+            let inputValue = searchInput.value
+            if(inputValue !== '') {
+                Object.entries(Inventory.Items).forEach(item => {
+                    inventory.push(item[0]);
+                    if(item[0].toLowerCase().includes(inputValue.toLowerCase())) searchResultsArr.push(item[1])
+                })
+            }
+            for(let i = 0; i < searchResultsArr.length; i++) {
+                let item = searchResultsArr[i]
+                let resultItemCont = document.createElement('div')
+                let resultItem = document.createElement('li')
+                let resultItemImage = document.createElement('img')
+                let resultItemDetails = document.createElement('div')
+                let resultItemP = document.createElement('p')
+                resultItemImage.src = require(`../../images/${item.category}/mobile/${item.imageTag}.webp`)
+                if(!item.quantity && !item.strength) {
+                    resultItemDetails.innerHTML = 
+                    `<p style='font-weight: bold'>${item.name}</p>
+                    <p>$${item.price}</p>`
+                }
+                else if(item.quantity && item.strength) {
+                    resultItemDetails.innerHTML = 
+                    `<p style='font-weight: bold'>${item.name}</p>
+                    <p>${item.quantity}/${item.strength}</p>
+                    <p>$${item.price}</p>`
+                }
+                resultItemCont.classList.add('search-results-list-container')
+                resultItemDetails.classList.add('search-result-details-mobile')
+                resultItemP.innerText = `${searchResultsArr[i].name}`
+                
+                resultsList.appendChild(resultItemCont)
+                resultItemCont.appendChild(resultItem)
+                resultItem.appendChild(resultItemDetails)
+                resultItem.appendChild(resultItemImage)
+            }
+        }
     }
 
     return(
@@ -269,9 +361,26 @@ function Nav () {
                     <p className='logo'>Liquid</p>
                 </div>
                 <div className="nav-utilities">
-                    <div className='search-bar'>
-                        <input type="text" placeholder='Search for a product'/>
-                        <span className="material-icons nav-icon">search</span>
+                    <div className='search-bar-container'>
+                        <div className='search-bar'>
+                            <input 
+                            onFocus={() => searchResultsAnim('desktop', 'start')}
+                            // onBlur={() => searchResultsAnim('desktop', 'end')}
+                            onChange={() => searchFunc('desktop')} 
+                            type="text" placeholder='Search for a product'/>
+                            <span className="material-icons nav-icon">search</span>
+                        </div>
+                        <div className='search-results-container animate__faster animate__animated'>
+                            <ul className='search-results-list'>
+                                <li>aaa</li>
+                                <li>aaa</li>
+                                <li>aaa</li>
+                                <li>aaa</li>
+                                <li>aaa</li>
+                                <li>aaa</li>
+                                <li>aaa</li>
+                            </ul>
+                        </div>
                     </div>
                     <div><span className="material-symbols-outlined nav-icon">favorite</span></div>
                     <div><span className='material-symbols-outlined nav-icon'>account_circle</span></div>
@@ -290,12 +399,25 @@ function Nav () {
                 </div>
                 <div className='nav-mobile-utilities'>
                     <span onClick={() => {
-                        openMobileAnim('search')
+                        openMobileAnim('search');
+                        if(document.querySelector('body')!.style.overflow === 'hidden') {
+                            document.querySelector('body')!.style.overflow = 'visible';
+                        }
                         }} className='material-symbols-outlined search-icon-mobile'>search</span>
                 </div>
             </div>
             <div className='nav-mobile-search-cont animate__animated'>
-                <input onChange= {() => searchFunc()} type="text" placeholder='Search'/>
+                <div className='mobile-search-bar'>
+                    <input
+                    onChange= {() => searchFunc('mobile')} 
+                    onFocus={() => searchResultsAnim('mobile', 'start')}
+                    type="text" placeholder='Search'/>
+                </div>
+                <div className='mobile-search-results animate__faster animate__animated'>
+                    <ul className='search-results-list'>
+                        
+                    </ul>
+                </div>
             </div>
             <div className='nav-lower animate__animated'>
                 <div className='primary-categ'>
@@ -341,7 +463,7 @@ function Nav () {
                             deactivateCateg()
                             }}>
                             <li>
-                                <img src={require(`../../images/GiftCards/mobile/100off.webp`)} alt="Gift Cards" />
+                                <img src={require(`../../images/Gift-Card/mobile/100off.webp`)} alt="Gift Cards" />
                                 <p>Gift Cards</p>
                             </li>
                         </div>
