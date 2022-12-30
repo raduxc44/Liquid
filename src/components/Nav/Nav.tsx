@@ -280,6 +280,7 @@ function Nav () {
             }
         }
         else if(type === 'mobile') {
+            let searchInput:HTMLInputElement = document.querySelector('div.mobile-search-bar > input')!;
             let resultsDiv:HTMLElement = document.querySelector('div.mobile-search-results')!;
             if(time === 'start' && searchResultsAnimationDelay.current === 0) { 
                 document.querySelector('body')!.style.overflow = 'hidden';
@@ -288,6 +289,15 @@ function Nav () {
                 setTimeout(() => {
                     resultsDiv.classList.toggle('animate__fadeIn')
                     searchResultsAnimationDelay.current = 1
+                }, 500)
+            }
+            else if(time === 'end' && searchResultsAnimationDelay.current === 1) {
+                document.querySelector('body')!.style.overflow = 'visible';
+                resultsDiv.classList.toggle('animate__fadeOut');
+                resultsDiv.style.display = 'none'
+                setTimeout(() => {
+                    resultsDiv.classList.toggle('animate__fadeOut')
+                    searchResultsAnimationDelay.current = 0
                 }, 500)
             }
         }
@@ -302,12 +312,14 @@ function Nav () {
             resultsList.innerHTML = ''
             let inventory: string[] = [];
             if(searchInput.value !== '') {
+                searchResultsAnim('desktop', 'start')
                 Object.entries(Inventory.Items).forEach(item => {
                     inventory.push(item[0]);
                     if(item[0].toLowerCase().includes(searchInput.value.toLowerCase())) 
                     {searchResultsArr.push(item[1])}
                 })
             }
+            else if(searchInput.value === '') {searchResultsAnim('desktop', 'end')}
             searchResultsArr.forEach((item) =>  {
                 let resultItemCont = document.createElement('div')
                 let resultItem = document.createElement('li')
@@ -345,12 +357,14 @@ function Nav () {
             resultsList.innerHTML = ''
             let inventory: string[] = [];
             if(searchInput.value !== '') {
+                searchResultsAnim('mobile', 'start')
                 Object.entries(Inventory.Items).forEach(item => {
                     inventory.push(item[0]);
                     if(item[0].toLowerCase().includes(searchInput.value.toLowerCase())) 
                     {searchResultsArr.push(item[1])}
                 })
             }
+            else if(searchInput.value === '') {searchResultsAnim('mobile', 'end')}
             searchResultsArr.forEach((item) =>  {
                 let resultItemCont = document.createElement('div')
                 let resultItem = document.createElement('li')
@@ -358,9 +372,10 @@ function Nav () {
                 let resultItemDetails = document.createElement('div')
                 let resultItemP = document.createElement('p')
                 resultItemImage.src = require(`../../images/${item.category}/mobile/${item.imageTag}.webp`)
-                if(!item.quantity && !item.strength) {
+                if(!item.strength) {
                     resultItemDetails.innerHTML = 
                     `<p style='font-weight: bold'>${item.name}</p>
+                    <p>${item.quantity}</p>
                     <p>$${item.price}</p>`
                 }
                 else if(item.quantity && item.strength) {
@@ -381,6 +396,14 @@ function Nav () {
         }
     }
 
+    function deleteMobileSearchInput () {
+        let searchInput:HTMLInputElement = document.querySelector('div.mobile-search-bar > input')!;
+        if(searchInput.value !== '') {
+            searchInput.value = ''
+            searchResultsAnim('mobile', 'end')
+        }
+    }
+
     return(
         <nav>
             <div className='nav-upper'>
@@ -390,9 +413,7 @@ function Nav () {
                 <div className="nav-utilities">
                     <div className='search-bar-container'>
                         <div className='search-bar'>
-                            <input 
-                            onFocus={() => searchResultsAnim('desktop', 'start')}
-                            onBlur={() => searchResultsAnim('desktop', 'end')}
+                            <input
                             onChange={() => searchFunc('desktop')} 
                             type="text" placeholder='Search for a product'/>
                             <span className="material-icons nav-icon">search</span>
@@ -430,8 +451,10 @@ function Nav () {
                 <div className='mobile-search-bar'>
                     <input
                     onChange= {() => searchFunc('mobile')} 
-                    onFocus={() => searchResultsAnim('mobile', 'start')}
                     type="text" placeholder='Search'/>
+                    <div 
+                    onClick={() => {deleteMobileSearchInput()}}
+                    className='mobile-menu-delete'>X</div>
                 </div>
                 <div className='mobile-search-results animate__faster animate__animated'>
                     <ul className='search-results-list'>

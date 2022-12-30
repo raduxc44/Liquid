@@ -727,6 +727,7 @@
         "imageTag":"arizona",
         "quantity":"0.5L",
         "flavor":["lemon", "green", "peach", "raspberry", "cranberry"],
+        "strength": "0%",
         "price":3
     },
     "coca-cola":{
@@ -736,6 +737,7 @@
         "imageTag":"coca-cola",
         "quantity":"0.33L",
         "flavor":["standard", "zero", "lemon"],
+        "strength": "0%",
         "price":2
     },
     "fanta":{
@@ -745,6 +747,7 @@
         "imageTag":"fanta",
         "quantity":"0.3L",
         "flavor":["orange", "lemon", "strawberry"],
+        "strength": "0%",
         "price":1.8
     },
     "jarritos":{
@@ -754,6 +757,7 @@
         "imageTag":"jarritos",
         "quantity":"0.37L",
         "flavor":["grapefruit", "fruit punch", "passion fruit", "pineapple", "guava", "mango", "lime", "mandarin"],
+        "strength": "0%",
         "price":4
     },
     "lemonade":{
