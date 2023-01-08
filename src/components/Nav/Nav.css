@@ -256,7 +256,7 @@ nav {
     }
     .nav-mobile-utilities {
         display: flex;
-        justify-content: end;
+        justify-content: flex-end;
         align-items: center;
     }
     .nav-mobile-search-cont{
