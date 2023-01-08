@@ -116,7 +116,9 @@ function Recommended () {
                         <div key={index} className='rec-item-wrapper'>
                         <div className='rec-item'>
                             <div className='rec-item-upper'>
-                                <img className='carousel-img' src={require(`../../images/${item.category}/desktop/${item.imageTag}.webp`)} alt={item.name}/>
+                                <a href="/product">
+                                    <img className='carousel-img' src={require(`../../images/${item.category}/desktop/${item.imageTag}.webp`)} alt={item.name}/>
+                                </a>
                                 <p>{item.name}</p>
                                 <p>{item.quantity}/{item.strength}</p>
                             </div>

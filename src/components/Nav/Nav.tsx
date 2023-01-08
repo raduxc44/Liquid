@@ -408,7 +408,9 @@ function Nav () {
         <nav>
             <div className='nav-upper'>
                 <div className='logo-cont'>
+                    <a href="./">
                     <p className='logo'>Liquid</p>
+                    </a>
                 </div>
                 <div className="nav-utilities">
                     <div className='search-bar-container'>

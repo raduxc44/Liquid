@@ -22,3 +22,6 @@
   font-family: 'Roboto';
   user-select: none;
 }
+a {
+  text-decoration: none;
+}
