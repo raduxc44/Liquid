@@ -1,15 +1,76 @@
 import './single-prod.css'
 import * as MaterialIcon from '@mui/icons-material'
 import * as Material from '@mui/material'
-import { palette } from '@mui/system'
-
+import { useState } from 'react';
 
 function SingleProd (
     // selectedProduct Prop
+) {    
 
-) {
-    function renderRating () {
-        
+    function QuantityInput() {
+        const [quantityValue, setQuantityValue] = useState<number | string>(1);
+        const handleIncrement = () => {
+            setQuantityValue(prevValue => (prevValue as number) + 1);
+        };
+        const handleDecrement = () => {
+            if(quantityValue > 1) setQuantityValue(prevValue => (prevValue as number) - 1);
+        };
+        const sideButtonsStyles = {
+            background: 'black',
+            color: 'goldenrod',
+            height: '100%',
+            minWidth: '25%',
+            maxWidth: '25%',
+        };
+        const CustomDisableInput = Material.styled(Material.TextField)(() => ({
+                ".MuiInputBase-input.Mui-disabled": {
+                    WebkitTextFillColor: "gold"
+                }
+            }));
+
+        return (
+        <Material.Box className="quantity-container" 
+            sx={{ 
+                background: 'black',
+                display: "flex",
+                placeContent: "center",
+                height: {xs: '40%', sm: '40%', md: '50%'},
+                width: {xs: '70%', sm: '70%', md: '40%'},
+                borderRadius: '15px'
+            }}>
+            <Material.Button onClick={handleIncrement} style={sideButtonsStyles}>+</Material.Button>
+            <CustomDisableInput
+                type="text"
+                value={quantityValue}
+                disabled
+                className='QuantityInput'
+                sx={{
+                    width: '50%',
+                    height: '100%',
+                    color: 'white',
+                    borderLeft: '1px solid goldenrod',
+                    borderRight: '1px solid goldenrod',
+                }}
+                inputProps={{
+                    max: 99,
+                    min: 0,
+                    sx: {
+                        width: '100%',
+                        height: 'inherit',
+                        textAlign: 'center'
+                    },
+                }}
+                InputProps={{   
+                    sx: {
+                        color: 'white',
+                        height: 'inherit',
+                        width: '100%',
+                    },
+                }}
+            />
+            <Material.Button onClick={handleDecrement} style={sideButtonsStyles}>-</Material.Button>
+            </Material.Box>
+        )
     }
 
     return(
@@ -41,30 +102,19 @@ function SingleProd (
                         </div>
                         
                         <div className='buy-cont'>
-                            <Material.TextField 
-                            type="tel"
-                            id="buying-quantity"
-                            variant="standard"
-                            defaultValue={1}
-                            InputProps={{
-                                disableUnderline: true,
-                            }}
-                            sx= {{
-                                aspectRatio: "1 / 1",
-                                display: "flex",
-                                placeContent: "center",
-                                height: "4.5dvh",
-                                input: { 
-                                    color: 'white',
-                                    aspectRatio: "1 / 1", 
-                                    textAlign: "center",
-                                },
-                                borderRadius: '5px',
-                                background: 'black', 
+                            {QuantityInput()}
+                            <Material.Button
+                                variant="contained" 
+                                sx={{
+                                    background: 'black',
+                                    color: 'goldenrod',
+                                    height: {xs: '80%', sm: '80%', md: '50%'},
+                                    width: {xs: '70%', sm: '70%', md: '40%'},
+                                    "&:hover": {
+                                        backgroundColor: "black"
+                                    }
                                 }}
-                            />
-                            <Material.Button 
-                                variant="contained" sx={{color: 'white', background:'black'}} startIcon={<MaterialIcon.AddShoppingCartRounded/>}>
+                                startIcon={<MaterialIcon.AddShoppingCartRounded/>}>
                                 Add to Cart
                             </Material.Button>
                         </div>
