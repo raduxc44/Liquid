@@ -38,7 +38,7 @@ function SingleProd (
                 width: {xs: '70%', sm: '70%', md: '40%'},
                 borderRadius: '15px'
             }}>
-            <Material.Button onClick={handleIncrement} style={sideButtonsStyles}>+</Material.Button>
+            <Material.Button onClick={handleDecrement} style={sideButtonsStyles}>-</Material.Button>
             <CustomDisableInput
                 type="text"
                 value={quantityValue}
@@ -68,7 +68,7 @@ function SingleProd (
                     },
                 }}
             />
-            <Material.Button onClick={handleDecrement} style={sideButtonsStyles}>-</Material.Button>
+            <Material.Button onClick={handleIncrement} style={sideButtonsStyles}>+</Material.Button>
             </Material.Box>
         )
     }
