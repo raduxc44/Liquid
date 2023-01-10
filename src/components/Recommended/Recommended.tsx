@@ -2,19 +2,13 @@ import './Recommended.css'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
-import Inventory from '../../data/inventory.json'
+import Inventory from '../../data/inventory.json';
+import { Link } from 'react-router-dom';
+import { Item } from '../../data/types';
+import { useContext } from 'react';
+import { SelectedProdContext } from '../../Contexts/selectedProductContext';
 
-type Item = {
-    name: string,
-    category: string,
-    origin?: string,
-    imageTag?: string,
-    quantity?: string,
-    flavor?: string[],
-    strength?: string,
-    price: number
-}
-let randomItemsArr: Item[] = [];
+let randomItemsArr: (Item)[] = [];
 
 // Picks one random of each: Whisky, Vodka, Cognac, Rum, Liquor, Red & Wine, Champagne, Beer, Beverage
 (function randomizer () {
@@ -80,6 +74,14 @@ let randomItemsArr: Item[] = [];
 })()
 
 function Recommended () {
+
+    const {setSelectedProductToShow} = useContext(SelectedProdContext)
+
+    function handleUserSelection (item: Item) {
+        window.scroll(0,0)
+        setSelectedProductToShow(item);
+    }
+    
     return(
         <div className="rec-cont">
             <div className='rec-section'>
@@ -116,11 +118,18 @@ function Recommended () {
                         <div key={index} className='rec-item-wrapper'>
                         <div className='rec-item'>
                             <div className='rec-item-upper'>
-                                <a href="/product">
+                                <Link
+                                to={`/product/${item?.name}`}
+                                onClick={() => handleUserSelection(item)}
+                                state= {{
+                                    selectedProductToShow: item,
+                                    Item: item
+                                }}
+                                >
                                     <img className='carousel-img' src={require(`../../images/${item.category}/desktop/${item.imageTag}.webp`)} alt={item.name}/>
-                                </a>
+                                </Link>
                                 <p>{item.name}</p>
-                                <p>{item.quantity}/{item.strength}</p>
+                                <p>{item.quantity}{item.strength}</p>
                             </div>
                             <p className='rec-card-check check-out-btn'>Check it out</p>
                         </div>

@@ -1,11 +1,12 @@
 import './single-prod.css'
 import * as MaterialIcon from '@mui/icons-material'
 import * as Material from '@mui/material'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { SelectedProdContext } from '../../Contexts/selectedProductContext';
 
-function SingleProd (
-    // selectedProduct Prop
-) {    
+function SingleProd () {
+    
+    const { selectedProductToShow } = useContext(SelectedProdContext);
 
     function QuantityInput() {
         const [quantityValue, setQuantityValue] = useState<number | string>(1);
@@ -79,12 +80,12 @@ function SingleProd (
                 <div className='product-container'>
                     {/* Product name  + quantity */}
                     <div className='product-title'>
-                        <h1>Jack Daniel's Standard</h1>
+                        <h1>{selectedProductToShow?.name}</h1>
                         {/*Product details*/}
-                        <p>Whisky 0.7L / 40%</p>
+                        <p>{selectedProductToShow?.category} / {selectedProductToShow?.quantity} / {selectedProductToShow?.strength}</p>
                     </div>
                     <div className='product-photo-cont'>
-                        <img src={require('../../images/Whisky/desktop/jack-standard.webp')} alt="Jack Daniel's Standard" />
+                        <img src={require(`../../images/${selectedProductToShow?.category}/desktop/${selectedProductToShow?.imageTag}.webp`)} alt={selectedProductToShow?.name} />
                     </div>
                 </div>
                 <div className='product-details-container'>
@@ -94,7 +95,7 @@ function SingleProd (
                                 <Material.Rating name="half-rating" defaultValue={4.5} sx={{color: 'black'}} precision={0.5} />
                             </div>
                             <p>0 Reviews for this product</p>
-                            <p className='price-cont'>$15</p>
+                            <p className='price-cont'>${selectedProductToShow?.price}</p>
                             <div className='stock'>
                                 <span className="material-symbols-outlined">check_circle</span>
                                 <p>In stock</p>
@@ -123,19 +124,19 @@ function SingleProd (
                         <div className='product-details'>
                         <div className='product-detail'>
                             <p className='detail-categ'>Category</p>
-                            <p className='detail-value'>Whisky</p>
+                            <p className='detail-value'>{selectedProductToShow?.category}</p>
                         </div>
                         <div className='product-detail'>
                             <p className='detail-categ'>Size</p>
-                            <p className='detail-value'>0.7L</p>
+                            <p className='detail-value'>{selectedProductToShow?.quantity}</p>
                         </div>
                         <div className='product-detail'>
                             <p className='detail-categ'>Strength</p>
-                            <p className='detail-value'>40%</p>
+                            <p className='detail-value'>{selectedProductToShow?.strength}</p>
                         </div>
                         <div className='product-detail'>
                             <p className='detail-categ'>Origin Country</p>
-                            <p className='detail-value'>USA</p>
+                            <p className='detail-value'>{selectedProductToShow?.origin}</p>
                         </div>
                         </div>
                     </div>

@@ -2,6 +2,7 @@ import './Nav.css'
 import 'animate.css';
 import { useEffect, useMemo, useState, useRef } from 'react';
 import Inventory from '../../data/inventory.json'
+import { Link } from 'react-router-dom';
 
 function Nav () {
 
@@ -101,7 +102,6 @@ function Nav () {
         strength?: string,
         price: number
     }
-
 
     let deactivateCateg = () => {
         if(window.innerWidth < 1000) {
@@ -407,10 +407,10 @@ function Nav () {
     return(
         <nav>
             <div className='nav-upper'>
-                <div className='logo-cont'>
-                    <a href="./">
-                    <p className='logo'>Liquid</p>
-                    </a>
+                <div className='logo-cont' onClick={() => window.scrollTo(0, 0)}>
+                    <Link to={'/'}>
+                        <p className='logo'>Liquid</p>
+                    </Link>
                 </div>
                 <div className="nav-utilities">
                     <div className='search-bar-container'>
