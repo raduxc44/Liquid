@@ -131,7 +131,16 @@ function Recommended () {
                                 <p>{item.name}</p>
                                 <p>{item.quantity}{item.strength}</p>
                             </div>
-                            <p className='rec-card-check check-out-btn'>Check it out</p>
+                            <Link
+                                to={`/product/${item?.name}`}
+                                onClick={() => handleUserSelection(item)}
+                                state= {{
+                                    selectedProductToShow: item,
+                                    Item: item
+                                }}
+                            >
+                                <p className='rec-card-check check-out-btn'>Check it out</p>
+                            </Link>
                         </div>
                         </div>
                     ))}
