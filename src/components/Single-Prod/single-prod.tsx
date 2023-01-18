@@ -1,15 +1,15 @@
 import './single-prod.css'
 import * as MaterialIcon from '@mui/icons-material'
 import * as Material from '@mui/material'
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { SelectedProdContext } from '../../Contexts/selectedProductContext';
 
 function SingleProd () {
     
-    const { selectedProductToShow } = useContext(SelectedProdContext);
+    const { selectedProductToShow, quantityValue, setQuantityValue} = useContext(SelectedProdContext);
 
     function QuantityInput() {
-        const [quantityValue, setQuantityValue] = useState<number | string>(1);
+        
         const handleIncrement = () => {
             setQuantityValue(prevValue => (prevValue as number) + 1);
         };
@@ -73,7 +73,9 @@ function SingleProd () {
             </Material.Box>
         )
     }
-
+    
+    if(selectedProductToShow === null) return <div></div>
+    else
     return(
         <div className='product-wrapper-cont'>
             <div className='product-container-wrapper'>

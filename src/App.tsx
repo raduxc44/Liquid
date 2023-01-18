@@ -11,20 +11,23 @@ import { SelectedProdContext } from './Contexts/selectedProductContext';
 function App() {
 
   const [selectedProductToShow, setSelectedProductToShow] = useState<Item | null>(null);
+  const [quantityValue, setQuantityValue] = useState<number>(1);
+  
 
   return (
-    <SelectedProdContext.Provider value={{selectedProductToShow, setSelectedProductToShow}}>
-
-    <BrowserRouter>
-      <Routes>
-          <Route index element= {<Home/>}></Route>
-          <Route 
-          path={`/product/${selectedProductToShow?.name}`} 
-          element={<IndividualProdPage />} />
-        <Route path='/shopping-cart' element= {<ShoppingCart />}></Route>
-      </Routes>
-    </BrowserRouter>
-    
+    <SelectedProdContext.Provider value={{
+      selectedProductToShow, setSelectedProductToShow,
+      quantityValue, setQuantityValue
+      }}>
+      <BrowserRouter>
+        <Routes>
+            <Route index element= {<Home/>}></Route>
+            <Route 
+            path={`/product/:productId`} 
+            element={<IndividualProdPage />} />
+          <Route path='/shopping-cart' element= {<ShoppingCart />}></Route>
+        </Routes>
+      </BrowserRouter>
     </SelectedProdContext.Provider>
 
   );  

@@ -1,11 +1,15 @@
 import './Nav.css'
 import 'animate.css';
-import { useEffect, useMemo, useState, useRef } from 'react';
+import { useEffect, useMemo, useState, useRef, useContext } from 'react';
 import Inventory from '../../data/inventory.json'
-import { Link } from 'react-router-dom';
+import { Item } from '../../data/types';
+import { Link, useNavigate } from 'react-router-dom';
+import { SelectedProdContext } from '../../Contexts/selectedProductContext';
 
 function Nav () {
 
+    const { setSelectedProductToShow } = useContext(SelectedProdContext);
+    const navigate = useNavigate();
     //Functionality for the second desktop nav menu
     const alreadyOpenedCateg = useRef(false);
     const subCategories = useRef(0)
@@ -90,18 +94,7 @@ function Nav () {
     let categAnimationDelay = useRef(0)
     let searchAnimationDelay = useRef(0)
     let searchResultsAnimationDelay = useRef(0);
-    let searchResultsArr: searchResult[] = [];
-
-    type searchResult = {
-        name: string,
-        category: string,
-        origin?: string,
-        imageTag?: string,
-        quantity?: string,
-        flavor?: string[],
-        strength?: string,
-        price: number
-    }
+    let searchResultsArr: Item[] = [];
 
     let deactivateCateg = () => {
         if(window.innerWidth < 1000) {
@@ -283,7 +276,7 @@ function Nav () {
             let searchInput:HTMLInputElement = document.querySelector('div.mobile-search-bar > input')!;
             let resultsDiv:HTMLElement = document.querySelector('div.mobile-search-results')!;
             if(time === 'start' && searchResultsAnimationDelay.current === 0) { 
-                document.querySelector('body')!.style.overflow = 'hidden';
+                // document.querySelector('body')!.style.overflow = 'hidden';
                 resultsDiv.classList.toggle('animate__fadeIn');
                 resultsDiv.style.display = 'flex'
                 setTimeout(() => {
@@ -292,10 +285,10 @@ function Nav () {
                 }, 500)
             }
             else if(time === 'end' && searchResultsAnimationDelay.current === 1) {
-                document.querySelector('body')!.style.overflow = 'visible';
+                // document.querySelector('body')!.style.overflow = 'visible';
                 resultsDiv.classList.toggle('animate__fadeOut');
-                resultsDiv.style.display = 'none'
                 setTimeout(() => {
+                    resultsDiv.style.display = 'none'
                     resultsDiv.classList.toggle('animate__fadeOut')
                     searchResultsAnimationDelay.current = 0
                 }, 500)
@@ -339,6 +332,10 @@ function Nav () {
                     <p>$${item.price}</p>`
                 }
                 resultItemCont.classList.add('search-results-list-container')
+                resultItemCont.onclick = () => {
+                    setSelectedProductToShow(item);
+                    navigate(`/product/${item.name}`);
+                }
                 resultItemDetails.classList.add('search-result-details')
                 resultItemP.innerText = `${item.name}`
                 resultsList.appendChild(resultItemCont)
@@ -384,10 +381,15 @@ function Nav () {
                     <p>${item.quantity}/${item.strength}</p>
                     <p>$${item.price}</p>`
                 }
+                resultItemCont.onclick = () => {
+                    setTimeout(() => {
+                    setSelectedProductToShow(item);
+                    navigate(`/product/${item.name}`);
+                    }, 300)
+                }
                 resultItemCont.classList.add('search-results-list-container')
                 resultItemDetails.classList.add('search-result-details-mobile')
                 resultItemP.innerText = `${item.name}`
-                
                 resultsList.appendChild(resultItemCont)
                 resultItemCont.appendChild(resultItem)
                 resultItem.appendChild(resultItemDetails)
@@ -443,9 +445,9 @@ function Nav () {
                 <div className='nav-mobile-utilities'>
                     <span onClick={() => {
                         openMobileAnim('search');
-                        if(document.querySelector('body')!.style.overflow === 'hidden') {
-                            document.querySelector('body')!.style.overflow = 'visible';
-                        }
+                        // if(document.querySelector('body')!.style.overflow === 'hidden') {
+                        //     document.querySelector('body')!.style.overflow = 'visible';
+                        // }
                         }} className='material-symbols-outlined search-icon-mobile'>search</span>
                 </div>
             </div>

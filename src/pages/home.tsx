@@ -8,14 +8,17 @@ import { useContext } from 'react';
 
 export default function Home () {
     
-    const { selectedProductToShow } = useContext(SelectedProdContext);
-    const {setSelectedProductToShow} = useContext(SelectedProdContext)
-
+    const { selectedProductToShow, setSelectedProductToShow } = useContext(SelectedProdContext);
+    const { quantityValue, setQuantityValue } = useContext(SelectedProdContext);
+    
     return(
         <>
             <Nav></Nav>
             <Banner></Banner>
-            <SelectedProdContext.Provider value={{selectedProductToShow, setSelectedProductToShow}}>
+            <SelectedProdContext.Provider value={{
+                selectedProductToShow, setSelectedProductToShow,
+                quantityValue, setQuantityValue
+                }}>
                 <Recommended></Recommended>
             </SelectedProdContext.Provider>
             <About></About>
