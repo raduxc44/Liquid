@@ -30,7 +30,6 @@
     justify-content: center;
     align-items: center;
     gap: 1%;
-    font-size: large;
 }
 .truck {
     font-variation-settings: 
@@ -39,7 +38,7 @@
 
 @media screen and (max-width: 1000px) {
     .banner-cont{
-        height: 280px
+        height: 60vh;
     }
     .banner-cont > *{
         object-fit: scale-down;
@@ -47,6 +46,9 @@
 }
 
 @media screen and (max-width: 500px) {
+    .banner-cont{
+        height: 30vh;
+    }
     .whisky-banner {
         background-image: url('../../images/Covers/mobile/spirits-cover.webp');
     }
