@@ -22,8 +22,7 @@ function IndividualProdPage () {
         if (storedSelectedProductToShow) {
         setSelectedProductToShow(storedSelectedProductToShow);
         }
-        console.log(storedSelectedProductToShow)
-    }, []);
+    }, [setSelectedProductToShow]);
 
     return (
         <>

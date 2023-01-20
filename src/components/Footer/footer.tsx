@@ -1,7 +1,19 @@
+import './footer.css'
+import Heart from '../../images/Icons/heart.svg'
+import React from '../../images/Icons/react.svg'
+import Typescript from '../../images/Icons/typescript.svg'
+
 export default function Footer () {
     return(
-        <>
-            <div style={{ backgroundColor: 'goldenrod', width: '100%', height: '10vh'}}>Footer Content</div>
-        </>
+        <footer>
+            <p>© 2023<span className='logo logo-foot'>Liquid</span></p>
+            <p>Made with 
+                <img src={Heart} alt="" />
+                ,
+                <img src={React} alt="" />
+                and 
+                <img src={Typescript} alt="" />
+            </p>
+        </footer>
     )
 }

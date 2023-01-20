@@ -397,12 +397,20 @@ function Nav () {
             })
         }
     }
-
-    function deleteMobileSearchInput () {
-        let searchInput:HTMLInputElement = document.querySelector('div.mobile-search-bar > input')!;
-        if(searchInput.value !== '') {
-            searchInput.value = ''
-            searchResultsAnim('mobile', 'end')
+    function deleteSearchInput (deviceType:string) {
+        if(deviceType === 'desktop') {
+            let desktopSearchInput:HTMLInputElement = document.querySelector('div.search-bar > input')!;
+            if(desktopSearchInput.value !== '') {
+                desktopSearchInput.value = ''
+                searchResultsAnim('desktop', 'end')
+            }
+        }
+        else if(deviceType === 'mobile') {
+        let mobileSearchInput:HTMLInputElement = document.querySelector('div.mobile-search-bar > input')!;
+            if(mobileSearchInput.value !== '') {
+                mobileSearchInput.value = ''
+                searchResultsAnim('mobile', 'end')
+            }
         }
     }
 
@@ -420,7 +428,7 @@ function Nav () {
                             <input
                             onChange={() => searchFunc('desktop')} 
                             type="text" placeholder='Search for a product'/>
-                            <span className="material-icons nav-icon">search</span>
+                            <p style={{'cursor': 'pointer', 'justifySelf': 'flex-end'}} onClick={() => deleteSearchInput('desktop')}>X</p>
                         </div>
                         <div className='search-results-container animate__faster animate__animated'>
                             <ul className='search-results-list'>
@@ -445,9 +453,6 @@ function Nav () {
                 <div className='nav-mobile-utilities'>
                     <span onClick={() => {
                         openMobileAnim('search');
-                        // if(document.querySelector('body')!.style.overflow === 'hidden') {
-                        //     document.querySelector('body')!.style.overflow = 'visible';
-                        // }
                         }} className='material-symbols-outlined search-icon-mobile'>search</span>
                 </div>
             </div>
@@ -457,7 +462,7 @@ function Nav () {
                     onChange= {() => searchFunc('mobile')} 
                     type="text" placeholder='Search'/>
                     <div 
-                    onClick={() => {deleteMobileSearchInput()}}
+                    onClick={() => {deleteSearchInput('mobile')}}
                     className='mobile-menu-delete'>X</div>
                 </div>
                 <div className='mobile-search-results animate__faster animate__animated'>

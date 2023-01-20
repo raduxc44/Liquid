@@ -129,7 +129,7 @@ function Recommended () {
                                     <img className='carousel-img' src={require(`../../images/${item.category}/desktop/${item.imageTag}.webp`)} alt={item.name}/>
                                 </Link>
                                 <p>{item.name}</p>
-                                <p>{item.quantity}{item.strength}</p>
+                                <p>{item.quantity} / {item.strength}</p>
                             </div>
                             <Link
                                 to={`/product/${item?.name}`}
