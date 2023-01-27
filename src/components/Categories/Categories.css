@@ -67,6 +67,10 @@
     animation-fill-mode: forwards;
 }
 
+picture {
+    cursor: pointer;
+}
+
 @keyframes categ-small-check-out-color {
     100% {
         background-color: black;

@@ -5,252 +5,371 @@ import Inventory from '../../data/inventory.json'
 import { Item } from '../../data/types';
 import { Link, useNavigate } from 'react-router-dom';
 import { SelectedProdContext } from '../../Contexts/selectedProductContext';
+import { SelectedFilterContext } from '../../Contexts/selectedFilterContext';
 
 function Nav () {
 
-    const { setSelectedProductToShow } = useContext(SelectedProdContext);
     const navigate = useNavigate();
+    const { setSelectedProductToShow } = useContext(SelectedProdContext);
+    const { setSelectedFilter } = useContext(SelectedFilterContext);
+    const [selectedMainCategory, setSelectedMainCategory] = useState('spirits');
+    const [deviceType, setDeviceType] = useState('desktop');
     //Functionality for the second desktop nav menu
     const alreadyOpenedCateg = useRef(false);
-    const subCategories = useRef(0)
-    const [selectedCategories, setSelectedCategories] = useState('spirits');
-    const shownCategories: Object[] = useMemo(() => {
-        if(selectedCategories === 'spirits') {
-            let spiritsArr:Object[] = []
-            subCategories.current = 7;
-            Object.entries(Inventory.Items).forEach(item => {
-                if (item[1].category === 'Whisky' || 
-                    item[1].category === 'Vodka'  || 
-                    item[1].category === 'Rum'    ||
-                    item[1].category === 'Gin'    ||
-                    item[1].category === 'Liquor' ||
-                    item[1].category === 'Tequila'||
-                    item[1].category === 'Cognac' ) 
-                {spiritsArr.push(item[1])}
-            })
-            return spiritsArr 
-        }
-        else if(selectedCategories === 'wines') {
-            let winesArr: Object[] = []
-            subCategories.current = 3;
-            Object.entries(Inventory.Items).forEach(item => {
-                if(item[1].category === 'White-Wine' || 
-                    item[1].category === 'Red-Wine' || 
-                    item[1].category === 'Rose-Wine') 
-                {winesArr.push(item[1])}
-            })
-            return winesArr
-        }
-        else if(selectedCategories === 'champagne') {
-            let champagneArr: Object[] = []
-            subCategories.current = 0;
-            Object.entries(Inventory.Items).forEach(item => {
-                if(item[1].category === 'Champagne')
-                {champagneArr.push(item[1])}
-            })
-            return champagneArr
-        }
-        else if(selectedCategories === 'others') {
-            let othersArr: Object[] = []
-            subCategories.current = 2;
-            Object.entries(Inventory.Items).forEach(item => {
-                if (item[1].category === 'Beer' ||
-                    item[1].category === 'Beverage')
-                {othersArr.push(item[1])}
-            })
-            return othersArr
-        }
-        else if(selectedCategories === 'gift-cards') {
-            let giftCardsArr: Object[] = []
-            subCategories.current = 0;
-            Object.entries(Inventory.Items).forEach(item => {
-                if(item[1].category === 'Gift-Card')
-                {giftCardsArr.push(item[1])}
-            })
-            return giftCardsArr
-        }
-        // On sale and daily offer needs to be reworked ( separate property with boolean value? )
-        else if(selectedCategories === 'on-sale') {
-            let onSaleArr: Object[] = []
-            subCategories.current = 0;
-            Object.entries(Inventory.Items).forEach(item => {
-                if(item[1].category === 'On-Sale')
-                {onSaleArr.push(item[1])}
-            })
-            return onSaleArr
-        }
-        else if(selectedCategories === 'daily-offer') {
-            let dailyOfferArr: Object[] = []
-            subCategories.current = 0;
-            Object.entries(Inventory.Items).forEach(item => {
-                if(item[1].category === 'Daily-Offer') 
-                {dailyOfferArr.push(item[1])}
-            })
-            return dailyOfferArr
-        }
-    }, [selectedCategories])!
-    // Applies in and out animations on categories (mobile version only)
-    // Delay refs are used to avoid animation bugging when pressing their buttons rapidly
+    const alreadyOpenedSearch = useRef(false);
     let categAnimationDelay = useRef(0)
     let searchAnimationDelay = useRef(0)
     let searchResultsAnimationDelay = useRef(0);
-    let searchResultsArr: Item[] = [];
+    let alreadyInTransition = useRef(false);
+    let searchResultsArr: Item[] = []; 
 
-    let deactivateCateg = () => {
+    function changeDeviceType () {
         if(window.innerWidth < 1000) {
-            let body: HTMLElement = document.querySelector('body')!;
-            body.style.overflow = 'visible';  
-            let primaryCategList: HTMLElement = document.querySelector('div.primary-categ > ul')!;
-            let secondCategList: HTMLElement = document.querySelector('div.second-categ > ul')!;
-            let mobileCateg: HTMLElement = document.querySelector('div.nav-lower')!;
-            mobileCateg.classList.toggle('animate__fadeOutLeft')         
-            setTimeout(() => {
-                if(primaryCategList.style.display === 'none')   primaryCategList.style.display = 'block';
-                if(secondCategList.style.display !== 'none')    secondCategList.style.display = 'none';
-                mobileCateg.classList.toggle('animate__fadeOutLeft')
-                mobileCateg.style.removeProperty('display')
-                categAnimationDelay.current = 0
-            }, 1000)   
+            setDeviceType('mobile');
+        }
+        else {
+            setDeviceType('desktop');
         }
     }
-    let deactivateSearch = () => {
-        let mobileSearch:HTMLElement = document.querySelector('div.nav-mobile-search-cont')!;
-        mobileSearch.classList.toggle('animate__fadeOutUp')
-        setTimeout(() => {
-            mobileSearch.classList.toggle('animate__fadeOutUp')
-            mobileSearch.style.removeProperty('display')
-            searchAnimationDelay.current = 0;
-        }, 1000);    
+    window.onresize = changeDeviceType;
+
+    function hideMobileElement (element: HTMLElement, animationClass: string) {
+        if(!element.classList.contains('in-transition')) {
+            element.classList.toggle('in-transition')
+            element.classList.toggle(animationClass)
+            setTimeout(() => {
+                element.classList.toggle('in-transition')
+                element.classList.toggle(animationClass)
+                element.style.removeProperty('display')
+                categAnimationDelay.current = 0
+                searchAnimationDelay.current = 0;
+            }, 1000)
+        }
     }
 
-    function openMobileAnim (button:string) {
-        if(window.innerWidth < 1000) {
-            let mobileCateg: HTMLElement = document.querySelector('.nav-lower')!;
-            let mobileSearch: HTMLElement = document.querySelector('.nav-mobile-search-cont')!;
-
-            //Obstructs interacting with the main body instead of the navbar
-            if(button === 'categ') {
-                //Prevents the user from rappidly pressing the opening button for categ/search
-                if(categAnimationDelay.current === 1 ) {
-                    categAnimationDelay.current = 1.5;
-                    deactivateCateg();
-                }
-                else if(categAnimationDelay.current === 0) {
-                    let body: HTMLElement = document.querySelector('body')!;
-                    body.style.overflow = 'hidden';
-                    categAnimationDelay.current = 0.5
-                    deactivateSearch();
-                    setTimeout(() => {categAnimationDelay.current = 1}, 1000)
-                    mobileCateg.style.display = 'block'
-                    mobileCateg.classList.toggle('animate__fadeInLeft')
-                    setTimeout(() => mobileCateg.classList.toggle('animate__fadeInLeft'), 1000)
-                }
-            }
-            else if(button === 'search') {
-                if(searchAnimationDelay.current === 1) {
-                    searchAnimationDelay.current = 1.5
-                    deactivateSearch();
-                }
-                else if(searchAnimationDelay.current === 0){
-                    searchAnimationDelay.current = 0.5
-                    deactivateCateg()
-                    setTimeout(() => {searchAnimationDelay.current = 1}, 1000)
-                    mobileSearch.style.display = 'flex'
-                    mobileSearch.classList.toggle('animate__fadeInDown');
-                    setTimeout(() => mobileSearch.classList.toggle('animate__fadeInDown'), 1000)
-                }
-            }
-        } 
+    function showMobileElement (element: HTMLElement, animationClass: string) {
+        if(!element.classList.contains('in-transition')) {
+            element.classList.toggle('in-transition')
+            element.style.display = 'flex';
+            element.classList.toggle(animationClass)
+            setTimeout(() => {
+                element.classList.toggle(animationClass)
+                element.classList.toggle('in-transition')
+            }, 1000)
+        }
     }
+
+    // function openMobileAnim (button:string) {
+    //     if(window.innerWidth < 1000) {
+    //         let mobileCateg: HTMLElement = document.querySelector('.nav-lower')!;
+    //         let mobileSearch: HTMLElement = document.querySelector('.nav-mobile-search-cont')!;
+    //         let body: HTMLElement = document.querySelector('body')!;
+    //         body.style.overflow = 'visible';
+    //         //Obstructs interacting with the main body instead of the navbar
+    //         if(button === 'categ') {
+    //             //Prevents the user from rappidly pressing the opening button for categ/search
+    //             if(categAnimationDelay.current === 1 ) {
+    //                 categAnimationDelay.current = 1.5;
+    //                 hideMobileElement(mobileCateg, 'animate__fadeOutLeft');
+    //             }
+    //             else if(categAnimationDelay.current === 0) {
+    //                 body.style.overflow = 'hidden';
+    //                 categAnimationDelay.current = 0.5
+    //                 hideMobileElement(mobileSearch, 'animate__fadeOutUp');
+    //                 setTimeout(() => {categAnimationDelay.current = 1}, 1000);
+    //                 showMobileElement(mobileCateg, 'animate__fadeInLeft');
+    //             }
+    //         }
+    //         else if(button === 'search') {
+    //             if(searchAnimationDelay.current === 1) {
+    //                 searchAnimationDelay.current = 1.5
+    //                 hideMobileElement(mobileSearch, 'animate__fadeOutUp');
+    //             }
+    //             else if(searchAnimationDelay.current === 0){
+    //                 searchAnimationDelay.current = 0.5
+    //                 hideMobileElement(mobileCateg, 'animate__fadeOutLeft');
+    //                 setTimeout(() => {searchAnimationDelay.current = 1}, 1000)
+    //                 showMobileElement(mobileSearch, 'animate__fadeInDown');
+    //             }
+    //         }
+    //     } 
+    // }
     
     //Handles the secondary menu animations - mobile
-    function switchMenus () {
+    function switchMenus (start:string, end:string) {
         let primaryCategList: HTMLElement = document.querySelector('div.primary-categ > ul')!;
         let secondCategList: HTMLElement = document.querySelector('div.second-categ > ul')!;
-        setTimeout(() => {
+        let backButton: HTMLElement = document.querySelector('div.second-categ-list-back')!;
+
+        if(start === 'primary' && end === 'secondary' && !alreadyInTransition.current) {
             primaryCategList.classList.add('animate__fadeOutLeft');
             secondCategList.style.display = 'flex';
-            secondCategList.classList.add('animate__fadeInRight')
-            setTimeout(() => {primaryCategList.style.display = 'none';}, 1000)
-        }, 0)
-        setTimeout(() => {
-            primaryCategList.classList.remove('animate__fadeOutLeft')
-            secondCategList.classList.remove('animate__fadeInRight')
-        }, 1200)
+            backButton.style.display = 'flex';
+            backButton.classList.add('animate__fadeInRight')
+            secondCategList.classList.add('animate__fadeInRight');
+            alreadyInTransition.current = true;
+            setTimeout(() => {primaryCategList.style.display = 'none'}, 1000);
+            setTimeout(() => {
+                primaryCategList.classList.remove('animate__fadeOutLeft')
+                secondCategList.classList.remove('animate__fadeInRight')
+                backButton.classList.remove('animate__fadeInRight')
+                alreadyInTransition.current = false;
+            }, 1200)
+        }
+        else if(start === 'secondary' && end === 'primary' && !alreadyInTransition.current) {
+            setTimeout(() => {
+                backButton.classList.add('animate__fadeOutRight');
+                secondCategList.classList.add('animate__fadeOutRight');
+                primaryCategList.style.display = 'flex';
+                primaryCategList.classList.add('animate__fadeInLeft')
+                alreadyInTransition.current = true;
+                setTimeout(() => {
+                    secondCategList.style.display = 'none';
+                    backButton.style.display = 'none';
+                }, 1000)
+            }, 0)
+            setTimeout(() => {
+                secondCategList.classList.remove('animate__fadeOutRight')
+                backButton.classList.remove('animate__fadeOutRight')
+                primaryCategList.classList.remove('animate__fadeInLeft')
+                alreadyInTransition.current = false;
+            }, 1200)
+        }
     }
 
-    // Generates the second category menu
-    useEffect(() => {
-        let primaryCategList: HTMLElement = document.querySelector('div.primary-categ > ul')!;
-        let secondCategList: HTMLElement = document.querySelector('ul.second-categ-list')!;
-        primaryCategList.classList.add('animate__animated');
-        secondCategList.classList.add('animate__animated');
-        secondCategList.innerHTML = ''
-        if( selectedCategories === 'spirits'||
-            selectedCategories === 'wines'  ||
-            selectedCategories === 'others'
-        ) {
-            for(let i = 0; i < subCategories.current; i++) {
-                let listItemDiv: HTMLElement = document.createElement('div');
-                let listItem: HTMLElement = document.createElement('li');
-                let listItemImage: HTMLImageElement = document.createElement('img')
-                let listItemP: HTMLElement = document.createElement('p')
-                secondCategList.appendChild(listItemDiv);
-                listItemDiv.appendChild(listItem);
-                listItem.appendChild(listItemImage);
-                listItem.appendChild(listItemP);
-                listItemDiv.classList.add('secondary-categ-item')
-                if(selectedCategories === 'spirits') listItemDiv.classList.toggle('seven-categs');
-                else if(selectedCategories === 'wines') listItemDiv.classList.toggle('three-categs');
-                else if(selectedCategories === 'others') listItemDiv.classList.toggle('two-categs');
+    function filterHandler (filter: string) {
+        let filteredItems:Item[] = [];
+        Object.entries(Inventory.Items).forEach(([key, value]) => {
+            if(value.category === filter) filteredItems.push(value);
+        })
+        setSelectedFilter(filteredItems);        
+    }
+
+    //Handles the secondary menu content
+
+    const secondaryMenu = () => {
+        switch (selectedMainCategory) {
+            case 'spirits':
+                if(window.innerWidth >= 1000) {
+                    return (
+                        <>
+                            <div className="secondary-categ-item seven-categs"
+                            onClick={() => {filterHandler('Whisky')}}
+                            >
+                                <li>
+                                    <p>Whisky</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item seven-categs"
+                            onClick={() => {filterHandler('Vodka')}}
+                            >
+                                <li>
+                                    <p>Vodka</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item seven-categs"
+                            onClick={() => {filterHandler('Cognac')}}
+                            >
+                                <li>
+                                    <p>Cognac</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item seven-categs"
+                            onClick={() => {filterHandler('Gin')}}
+                            >
+                                <li>
+                                    <p>Gin</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item seven-categs"
+                            onClick={() => {filterHandler('Rum')}}
+                            >
+                                <li>
+                                    <p>Rum</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item seven-categs"
+                            onClick={() => {filterHandler('Tequila')}}
+                            >
+                                <li>
+                                    <p>Tequila</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item seven-categs"
+                            onClick={() => {filterHandler('Liquor')}}
+                            >
+                                <li>
+                                    <p>Liquor</p>
+                                </li>
+                            </div>
+                        </>
+                    )
                 }
-                let listCategoryNamesArr: HTMLElement[] = Array.from(document.querySelectorAll('div.secondary-categ-item > li > p'))
-                if(selectedCategories === 'spirits') {
-                    listCategoryNamesArr[0].innerText = 'Whisky';
-                    listCategoryNamesArr[1].innerText = 'Vodka';
-                    listCategoryNamesArr[2].innerText = 'Cognac';
-                    listCategoryNamesArr[3].innerText = 'Gin';
-                    listCategoryNamesArr[4].innerText = 'Rum';
-                    listCategoryNamesArr[5].innerText = 'Tequila';
-                    listCategoryNamesArr[6].innerText = 'Liquor'
+                else {
+                    return (
+                        <>
+                            <div className="secondary-categ-item seven-categs"
+                            onClick={() => {filterHandler('Whisky')}}
+                            >
+                                <li>
+                                    <img src={require(`../../images/Whisky/mobile/jack-standard.webp`)} alt="Whisky"/>
+                                    <p>Whisky</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item seven-categs"
+                            onClick={() => {filterHandler('Vodka')}}
+                            >
+                                <li>
+                                    <img src={require(`../../images/Vodka/mobile/absolut.webp`)} alt="Vodka"/>
+                                    <p>Vodka</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item seven-categs"
+                            onClick={() => {filterHandler('Cognac')}}
+                            >
+                                <li>
+                                    <img src={require(`../../images/Cognac/mobile/hennessy.webp`)} alt="Cognac"/>
+                                    <p>Cognac</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item seven-categs"
+                            onClick={() => {filterHandler('Gin')}}
+                            >
+                                <li>
+                                    <img src={require(`../../images/Gin/mobile/koval.webp`)} alt="Gin"/>
+                                    <p>Gin</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item seven-categs"
+                            onClick={() => {filterHandler('Rum')}}
+                            >
+                                <li>
+                                    <img src={require(`../../images/Rum/mobile/the-kraken.webp`)} alt="Rum"/>
+                                    <p>Rum</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item seven-categs"
+                            onClick={() => {filterHandler('Tequila')}}
+                            >
+                                <li>
+                                    <img src={require(`../../images/Tequila/mobile/jose-cuervo-reposado.webp`)} alt="Tequila"/>
+                                    <p>Tequila</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item seven-categs"
+                            onClick={() => {filterHandler('Liquor')}}
+                            >
+                                <li>
+                                    <img src={require(`../../images/Liquor/mobile/disaronno.webp`)} alt="Liquor"/>
+                                    <p>Liquor</p>
+                                </li>
+                            </div>
+                        </>
+                    )
                 }
-                else if(selectedCategories === 'wines') {
-                    listCategoryNamesArr[0].innerText = 'Red Wine';
-                    listCategoryNamesArr[1].innerText = 'White Wine';
-                    listCategoryNamesArr[2].innerText = 'Rose Wine';
+            case 'wines':
+                if(window.innerWidth >= 1000) {
+                    return (
+                        <>
+                            <div className="secondary-categ-item three-categs"
+                            onClick={() => {filterHandler('Red-Wine')}}
+                            >
+                                <li>
+                                    <p>Red Wine</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item three-categs"
+                            onClick={() => {filterHandler('White-Wine')}}
+                            >
+                                <li>
+                                    <p>White Wine</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item three-categs"
+                            onClick={() => {filterHandler('Rose-Wine')}}
+                            >
+                                <li>
+                                    <p>Rose Wine</p>
+                                </li>
+                            </div>
+                        </>
+                    )
                 }
-                else if(selectedCategories === 'others') {
-                    listCategoryNamesArr[0].innerText = 'Beer';
-                    listCategoryNamesArr[1].innerText = 'Beverages';
+                else {
+                    return (
+                        <>
+                            <div className="secondary-categ-item three-categs"
+                            onClick={() => {filterHandler('Red-Wine')}}
+                            >
+                                <li>
+                                    <img src={require(`../../images/Red-Wine/mobile/canaletto.webp`)} alt="Red Wine"/>
+                                    <p>Red Wine</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item three-categs"
+                            onClick={() => {filterHandler('White-Wine')}}
+                            >
+                                <li>
+                                    <img src={require(`../../images/White-Wine/mobile/fratelli.webp`)} alt="White Wine"/>
+                                    <p>White Wine</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item three-categs"
+                            onClick={() => {filterHandler('Rose-Wine')}}
+                            >
+                                <li>
+                                    <img src={require(`../../images/Rose-Wine/mobile/cave-amadeu.webp`)} alt="Rose Wine"/>
+                                    <p>Rose Wine</p>
+                                </li>
+                            </div>
+                        </>
+                    )
                 }
-                if(window.innerWidth < 1000) {
-                    let listImagesArr: HTMLImageElement[] = Array.from(document.querySelectorAll('div.secondary-categ-item > li > img'))!;
-                    let firstCategListElements: HTMLElement[] = Array.from(document.querySelectorAll('div.primary-categ-item'))!;
-                    firstCategListElements[0].onclick = switchMenus;
-                    firstCategListElements[1].onclick = switchMenus;
-                    firstCategListElements[3].onclick = switchMenus;
-                    if(selectedCategories === 'spirits') {
-                        listImagesArr[0].src = require(`../../images/Whisky/mobile/jack-standard.webp`);
-                        listImagesArr[1].src = require(`../../images/Vodka/mobile/absolut.webp`);
-                        listImagesArr[2].src = require(`../../images/Cognac/mobile/hennessy.webp`);
-                        listImagesArr[3].src = require(`../../images/Gin/mobile/koval.webp`);
-                        listImagesArr[4].src = require(`../../images/Rum/mobile/the-kraken.webp`);
-                        listImagesArr[5].src = require(`../../images/Tequila/mobile/jose-cuervo-reposado.webp`);
-                        listImagesArr[6].src = require(`../../images/Liquor/mobile/disaronno.webp`)
-                    }
-                    else if(selectedCategories === 'wines') {    
-                        listImagesArr[0].src = require(`../../images/Red-Wine/mobile/samtrot-spatlese.webp`);
-                        listImagesArr[1].src = require(`../../images/White-Wine/mobile/muni.webp`);
-                        listImagesArr[2].src = require(`../../images/Rose-Wine/mobile/cave-amadeu.webp`);
-                    }
-                    else if(selectedCategories === 'others') {
-                        listImagesArr[0].src = require(`../../images/Beer/mobile/desperados.webp`);
-                        listImagesArr[1].src = require(`../../images/Beverage/mobile/coca-cola.webp`);
-                    }
+            case 'others':
+                if(window.innerWidth >= 1000) {
+                    return (
+                        <>
+                            <div className="secondary-categ-item two-categs"
+                            onClick={() => {filterHandler('Beer')}}
+                            >
+                                <li>
+                                    <p>Beer</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item two-categs"
+                            onClick={() => {filterHandler('Beverage')}}
+                            >
+                                <li>
+                                    <p>Beverage</p>
+                                </li>
+                            </div>
+                        </>
+                    )
+                }
+                else {
+                    return (
+                        <>
+                            <div className="secondary-categ-item two-categs"
+                            onClick={() => {filterHandler('Beer')}}
+                            >
+                                <li>
+                                    <img src={require(`../../images/Beer/mobile/desperados.webp`)} alt="Beer"/>
+                                    <p>Beer</p>
+                                </li>
+                            </div>
+                            <div className="secondary-categ-item two-categs"
+                            onClick={() => {filterHandler('Beverage')}}
+                            >
+                                <li>
+                                    <img src={require(`../../images/Beverage/mobile/coca-cola.webp`)} alt="Beverage"/>
+                                    <p>Beverage</p>
+                                </li>
+                            </div>
+                        </>
+                    )
                 }
         }
-        
-    }, [selectedCategories, shownCategories])
+    }
 
     function searchResultsAnim (type:string, time:string) {
         if(type === 'desktop') {
@@ -273,7 +392,6 @@ function Nav () {
             }
         }
         else if(type === 'mobile') {
-            let searchInput:HTMLInputElement = document.querySelector('div.mobile-search-bar > input')!;
             let resultsDiv:HTMLElement = document.querySelector('div.mobile-search-results')!;
             if(time === 'start' && searchResultsAnimationDelay.current === 0) { 
                 // document.querySelector('body')!.style.overflow = 'hidden';
@@ -443,107 +561,144 @@ function Nav () {
                     </div>
                 </div>
             </div>
-            <div className='nav-lower-mobile'>
-                <div className='nav-mobile-menu'>
-                    <span onClick={() => {
-                        openMobileAnim('categ');
-                        }} className="material-symbols-outlined">menu</span>
-                    <p>Products</p>
-                </div>
-                <div className='nav-mobile-utilities'>
-                    <span onClick={() => {
-                        openMobileAnim('search');
+            {deviceType === 'mobile' && 
+            <>
+                <div className='nav-lower-mobile'>
+                    <div className='nav-mobile-menu'>
+                        <span onClick={() => {
+                            let categories:HTMLElement = document.querySelector('div.nav-mobile-categs')!;
+                            let searchCont:HTMLElement = document.querySelector('div.nav-mobile-search-cont')!;
+                            if(searchCont.classList.contains('in-transition')) return;
+                            if(alreadyOpenedSearch.current) hideMobileElement(searchCont, 'animate__fadeOutUp')
+                            if(categories.style.display !== 'flex') {
+                                showMobileElement(categories, 'animate__fadeInLeft')
+                                alreadyOpenedCateg.current = true;
+                            }
+                            else {
+                                hideMobileElement(categories, 'animate__fadeOutLeft')
+                                alreadyOpenedCateg.current = false;
+                            }
+                            }} className="material-symbols-outlined">menu</span>
+                        <p>Products</p>
+                    </div>
+                    <div className='nav-mobile-utilities'>
+                        <span onClick={() => {
+                            let categories:HTMLElement = document.querySelector('div.nav-mobile-categs')!;
+                            let searchCont:HTMLElement = document.querySelector('div.nav-mobile-search-cont')!;
+                            if(categories.classList.contains('in-transition')) return;
+                            if(alreadyOpenedCateg.current) hideMobileElement(categories, 'animate__fadeOutLeft')
+                            if(searchCont.style.display !== 'flex') {
+                                showMobileElement(searchCont, 'animate__fadeInDown')
+                                alreadyOpenedSearch.current = true;
+                            }
+                            else {
+                                hideMobileElement(searchCont, 'animate__fadeOutUp')
+                                alreadyOpenedSearch.current = false;
+                            }
                         }} className='material-symbols-outlined search-icon-mobile'>search</span>
+                    </div>
                 </div>
-            </div>
-            <div className='nav-mobile-search-cont animate__animated'>
-                <div className='mobile-search-bar'>
-                    <input
-                    onChange= {() => searchFunc('mobile')} 
-                    type="text" placeholder='Search'/>
-                    <div 
-                    onClick={() => {deleteSearchInput('mobile')}}
-                    className='mobile-menu-delete'>X</div>
+                <div className='nav-mobile-search-cont animate__animated'>
+                    <div className='mobile-search-bar'>
+                        <input
+                        onChange= {() => searchFunc('mobile')} 
+                        type="text" placeholder='Search'/>
+                        <div 
+                        onClick={() => {deleteSearchInput('mobile')}}
+                        className='mobile-menu-delete'>X</div>
+                    </div>
+                    <div className='mobile-search-results animate__faster animate__animated'>
+                        <ul className='search-results-list'>
+                            
+                        </ul>
+                    </div>
                 </div>
-                <div className='mobile-search-results animate__faster animate__animated'>
-                    <ul className='search-results-list'>
-                        
+                <div className='nav-mobile-categs animate__animated'>
+                    <ul className='animate__animated'>
+                        <div className='primary-categ-item'>
+                            <li>
+                                <img src={require('../../images/Whisky/mobile/jack-honey.webp')} alt="" />
+                                <p>Spirits</p>
+                            </li>
+                        </div>
+                        <div className='primary-categ-item'>
+                            <li>
+                                <img src={require('../../images/Red-Wine/mobile/samtrot-spatlese.webp')} alt="" />
+                                <p>Wine</p>
+                            </li>
+                        </div>
+                        <div className='primary-categ-item'>
+                            <li>
+                                <img src={require('../../images/Champagne/mobile/ferrari.webp')} alt="" />
+                                <p>Champagne</p>
+                            </li>
+                        </div>
+                        <div className='primary-categ-item'>
+                            <li>
+                                <img src={require('../../images/Beer/mobile/desperados.webp')} alt="" />
+                                <p>Others</p>
+                            </li>
+                        </div>
+                        <div className='primary-categ-item'>
+                            <li>
+                                <img src={require('../../images/Gift-Card/mobile/100off.webp')} alt="" />
+                                <p>Gift Cards</p>
+                            </li>
+                        </div>
                     </ul>
                 </div>
-            </div>
-            <div className='nav-lower animate__animated'>
+            </>
+            }
+            {deviceType === 'desktop' &&
+            <div className='nav-lower-desktop'>
                 <div className='primary-categ'>
                     <ul>
                         <div className='primary-categ-item' onClick={() => {
-                            setSelectedCategories('spirits')
-                            alreadyOpenedCateg.current = true;
+                            setSelectedMainCategory('spirits');
                             }}>
                             <li>
-                                <img src={require(`../../images/Whisky/mobile/jack-honey.webp`)} alt="Whisky" />
                                 <p>Spirits</p>
                             </li>
                         </div>
                         <div className='primary-categ-item' onClick={() => {
-                            setSelectedCategories('wines')
-                            alreadyOpenedCateg.current = true;
+                            setSelectedMainCategory('wines')
                             }}>
                             <li>
-                                <img src={require(`../../images/Red-Wine/mobile/samtrot-spatlese.webp`)} alt="Whisky" />
                                 <p>Wine</p>
                             </li>
                         </div>
                         <div className='primary-categ-item' onClick={() => {
-                            setSelectedCategories('champagne')
-                            deactivateCateg()
+                            setSelectedMainCategory('champagne')
+                            filterHandler('Champagne')
                             }}>
                             <li>
-                                <img src={require(`../../images/Champagne/mobile/ferrari.webp`)} alt="Whisky" />
                                 <p>Champagne</p>
                             </li>
                         </div>
                         <div className='primary-categ-item' onClick={() => {
-                            setSelectedCategories('others')
-                            alreadyOpenedCateg.current = true;
+                            setSelectedMainCategory('others')
                             }}>
                             <li>
-                                <img src={require(`../../images/Beer/mobile/desperados.webp`)} alt="Others" />
                                 <p>Others</p>
                             </li>
                         </div>
                         <div className='primary-categ-item' onClick={() => {
-                            setSelectedCategories('gift-cards')
-                            deactivateCateg()
+                            setSelectedMainCategory('gift-cards')
+                            filterHandler('Gift-Card')
                             }}>
                             <li>
-                                <img src={require(`../../images/Gift-Card/mobile/100off.webp`)} alt="Gift Cards" />
                                 <p>Gift Cards</p>
-                            </li>
-                        </div>
-                        <div className='primary-categ-item' onClick={() => {
-                            setSelectedCategories('on-sale')
-                            deactivateCateg()
-                            }}>
-                            <li>
-                                <img src={require(`../../images/on-sale-mobile-res.webp`)} alt="On Sale" />
-                                <p>On sale</p>
-                            </li>
-                        </div>
-                        <div className='primary-categ-item' onClick={() => {
-                            setSelectedCategories('daily-offer')
-                            deactivateCateg()
-                            }}>
-                            <li>
-                                <img src={require(`../../images/daily-offer-mobile-res.webp`)} alt="Daily Offer" />
-                                <p>Daily Offer</p>
                             </li>
                         </div>
                     </ul>
                 </div>
                 <div className='second-categ'>
                     <ul className='second-categ-list'>
+                        {secondaryMenu()}
                     </ul>
                 </div>
             </div>
+            }
         </nav>
     )
 }
