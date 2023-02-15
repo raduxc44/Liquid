@@ -464,6 +464,11 @@ nav {
         width: 15vw;
         border-radius: 10px;
     }
+    .second-categ-list-back:hover {
+        animation-name: primary-categ-selecting;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
     .primary-categ {
         display: block;
     }

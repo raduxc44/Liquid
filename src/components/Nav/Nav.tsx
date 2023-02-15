@@ -1,6 +1,6 @@
 import './Nav.css'
 import 'animate.css';
-import { useEffect, useMemo, useState, useRef, useContext } from 'react';
+import { useState, useRef, useContext } from 'react';
 import Inventory from '../../data/inventory.json'
 import { Item } from '../../data/types';
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,7 +14,6 @@ function Nav () {
     const { setSelectedFilter } = useContext(SelectedFilterContext);
     const [selectedMainCategory, setSelectedMainCategory] = useState('spirits');
     const [deviceType, setDeviceType] = useState('desktop');
-    //Functionality for the second desktop nav menu
     const alreadyOpenedCateg = useRef(false);
     const alreadyOpenedSearch = useRef(false);
     let categAnimationDelay = useRef(0)
@@ -31,7 +30,9 @@ function Nav () {
             setDeviceType('desktop');
         }
     }
+    window.onload = changeDeviceType;
     window.onresize = changeDeviceType;
+    window.onreset = changeDeviceType;
 
     function hideMobileElement (element: HTMLElement, animationClass: string) {
         if(!element.classList.contains('in-transition')) {
@@ -61,22 +62,22 @@ function Nav () {
     
     //Handles the secondary menu animations - mobile
     function switchMenus (start:string, end:string) {
-        let primaryCategList: HTMLElement = document.querySelector('div.primary-categ > ul')!;
-        let secondCategList: HTMLElement = document.querySelector('div.second-categ > ul')!;
+        let primaryCategList: HTMLElement = document.querySelector('ul.nav-mobile-primary-categ')!;
+        let secondCategList: HTMLElement = document.querySelector('ul.nav-mobile-secondary-categ')!;
         let backButton: HTMLElement = document.querySelector('div.second-categ-list-back')!;
 
         if(start === 'primary' && end === 'secondary' && !alreadyInTransition.current) {
-            primaryCategList.classList.add('animate__fadeOutLeft');
+            primaryCategList.classList.toggle('animate__fadeOutLeft');
             secondCategList.style.display = 'flex';
             backButton.style.display = 'flex';
-            backButton.classList.add('animate__fadeInRight')
-            secondCategList.classList.add('animate__fadeInRight');
+            backButton.classList.toggle('animate__fadeInRight')
+            secondCategList.classList.toggle('animate__fadeInRight');
             alreadyInTransition.current = true;
             setTimeout(() => {primaryCategList.style.display = 'none'}, 1000);
             setTimeout(() => {
-                primaryCategList.classList.remove('animate__fadeOutLeft')
-                secondCategList.classList.remove('animate__fadeInRight')
-                backButton.classList.remove('animate__fadeInRight')
+                primaryCategList.classList.toggle('animate__fadeOutLeft')
+                secondCategList.classList.toggle('animate__fadeInRight')
+                backButton.classList.toggle('animate__fadeInRight')
                 alreadyInTransition.current = false;
             }, 1200)
         }
@@ -204,62 +205,118 @@ function Nav () {
                 else {
                     return (
                         <>
-                            <div className="secondary-categ-item seven-categs"
-                            onClick={() => {filterHandler('Whisky')}}
-                            >
+                        <Link
+                            to={`/category/Whisky`}
+                            onClick={() => {
+                                filterHandler('Whisky')
+                                switchMenus('secondary', 'primary')
+                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                            }}
+                            className='primary-categ-item'
+                        >
+                            <div className="primary-categ-item seven-categs">
                                 <li>
                                     <img src={require(`../../images/Whisky/mobile/jack-standard.webp`)} alt="Whisky"/>
                                     <p>Whisky</p>
                                 </li>
                             </div>
-                            <div className="secondary-categ-item seven-categs"
-                            onClick={() => {filterHandler('Vodka')}}
-                            >
+                        </Link>
+                        <Link
+                            to={`/category/Vodka`}
+                            onClick={() => {
+                                filterHandler('Vodka')
+                                switchMenus('secondary', 'primary')
+                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                            }}
+                            className='primary-categ-item'
+                        >
+                            <div className="primary-categ-item seven-categs">
                                 <li>
                                     <img src={require(`../../images/Vodka/mobile/absolut.webp`)} alt="Vodka"/>
                                     <p>Vodka</p>
                                 </li>
                             </div>
-                            <div className="secondary-categ-item seven-categs"
-                            onClick={() => {filterHandler('Cognac')}}
-                            >
+                        </Link>
+                        <Link
+                            to={`/category/Cognac`}
+                            onClick={() => {
+                                filterHandler('Cognac')
+                                switchMenus('secondary', 'primary')
+                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                            }}
+                            className='primary-categ-item'
+                        >
+                            <div className="primary-categ-item seven-categs">
                                 <li>
                                     <img src={require(`../../images/Cognac/mobile/hennessy.webp`)} alt="Cognac"/>
                                     <p>Cognac</p>
                                 </li>
                             </div>
-                            <div className="secondary-categ-item seven-categs"
-                            onClick={() => {filterHandler('Gin')}}
-                            >
+                        </Link>
+                        <Link
+                            to={`/category/Gin`}
+                            onClick={() => {
+                                filterHandler('Gin')
+                                switchMenus('secondary', 'primary')
+                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                            }}
+                            className='primary-categ-item'
+                        >
+                            <div className="primary-categ-item seven-categs">
                                 <li>
                                     <img src={require(`../../images/Gin/mobile/koval.webp`)} alt="Gin"/>
                                     <p>Gin</p>
                                 </li>
                             </div>
-                            <div className="secondary-categ-item seven-categs"
-                            onClick={() => {filterHandler('Rum')}}
-                            >
+                        </Link>
+                        <Link
+                            to={`/category/Rum`}
+                            onClick={() => {
+                                filterHandler('Rum')
+                                switchMenus('secondary', 'primary')
+                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                            }}
+                            className='primary-categ-item'
+                        >
+                            <div className="primary-categ-item seven-categs">
                                 <li>
                                     <img src={require(`../../images/Rum/mobile/the-kraken.webp`)} alt="Rum"/>
                                     <p>Rum</p>
                                 </li>
                             </div>
-                            <div className="secondary-categ-item seven-categs"
-                            onClick={() => {filterHandler('Tequila')}}
-                            >
+                        </Link>
+                        <Link
+                            to={`/category/Tequila`}
+                            onClick={() => {
+                                filterHandler('Tequila')
+                                switchMenus('secondary', 'primary')
+                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                            }}
+                            className='primary-categ-item'
+                        >
+                            <div className="primary-categ-item seven-categs">
                                 <li>
                                     <img src={require(`../../images/Tequila/mobile/jose-cuervo-reposado.webp`)} alt="Tequila"/>
                                     <p>Tequila</p>
                                 </li>
                             </div>
-                            <div className="secondary-categ-item seven-categs"
-                            onClick={() => {filterHandler('Liquor')}}
-                            >
+                        </Link>
+                        <Link
+                            to={`/category/Liquor`}
+                            onClick={() => {
+                                filterHandler('Liquor')
+                                switchMenus('secondary', 'primary')
+                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                            }}
+                            className='primary-categ-item'
+                        >
+                            <div className="primary-categ-item seven-categs">
                                 <li>
                                     <img src={require(`../../images/Liquor/mobile/disaronno.webp`)} alt="Liquor"/>
                                     <p>Liquor</p>
                                 </li>
                             </div>
+                        </Link>
                         </>
                     )
                 }
@@ -267,10 +324,11 @@ function Nav () {
                 if(window.innerWidth >= 1000) {
                     return (
                         <>
-                            <div className="secondary-categ-item three-categs"
+                            <div className="primary-categ-item three-categs"
                             onClick={() => {filterHandler('Red-Wine')}}
                             >
                                 <li>
+                                    <img src={require(`../../images/Red-Wine/mobile/samtrot-spatlese.webp`)} alt="" />
                                     <p>Red Wine</p>
                                 </li>
                             </div>
@@ -278,6 +336,7 @@ function Nav () {
                             onClick={() => {filterHandler('White-Wine')}}
                             >
                                 <li>
+                                    <img src={require(`../../images/White-Wine/mobile/muni.webp`)} alt="" />
                                     <p>White Wine</p>
                                 </li>
                             </div>
@@ -285,6 +344,7 @@ function Nav () {
                             onClick={() => {filterHandler('Rose-Wine')}}
                             >
                                 <li>
+                                    <img src={require(`../../images/Rose-Wine/mobile/cave-amadeu.webp`)} alt="" />
                                     <p>Rose Wine</p>
                                 </li>
                             </div>
@@ -294,30 +354,54 @@ function Nav () {
                 else {
                     return (
                         <>
-                            <div className="secondary-categ-item three-categs"
-                            onClick={() => {filterHandler('Red-Wine')}}
-                            >
+                        <Link
+                            to={`/category/Red-Wine`}
+                            onClick={() => {
+                                filterHandler('Red-Wine')
+                                switchMenus('secondary', 'primary')
+                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                            }}
+                            className='primary-categ-item'
+                        >
+                            <div className="primary-categ-item three-categs">
                                 <li>
-                                    <img src={require(`../../images/Red-Wine/mobile/canaletto.webp`)} alt="Red Wine"/>
+                                    <img src={require(`../../images/Red-Wine/mobile/limestone-coast.webp`)} alt="Red Wine"/>
                                     <p>Red Wine</p>
                                 </li>
                             </div>
-                            <div className="secondary-categ-item three-categs"
-                            onClick={() => {filterHandler('White-Wine')}}
-                            >
+                        </Link>
+                        <Link
+                            to={`/category/White-Wine`}
+                            onClick={() => {
+                                filterHandler('White-Wine')
+                                switchMenus('secondary', 'primary')
+                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                            }}
+                            className='primary-categ-item'
+                        >
+                            <div className="primary-categ-item three-categs">
                                 <li>
                                     <img src={require(`../../images/White-Wine/mobile/fratelli.webp`)} alt="White Wine"/>
                                     <p>White Wine</p>
                                 </li>
                             </div>
-                            <div className="secondary-categ-item three-categs"
-                            onClick={() => {filterHandler('Rose-Wine')}}
-                            >
+                        </Link>
+                        <Link
+                            to={`/category/Rose-Wine`}
+                            onClick={() => {
+                                filterHandler('Rose-Wine')
+                                switchMenus('secondary', 'primary')
+                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                            }}
+                            className='primary-categ-item'
+                        >
+                            <div className="primary-categ-item three-categs">
                                 <li>
                                     <img src={require(`../../images/Rose-Wine/mobile/cave-amadeu.webp`)} alt="Rose Wine"/>
                                     <p>Rose Wine</p>
                                 </li>
                             </div>
+                        </Link>
                         </>
                     )
                 }
@@ -345,22 +429,38 @@ function Nav () {
                 else {
                     return (
                         <>
-                            <div className="secondary-categ-item two-categs"
-                            onClick={() => {filterHandler('Beer')}}
+                            <Link
+                                to={`/category/Beer`}
+                                onClick={() => {
+                                    filterHandler('Beer')
+                                    switchMenus('secondary', 'primary')
+                                    hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                }}
+                                className='primary-categ-item'
                             >
-                                <li>
-                                    <img src={require(`../../images/Beer/mobile/desperados.webp`)} alt="Beer"/>
-                                    <p>Beer</p>
-                                </li>
-                            </div>
-                            <div className="secondary-categ-item two-categs"
-                            onClick={() => {filterHandler('Beverage')}}
+                                <div className="primary-categ-item two-categs">
+                                    <li>
+                                        <img src={require(`../../images/Beer/mobile/desperados.webp`)} alt="Beer"/>
+                                        <p>Beer</p>
+                                    </li>
+                                </div>
+                            </Link>
+                            <Link
+                                to={`/category/Beverage`}
+                                onClick={() => {
+                                    filterHandler('Beverage')
+                                    switchMenus('secondary', 'primary')
+                                    hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                }}
+                                className='primary-categ-item'
                             >
-                                <li>
-                                    <img src={require(`../../images/Beverage/mobile/coca-cola.webp`)} alt="Beverage"/>
-                                    <p>Beverage</p>
-                                </li>
-                            </div>
+                                <div className="primary-categ-item two-categs">
+                                    <li>
+                                        <img src={require(`../../images/Beverage/mobile/coca-cola.webp`)} alt="Beverage"/>
+                                        <p>Beverage</p>
+                                    </li>
+                                </div>
+                            </Link>
                         </>
                     )
                 }
@@ -610,37 +710,80 @@ function Nav () {
                     </div>
                 </div>
                 <div className='nav-mobile-categs animate__animated'>
-                    <ul className='animate__animated'>
-                        <div className='primary-categ-item'>
+                    <ul className='nav-mobile-primary-categ animate__animated'>
+                        <div className='primary-categ-item'
+                        onClick={() => {
+                            setSelectedMainCategory('spirits')
+                            switchMenus('primary', 'secondary')
+                        }}
+                        >
                             <li>
                                 <img src={require('../../images/Whisky/mobile/jack-honey.webp')} alt="" />
                                 <p>Spirits</p>
                             </li>
                         </div>
-                        <div className='primary-categ-item'>
+                        <div className='primary-categ-item'
+                        onClick={() => {
+                            setSelectedMainCategory('wines')
+                            switchMenus('primary', 'secondary')
+                        }}
+                        >
                             <li>
                                 <img src={require('../../images/Red-Wine/mobile/samtrot-spatlese.webp')} alt="" />
                                 <p>Wine</p>
                             </li>
                         </div>
-                        <div className='primary-categ-item'>
-                            <li>
-                                <img src={require('../../images/Champagne/mobile/ferrari.webp')} alt="" />
-                                <p>Champagne</p>
-                            </li>
-                        </div>
-                        <div className='primary-categ-item'>
+                        <Link
+                            to='/category/Champagne'
+                            onClick={() => {
+                                filterHandler('Champagne')
+                                switchMenus('secondary', 'primary')
+                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                            }}
+                            className='primary-categ-item'
+                        >
+                            <div className='primary-categ-item'>
+                                <li>
+                                    <img src={require('../../images/Champagne/mobile/ferrari.webp')} alt="" />
+                                    <p>Champagne</p>
+                                </li>
+                            </div>
+                        </Link>
+                        <div className='primary-categ-item'
+                        onClick={() => {
+                            setSelectedMainCategory('others')
+                            switchMenus('primary', 'secondary')
+                        }}
+                        >
                             <li>
                                 <img src={require('../../images/Beer/mobile/desperados.webp')} alt="" />
                                 <p>Others</p>
                             </li>
                         </div>
-                        <div className='primary-categ-item'>
-                            <li>
-                                <img src={require('../../images/Gift-Card/mobile/100off.webp')} alt="" />
-                                <p>Gift Cards</p>
-                            </li>
+                        <Link
+                            to='/category/GiftCards'
+                            onClick={() => {
+                                filterHandler('Gift-Card')
+                                switchMenus('secondary', 'primary')
+                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                            }}
+                            className='primary-categ-item'
+                        >
+                            <div className='primary-categ-item'>
+                                <li>
+                                    <img src={require('../../images/Gift-Card/mobile/100off.webp')} alt="" />
+                                    <p>Gift Cards</p>
+                                </li>
+                            </div>
+                        </Link>
+                    </ul>
+                    <ul className='nav-mobile-secondary-categ animate__animated' style={{display: 'none'}}>
+                        <div className='second-categ-list-back' onClick={() => switchMenus('secondary', 'primary')}>
+                            <span className="material-symbols-outlined">
+                                arrow_back
+                            </span>Back
                         </div>
+                        {secondaryMenu()}
                     </ul>
                 </div>
             </>
