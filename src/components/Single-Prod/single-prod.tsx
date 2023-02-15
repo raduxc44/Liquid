@@ -80,10 +80,8 @@ function SingleProd () {
         <div className='product-wrapper-cont'>
             <div className='product-container-wrapper'>
                 <div className='product-container'>
-                    {/* Product name  + quantity */}
                     <div className='product-title'>
                         <h1>{selectedProductToShow?.name}</h1>
-                        {/*Product details*/}
                         <p>{selectedProductToShow?.category} / {selectedProductToShow?.quantity} / {selectedProductToShow?.strength}</p>
                     </div>
                     <div className='product-photo-cont'>

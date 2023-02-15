@@ -58,42 +58,6 @@ function Nav () {
             }, 1000)
         }
     }
-
-    // function openMobileAnim (button:string) {
-    //     if(window.innerWidth < 1000) {
-    //         let mobileCateg: HTMLElement = document.querySelector('.nav-lower')!;
-    //         let mobileSearch: HTMLElement = document.querySelector('.nav-mobile-search-cont')!;
-    //         let body: HTMLElement = document.querySelector('body')!;
-    //         body.style.overflow = 'visible';
-    //         //Obstructs interacting with the main body instead of the navbar
-    //         if(button === 'categ') {
-    //             //Prevents the user from rappidly pressing the opening button for categ/search
-    //             if(categAnimationDelay.current === 1 ) {
-    //                 categAnimationDelay.current = 1.5;
-    //                 hideMobileElement(mobileCateg, 'animate__fadeOutLeft');
-    //             }
-    //             else if(categAnimationDelay.current === 0) {
-    //                 body.style.overflow = 'hidden';
-    //                 categAnimationDelay.current = 0.5
-    //                 hideMobileElement(mobileSearch, 'animate__fadeOutUp');
-    //                 setTimeout(() => {categAnimationDelay.current = 1}, 1000);
-    //                 showMobileElement(mobileCateg, 'animate__fadeInLeft');
-    //             }
-    //         }
-    //         else if(button === 'search') {
-    //             if(searchAnimationDelay.current === 1) {
-    //                 searchAnimationDelay.current = 1.5
-    //                 hideMobileElement(mobileSearch, 'animate__fadeOutUp');
-    //             }
-    //             else if(searchAnimationDelay.current === 0){
-    //                 searchAnimationDelay.current = 0.5
-    //                 hideMobileElement(mobileCateg, 'animate__fadeOutLeft');
-    //                 setTimeout(() => {searchAnimationDelay.current = 1}, 1000)
-    //                 showMobileElement(mobileSearch, 'animate__fadeInDown');
-    //             }
-    //         }
-    //     } 
-    // }
     
     //Handles the secondary menu animations - mobile
     function switchMenus (start:string, end:string) {
@@ -140,9 +104,13 @@ function Nav () {
     function filterHandler (filter: string) {
         let filteredItems:Item[] = [];
         Object.entries(Inventory.Items).forEach(([key, value]) => {
-            if(value.category === filter) filteredItems.push(value);
+            if(value.category === filter) {
+                filteredItems.push(value);
+                setSelectedFilter(filteredItems);
+            }
+            window.scroll(0,0);
         })
-        setSelectedFilter(filteredItems);        
+        setSelectedMainCategory('spirits')
     }
 
     //Handles the secondary menu content
@@ -153,55 +121,83 @@ function Nav () {
                 if(window.innerWidth >= 1000) {
                     return (
                         <>
-                            <div className="secondary-categ-item seven-categs"
-                            onClick={() => {filterHandler('Whisky')}}
+                            <Link
+                                to={`/category/Whisky`}
+                                onClick={() => filterHandler('Whisky')}
+                                className="secondary-categ-item seven-categs"
                             >
-                                <li>
-                                    <p>Whisky</p>
-                                </li>
-                            </div>
-                            <div className="secondary-categ-item seven-categs"
-                            onClick={() => {filterHandler('Vodka')}}
+                                <div>
+                                    <li>
+                                        <p>Whisky</p>
+                                    </li>
+                                </div>
+                            </Link>
+                            <Link
+                                to={`/category/Vodka`}
+                                onClick={() => filterHandler('Vodka')}
+                                className="secondary-categ-item seven-categs"
                             >
-                                <li>
-                                    <p>Vodka</p>
-                                </li>
-                            </div>
-                            <div className="secondary-categ-item seven-categs"
-                            onClick={() => {filterHandler('Cognac')}}
+                                <div>
+                                    <li>
+                                        <p>Vodka</p>
+                                    </li>
+                                </div>
+                            </Link>
+                            <Link
+                                to={`/category/Champagne`}
+                                onClick={() => filterHandler('Champagne')}
+                                className="secondary-categ-item seven-categs"
                             >
-                                <li>
-                                    <p>Cognac</p>
-                                </li>
-                            </div>
-                            <div className="secondary-categ-item seven-categs"
-                            onClick={() => {filterHandler('Gin')}}
+                                <div>
+                                    <li>
+                                        <p>Cognac</p>
+                                    </li>
+                                </div>
+                            </Link>
+                            <Link
+                                to={`/category/Gin`}
+                                onClick={() => filterHandler('Gin')}
+                                className="secondary-categ-item seven-categs"
                             >
-                                <li>
-                                    <p>Gin</p>
-                                </li>
-                            </div>
-                            <div className="secondary-categ-item seven-categs"
-                            onClick={() => {filterHandler('Rum')}}
+                                <div>
+                                    <li>
+                                        <p>Gin</p>
+                                    </li>
+                                </div>
+                            </Link>
+                            <Link
+                                to={`/category/Rum`}
+                                onClick={() => filterHandler('Rum')}
+                                className="secondary-categ-item seven-categs"
                             >
-                                <li>
-                                    <p>Rum</p>
-                                </li>
-                            </div>
-                            <div className="secondary-categ-item seven-categs"
-                            onClick={() => {filterHandler('Tequila')}}
+                                <div>
+                                    <li>
+                                        <p>Rum</p>
+                                    </li>
+                                </div>
+                            </Link>
+                            <Link
+                                to={`/category/Tequila`}
+                                onClick={() => filterHandler('Tequila')}
+                                className="secondary-categ-item seven-categs"
                             >
-                                <li>
-                                    <p>Tequila</p>
-                                </li>
-                            </div>
-                            <div className="secondary-categ-item seven-categs"
-                            onClick={() => {filterHandler('Liquor')}}
+                                <div>
+                                    <li>
+                                        <p>Tequila</p>
+                                    </li>
+                                </div>
+                            </Link>
+                            <Link
+                                to={`/category/Champagne`}
+                                onClick={() => filterHandler('Champagne')}
+                                className="secondary-categ-item seven-categs"
                             >
-                                <li>
-                                    <p>Liquor</p>
-                                </li>
-                            </div>
+                                <div>
+                                    <li>
+                                        <p>Liquor</p>
+                                    </li>
+                                </div>
+                            </Link>
                         </>
                     )
                 }
@@ -667,14 +663,17 @@ function Nav () {
                                 <p>Wine</p>
                             </li>
                         </div>
-                        <div className='primary-categ-item' onClick={() => {
-                            setSelectedMainCategory('champagne')
-                            filterHandler('Champagne')
-                            }}>
-                            <li>
-                                <p>Champagne</p>
-                            </li>
-                        </div>
+                        <Link
+                            to={`/category/Champagne`}
+                            onClick={() => filterHandler('Champagne')}
+                            className='primary-categ-item'
+                        >
+                            <div>
+                                <li>
+                                    <p>Champagne</p>
+                                </li>
+                            </div>
+                        </Link>
                         <div className='primary-categ-item' onClick={() => {
                             setSelectedMainCategory('others')
                             }}>
@@ -682,14 +681,17 @@ function Nav () {
                                 <p>Others</p>
                             </li>
                         </div>
-                        <div className='primary-categ-item' onClick={() => {
-                            setSelectedMainCategory('gift-cards')
-                            filterHandler('Gift-Card')
-                            }}>
-                            <li>
-                                <p>Gift Cards</p>
-                            </li>
-                        </div>
+                        <Link
+                            to={`/category/Gift-Cards`}
+                            onClick={() => filterHandler('Gift-Card')}
+                            className='primary-categ-item'
+                        >
+                            <div>
+                                <li>
+                                    <p>Gift Cards</p>
+                                </li>
+                            </div>
+                        </Link>
                     </ul>
                 </div>
                 <div className='second-categ'>

@@ -648,28 +648,28 @@
         "price":59
     },
     "10off":{
-        "name":"10off",
+        "name":"10 Off Gift Card",
         "category": "Gift-Card",
         "imageTag": "10off",
         "value": 10,
         "price": 10
     },
     "25off":{
-        "name":"25off",
+        "name":"25 Off Gift Card",
         "category": "Gift-Card",
         "imageTag": "25off",
         "value": 25,
         "price": 25
     },
     "50off":{
-        "name":"50off",
+        "name":"50 Off Gift Card",
         "category": "Gift-Card",
         "imageTag": "50off",
         "value": 50,
         "price": 50
     },
     "100off":{
-        "name":"100off",
+        "name":"100 Off Gift Card",
         "category": "Gift-Card",
         "imageTag": "100off",
         "value": 100,

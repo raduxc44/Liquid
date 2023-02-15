@@ -75,11 +75,12 @@ let randomItemsArr: (Item)[] = [];
 
 function Recommended () {
 
-    const {setSelectedProductToShow} = useContext(SelectedProdContext)
+    const {selectedProductToShow, setSelectedProductToShow} = useContext(SelectedProdContext)
 
     function handleUserSelection (item: Item) {
         window.scroll(0,0)
         setSelectedProductToShow(item);
+        console.log(selectedProductToShow)
     }
     
     return(
@@ -121,10 +122,6 @@ function Recommended () {
                                 <Link
                                 to={`/product/${item?.name}`}
                                 onClick={() => handleUserSelection(item)}
-                                state= {{
-                                    selectedProductToShow: item,
-                                    Item: item
-                                }}
                                 >
                                     <img className='carousel-img' src={require(`../../images/${item.category}/desktop/${item.imageTag}.webp`)} alt={item.name}/>
                                 </Link>
@@ -134,10 +131,6 @@ function Recommended () {
                             <Link
                                 to={`/product/${item?.name}`}
                                 onClick={() => handleUserSelection(item)}
-                                state= {{
-                                    selectedProductToShow: item,
-                                    Item: item
-                                }}
                             >
                                 <p className='rec-card-check check-out-btn'>Check it out</p>
                             </Link>
