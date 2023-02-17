@@ -8,12 +8,11 @@ import { Link } from 'react-router-dom';
 export default function MultipleProd () {
 
     const {selectedFilter} = useContext(SelectedFilterContext);
-    const {selectedProductToShow, setSelectedProductToShow} = useContext(SelectedProdContext)
+    const {setSelectedProductToShow} = useContext(SelectedProdContext)
 
     function handleUserSelection (item: Item) {
         window.scroll(0,0)
         setSelectedProductToShow(item);
-        console.log(selectedProductToShow)
     }
 
     if(selectedFilter.length === 0) return <div></div>
@@ -23,7 +22,7 @@ export default function MultipleProd () {
                 {selectedFilter.map((item, index) => {
                     return (
                         <div key={index} className='multiple-prod-card'>
-                            <p style={{fontSize: 24, fontWeight: 600}}>{item.name}</p>
+                            <p style={{fontWeight: 600}}>{item.name}</p>
                             <Link
                                 to={`/product/${item?.name}`}
                                 onClick={() => handleUserSelection(item)}

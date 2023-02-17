@@ -93,19 +93,24 @@ picture {
         flex-wrap: wrap;
         align-items: flex-start;
     }
+    .lower-categ {
+        height: 40vh;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
     .categ-card-sm {
         height: 46%;
         width: 48%;
     }
     .categ-card-lg {
         width: 48%;
+        height: 40vh;
     }
     .categ-pic-sm {
-        width: 25vw
+        width: 25dvw;
+        height: 30dvh;
     }
-    .categ-pic-lg {
-        height: 25vh;
-    }
+
 }
 
 @media screen and (max-width: 500px) {
@@ -120,16 +125,11 @@ picture {
         flex-wrap: wrap;
         align-items: flex-start;
     }
-    .categ-card-lg picture {
-        height: 25dvh;
-        width: 70dvw;
-    }
     .categ-card-lg {
         width: 100%;
         height: 46%;
     }
     .categ-pic-lg {
-        width: 100%;
-        height: 100%;
+        width: 50vw;
     }
 }

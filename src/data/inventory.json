@@ -504,7 +504,7 @@
         "price":8
     },
     "canaletto":{
-        "name":"Canaletto Montepulciano D'Abruzzo",
+        "name":"Canaletto",
         "category": "Red-Wine",
         "origin":"Italy",
         "imageTag":"canaletto",
@@ -576,7 +576,7 @@
         "price":4
     },
     "sauvignon-blanc":{
-        "name":"Cimarosa Sauvignon Blanc Marlborough",
+        "name":"Cimarosa Sauvignon Blanc",
         "category": "White-Wine",
         "origin":"New Zealand",
         "imageTag":"sauvignon-blanc",

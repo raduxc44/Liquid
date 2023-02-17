@@ -7,7 +7,7 @@
     justify-content: center;
     align-items: center;
     gap: 5dvw;
-    padding: 7.5vh 5vw;
+    padding: 7.5vh 2vw;
 }
 .multiple-prod-card {
     display: flex;
@@ -29,9 +29,41 @@
     border-radius: 5px;
 }
 .multiple-prod-card p {
-    font-size: 1.5rem;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 19px;
     margin: 0;
     text-align: center;
+}
+@media screen and (max-width: 1000px) {
+    .multiple-prod-card {
+        width: 200px;
+        height: 40vh;
+    }
+    .multiple-prod-card img {
+        width: 150px;
+        height: 20vh
+    }
+    .multiple-prod-card p {
+        font-size: 18px;
+        font-weight: 500;
+    }
+}
+@media screen and (max-width: 500px) {
+    .multiple-prod-card {
+        width: 150px;
+        height: 30vh;
+    }
+    .multiple-prod-card img {
+        width: 130px;
+        height: 15vh;
+    }
+    .multiple-prod-card p {
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .check-out-btn {
+        font-size: 10px;
+        width: 70px;
+        height: 30px;
+    }
 }

@@ -82,7 +82,9 @@ function SingleProd () {
                 <div className='product-container'>
                     <div className='product-title'>
                         <h1>{selectedProductToShow?.name}</h1>
-                        <p>{selectedProductToShow?.category} / {selectedProductToShow?.quantity} / {selectedProductToShow?.strength}</p>
+                        {selectedProductToShow?.category !== 'Gift-Card' &&
+                            <p>{selectedProductToShow?.category} / {selectedProductToShow?.quantity} / {selectedProductToShow?.strength}</p>
+                        }
                     </div>
                     <div className='product-photo-cont'>
                         <img src={require(`../../images/${selectedProductToShow?.category}/desktop/${selectedProductToShow?.imageTag}.webp`)} alt={selectedProductToShow?.name} />
@@ -120,7 +122,8 @@ function SingleProd () {
                             </Material.Button>
                         </div>
                     </div>
-                    <div className='details-cont'>
+                    {selectedProductToShow?.category !== 'Gift-Card' &&
+                        <div className='details-cont'>
                         <div className='product-details'>
                         <div className='product-detail'>
                             <p className='detail-categ'>Category</p>
@@ -140,6 +143,7 @@ function SingleProd () {
                         </div>
                         </div>
                     </div>
+                    }
                 </div>
             </div>
         </div>

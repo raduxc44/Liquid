@@ -324,11 +324,10 @@ function Nav () {
                 if(window.innerWidth >= 1000) {
                     return (
                         <>
-                            <div className="primary-categ-item three-categs"
+                            <div className="secondary-categ-item three-categs"
                             onClick={() => {filterHandler('Red-Wine')}}
                             >
                                 <li>
-                                    <img src={require(`../../images/Red-Wine/mobile/samtrot-spatlese.webp`)} alt="" />
                                     <p>Red Wine</p>
                                 </li>
                             </div>
@@ -336,7 +335,6 @@ function Nav () {
                             onClick={() => {filterHandler('White-Wine')}}
                             >
                                 <li>
-                                    <img src={require(`../../images/White-Wine/mobile/muni.webp`)} alt="" />
                                     <p>White Wine</p>
                                 </li>
                             </div>
@@ -344,7 +342,6 @@ function Nav () {
                             onClick={() => {filterHandler('Rose-Wine')}}
                             >
                                 <li>
-                                    <img src={require(`../../images/Rose-Wine/mobile/cave-amadeu.webp`)} alt="" />
                                     <p>Rose Wine</p>
                                 </li>
                             </div>
@@ -742,12 +739,10 @@ function Nav () {
                             }}
                             className='primary-categ-item'
                         >
-                            <div className='primary-categ-item'>
-                                <li>
-                                    <img src={require('../../images/Champagne/mobile/ferrari.webp')} alt="" />
-                                    <p>Champagne</p>
-                                </li>
-                            </div>
+                            <li>
+                                <img src={require('../../images/Champagne/mobile/ferrari.webp')} alt="" />
+                                <p>Champagne</p>
+                            </li>
                         </Link>
                         <div className='primary-categ-item'
                         onClick={() => {
@@ -769,12 +764,10 @@ function Nav () {
                             }}
                             className='primary-categ-item'
                         >
-                            <div className='primary-categ-item'>
-                                <li>
-                                    <img src={require('../../images/Gift-Card/mobile/100off.webp')} alt="" />
-                                    <p>Gift Cards</p>
-                                </li>
-                            </div>
+                            <li>
+                                <img src={require('../../images/Gift-Card/mobile/100off.webp')} alt="" />
+                                <p>Gift Cards</p>
+                            </li>
                         </Link>
                     </ul>
                     <ul className='nav-mobile-secondary-categ animate__animated' style={{display: 'none'}}>

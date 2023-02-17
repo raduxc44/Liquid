@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 function Categories () {
 
-    const { selectedFilter, setSelectedFilter } = useContext(SelectedFilterContext);
+    const { setSelectedFilter } = useContext(SelectedFilterContext);
 
     function filterHandler (filter: string) {
         let filteredItems:Item[] = [];
