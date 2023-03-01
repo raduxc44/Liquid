@@ -6,16 +6,21 @@ import { Item } from '../../data/types';
 import { Link, useNavigate } from 'react-router-dom';
 import { SelectedProdContext } from '../../Contexts/selectedProductContext';
 import { SelectedFilterContext } from '../../Contexts/selectedFilterContext';
+import AuthCont from '../Auth-Container/Auth-Cont';
 
 function Nav () {
 
     const navigate = useNavigate();
+    const AuthContainer = AuthCont;
     const { setSelectedProductToShow } = useContext(SelectedProdContext);
     const { setSelectedFilter } = useContext(SelectedFilterContext);
     const [selectedMainCategory, setSelectedMainCategory] = useState('spirits');
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+    const [signUpOrLogin, setSignUpOrLogin] = useState('login');
     const [deviceType, setDeviceType] = useState('desktop');
     const alreadyOpenedCateg = useRef(false);
     const alreadyOpenedSearch = useRef(false);
+    const alreadyOpenedAccount = useRef(false);
     let categAnimationDelay = useRef(0)
     let searchAnimationDelay = useRef(0)
     let searchResultsAnimationDelay = useRef(0);
@@ -647,7 +652,10 @@ function Nav () {
                         </div>
                     </div>
                     <div><span className="material-symbols-outlined nav-icon">favorite</span></div>
-                    <div><span className='material-symbols-outlined nav-icon'>account_circle</span></div>
+                    <div className='account-container'>
+                        <span className='material-symbols-outlined nav-icon'>account_circle</span>
+                        {AuthCont()}
+                    </div>
                     <div className='cart-container'>
                         <span className="material-symbols-outlined nav-icon">shopping_bag</span>
                         <div className='cart-count'>98</div>

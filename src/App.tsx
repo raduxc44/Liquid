@@ -5,12 +5,14 @@ import IndividualProdPage from './pages/individualProdPage';
 import FilteredProducts from './pages/filteredProductsPage';
 import { SelectedProdProvider } from './Contexts/selectedProductContext';
 import { SelectedFilterProvider } from './Contexts/selectedFilterContext';
+// import { AuthProvider } from './Contexts/authContext';
 
 function App() {
 
   return (
     <SelectedProdProvider>
     <SelectedFilterProvider>
+    {/* <AuthProvider> */}
       <BrowserRouter>
         <Routes>
             <Route index element= {<Home/>}></Route>
@@ -23,6 +25,7 @@ function App() {
             />
         </Routes>
       </BrowserRouter>
+    {/* </AuthProvider> */}
     </SelectedFilterProvider> 
     </SelectedProdProvider>
   );  
