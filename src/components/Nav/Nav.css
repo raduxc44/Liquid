@@ -126,10 +126,10 @@ nav {
         object-fit: cover;
         border-radius: 10px;
     }
-.account-container{
+/* .account-container{
     display: flex;
     flex-direction: column;
-}
+} */
 .cart-container{
     display: flex;
     justify-content: flex-end;

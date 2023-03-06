@@ -11,12 +11,9 @@ import AuthCont from '../Auth-Container/Auth-Cont';
 function Nav () {
 
     const navigate = useNavigate();
-    const AuthContainer = AuthCont;
     const { setSelectedProductToShow } = useContext(SelectedProdContext);
     const { setSelectedFilter } = useContext(SelectedFilterContext);
     const [selectedMainCategory, setSelectedMainCategory] = useState('spirits');
-    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-    const [signUpOrLogin, setSignUpOrLogin] = useState('login');
     const [deviceType, setDeviceType] = useState('desktop');
     const alreadyOpenedCateg = useRef(false);
     const alreadyOpenedSearch = useRef(false);
