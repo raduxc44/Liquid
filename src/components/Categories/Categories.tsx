@@ -39,7 +39,7 @@ function Categories () {
                     </Link>
                     <div>
                         <p className='categ-card-title'>Champagne</p>
-                        <p>Champagne placeholder text</p>
+                        <p>For a special ocassion</p>
                     </div>
                     <Link
                     to={`/category/Champagne`}
@@ -101,8 +101,8 @@ function Categories () {
                 </div>
                 <div className='categ-card-sm'>
                     <div>
-                        <p className='categ-card-title'>White Wine</p>
-                        <p>Wine placeholder text</p>
+                        <p className='categ-card-title'>Wine</p>
+                        <p>Guilty Pleasure</p>
                     </div>
                     <Link
                     to={`/category/White-Wine`}
@@ -129,7 +129,7 @@ function Categories () {
                 <div className='categ-card-lg'>
                     <div>
                         <p className='categ-card-title'>Gift Cards</p>
-                        <p>Gift Cards placeholder text</p>
+                        <p>Best gift idea</p>
                     </div>
                     <Link
                     to={`/category/Gift-Cards`}
@@ -167,7 +167,7 @@ function Categories () {
                     </Link>
                     <div>
                         <p className='categ-card-title'>Whisky</p>
-                        <p>Whisky placeholder text</p>
+                        <p>The classical way</p>
                     </div>
                     <Link
                     to={`/category/Whisky`}
