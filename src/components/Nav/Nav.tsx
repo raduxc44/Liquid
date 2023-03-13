@@ -17,7 +17,6 @@ function Nav () {
     const [deviceType, setDeviceType] = useState('desktop');
     const alreadyOpenedCateg = useRef(false);
     const alreadyOpenedSearch = useRef(false);
-    const alreadyOpenedAccount = useRef(false);
     let categAnimationDelay = useRef(0)
     let searchAnimationDelay = useRef(0)
     let searchResultsAnimationDelay = useRef(0);
@@ -650,7 +649,17 @@ function Nav () {
                     </div>
                     <div><span className="material-symbols-outlined nav-icon">favorite</span></div>
                     <div className='account-container'>
-                        <span className='material-symbols-outlined nav-icon'>account_circle</span>
+                        <span onClick={
+                            () => {
+                                let accountDiv:HTMLElement = document.querySelector('div.account-preview-container')!;
+                                if(accountDiv.style.display === 'flex') {
+                                    hideMobileElement(accountDiv, 'animate__fadeOutRight')
+                                }
+                                else {
+                                    showMobileElement(accountDiv, 'animate__fadeInRight')
+                                }
+                            }
+                        } className='material-symbols-outlined nav-icon'>account_circle</span>
                         {AuthCont()}
                     </div>
                     <div className='cart-container'>
