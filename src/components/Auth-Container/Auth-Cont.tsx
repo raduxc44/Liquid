@@ -8,6 +8,7 @@ import {
     onAuthStateChanged,
         } from 'firebase/auth'
 import { auth, db, updateProfile } from '../../firebase'
+import { doc, setDoc, deleteDoc } from 'firebase/firestore'
 
 function AuthCont () {
 
@@ -19,14 +20,18 @@ function AuthCont () {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [birthDate, setBirthDate] = useState('')
+    const displayName = `${firstName} ${lastName}`
+    let signedInId = ''
 
     onAuthStateChanged(auth, (user) => {
         if (user && !isUserLoggedIn) {
             setIsUserLoggedIn(true);
             setUser(user)
+            signedInId = user.uid
         } else if (!user && isUserLoggedIn) {
             setIsUserLoggedIn(false);
             setUser(null)
+            signedInId = ''
         }
     });
 
@@ -50,9 +55,17 @@ function AuthCont () {
         e.preventDefault();
         const { user } = await createUserWithEmailAndPassword(auth, email, password)
         await updateProfile(user, {
-            displayName: `${firstName} ${lastName}`
+            displayName: displayName
         });
-        console.log('New user', user.displayName)
+        await setDoc(doc(db, 'users', displayName), {
+            id: user.uid,
+            firstName,
+            lastName,
+            email,
+            birthDate,
+            age,
+            createdAt: new Date()
+        });
         setFirstName('');
         setLastName('');
         setEmail('');
@@ -68,10 +81,27 @@ function AuthCont () {
             });
     };
     
-    const handleSignInWithGoogle = () => {
+    const handleSignInWithGoogle = async () => {
         signInWithPopup(auth, new GoogleAuthProvider())
-            .then(() => setIsUserLoggedIn(true))
+            .then(() => {
+                setIsUserLoggedIn(true)
+            })
             .catch((error) => console.log(error));
+    };
+
+    const handleDelete = async () => {
+        if(auth.currentUser) {
+            if(window.confirm('Are you sure you want to delete your account?')) {
+                await deleteDoc(doc(db, 'users', user.displayName));
+                auth.currentUser.delete()
+                    .then(() => {
+                        setIsUserLoggedIn(false);
+                        setUser(null);
+                    })
+                    .catch((error) => console.log(error));
+                }
+            }
+            
     };
 
     return (
@@ -149,6 +179,7 @@ function AuthCont () {
                     <p>{auth.currentUser?.email}</p>
                     <button>Order History</button>
                     <button onClick={() => auth.signOut()}>Log out</button>
+                    <button onClick={() => handleDelete()}>Delete Account</button>
                 </div>
             </div>
             }
