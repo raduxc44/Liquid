@@ -1,16 +1,30 @@
 import './Auth-Cont.css'
 import { useState } from 'react'
+import { Item } from '../../data/types'
 import {
     GoogleAuthProvider, 
     signInWithEmailAndPassword, 
     createUserWithEmailAndPassword,
     signInWithPopup,
     onAuthStateChanged,
+    sendPasswordResetEmail,
         } from 'firebase/auth'
 import { auth, db, updateProfile } from '../../firebase'
-import { doc, setDoc, deleteDoc } from 'firebase/firestore'
+import { doc, setDoc, deleteDoc, collection, query, where, getDocs } from 'firebase/firestore'
 
 function AuthCont () {
+
+    type User = {
+        id: string;
+        firstName: string;
+        lastName: string;
+        email: string;
+        birthDate: number;
+        age: number;
+        createdAt: Date;
+        favorites: Item[];
+        cart: Item[];
+    }
 
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
     const [user, setUser] = useState<any>(null)
@@ -21,17 +35,14 @@ function AuthCont () {
     const [lastName, setLastName] = useState('')
     const [birthDate, setBirthDate] = useState('')
     const displayName = `${firstName} ${lastName}`
-    let signedInId = ''
 
     onAuthStateChanged(auth, (user) => {
         if (user && !isUserLoggedIn) {
             setIsUserLoggedIn(true);
             setUser(user)
-            signedInId = user.uid
         } else if (!user && isUserLoggedIn) {
             setIsUserLoggedIn(false);
             setUser(null)
-            signedInId = ''
         }
     });
 
@@ -57,14 +68,17 @@ function AuthCont () {
         await updateProfile(user, {
             displayName: displayName
         });
-        await setDoc(doc(db, 'users', displayName), {
+        await setDoc(doc(db, 'users', user.uid), {
             id: user.uid,
             firstName,
             lastName,
             email,
             birthDate,
             age,
-            createdAt: new Date()
+            createdAt: new Date(),
+            favorites: [],
+            cart: [],
+            orders: []
         });
         setFirstName('');
         setLastName('');
@@ -76,15 +90,31 @@ function AuthCont () {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
             .then(() => setIsUserLoggedIn(true))
-            .catch((error) => {
-                console.log(error); 
+            .catch(() => {
+                alert(`Autentication failed. Please check your email and password.`); 
             });
     };
     
     const handleSignInWithGoogle = async () => {
         signInWithPopup(auth, new GoogleAuthProvider())
-            .then(() => {
-                setIsUserLoggedIn(true)
+            .then((result) => {
+                setIsUserLoggedIn(true);
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential?.accessToken;
+                const user = result.user;
+                updateProfile(user, {
+                    displayName: user.displayName
+                });
+                setDoc(doc(db, 'users', user.uid), {
+                    id: user.uid,
+                    firstName: user.displayName?.split(' ')[0],  
+                    lastName: user.displayName?.split(' ')[1],
+                    email: user.email,
+                    createdAt: new Date(),
+                    favorites: [],
+                    cart: [],
+                    orders: []
+                });
             })
             .catch((error) => console.log(error));
     };
@@ -94,14 +124,29 @@ function AuthCont () {
             if(window.confirm('Are you sure you want to delete your account?')) {
                 await deleteDoc(doc(db, 'users', user.displayName));
                 auth.currentUser.delete()
-                    .then(() => {
+                    .then(() => {   
                         setIsUserLoggedIn(false);
                         setUser(null);
                     })
                     .catch((error) => console.log(error));
-                }
             }
-            
+        }
+    };
+
+    const handleResetPass = async (e: React.FormEvent) => {
+        e.preventDefault();
+        const q = query(collection(db, 'users'), where('email', '==', email));
+        const docsQ = await getDocs(q);
+        const selectedUser = docsQ.docs[0].data();
+        if(selectedUser) {
+            sendPasswordResetEmail(auth, selectedUser.email)
+                .then(() => {
+                    alert('Password reset email sent.')
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
     };
 
     return (
@@ -120,7 +165,10 @@ function AuthCont () {
                         type="password" 
                         placeholder='Password'
                     />
-                    <button type='submit'>Sign In</button>
+                    <div className='account-form-btns'>
+                        <button type='button' onClick={() => setSelectedForm('reset')}>Forgot Password?</button>
+                        <button type='submit'>Sign In</button>
+                    </div>
                 </div>
                 <div className='account-form-btns'>
                     <button onClick={handleSignInWithGoogle}>Sign in with Google</button>
@@ -163,7 +211,25 @@ function AuthCont () {
                         type="date"
                         placeholder='Birth Date'
                     />
-                    <button className='account-form-btns' type='submit'>Register</button>
+                    <button type='submit'>Register</button>
+                </div>
+                <div className='account-form-btns'>
+                    <button onClick={handleSignInWithGoogle}>Sign in with Google</button>
+                    <button onClick={() => setSelectedForm('signIn')}>Already have an account? Sign in</button>
+                </div>
+            </form>
+            }
+            {(!isUserLoggedIn && selectedForm === 'reset') &&
+            <form onSubmit={(e) => handleResetPass(e)}>
+                <p className='logo-auth'>Liquid</p>
+                <div className='account-form-container'>
+                    <input
+                        required
+                        onChange={(e) => setEmail(e.target.value)}
+                        type="text"
+                        placeholder='Email'
+                    />
+                    <button type='submit'>Reset Password</button>
                 </div>
                 <div className='account-form-btns'>
                     <button onClick={handleSignInWithGoogle}>Sign in with Google</button>
