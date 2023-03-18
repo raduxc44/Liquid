@@ -502,12 +502,11 @@ nav {
 }
 
 @media screen and (max-width: 500px) {
-
     .nav-lower-mobile {
         z-index: 2;
         position: relative;
     }
-    .nav-utilities div > span {
+    .nav-icon-container {
         scale: 0.8;
     }
     .nav-icon{
@@ -518,7 +517,7 @@ nav {
         height: 12vw;
     }
     .nav-icon:hover{
-        animation-name: icon-pulse;
+        animation-name: icon-pulse-small;
         animation-duration: 0.5s;
         animation-fill-mode: forwards;
     }

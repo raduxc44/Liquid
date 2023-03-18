@@ -1,5 +1,5 @@
 import './Fav-Cont.css'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth, db } from '../../firebase'
 import { doc, onSnapshot } from 'firebase/firestore'
@@ -15,32 +15,31 @@ function FavCont () {
     const [favorites, setFavorites] = useState<Item[]>([])
     const { setSelectedProductToShow } = useContext(SelectedProdContext)
 
-    onAuthStateChanged(auth, (user) => {
-        if(user) {
-            const userFavoritesRef = doc(db, 'users', user.uid)
-            onSnapshot(userFavoritesRef, (doc) => {
-                if(doc.exists()) {
-                    setUser(doc.data())
-                    setFavorites(doc.data().favorites)
-                    setIsUserLoggedIn(true)
-                }
-                else {
-                    setIsUserLoggedIn(false)
-                }
-            })
-        }
-        else {
-            setIsUserLoggedIn(false)
-        }
-    });
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if(user) {
+                const userFavoritesRef = doc(db, 'users', user.uid)
+                onSnapshot(userFavoritesRef, (doc) => {
+                    if(doc.exists()) {
+                        setUser(doc.data())
+                        setFavorites(doc.data().favorites)
+                        setIsUserLoggedIn(true)
+                    }
+                    else {
+                        setIsUserLoggedIn(false)
+                    }
+                })
+            }
+            else {
+                setIsUserLoggedIn(false)
+            }
+        });
+    }, []);
 
     return (
         <div className='favorites-preview-container animate__animated'>
             {isUserLoggedIn ? (
                 <div className='favorites-preview'>
-                    <div className='favorites-preview__user-info'>
-                        <p>{user.displayName}</p>
-                    </div>
                     <div className='favorites-preview__favorites'>
                         <ul className='favorites-list'>
                             {favorites.map((item, index) => {
@@ -66,8 +65,9 @@ function FavCont () {
                 : 
                 (
                 <div className='account-preview'>
-                    <div className='account-preview__user-info'>
-                        <p>a</p>
+                    <div>
+                        <p className='logo-auth'>Liquid</p>
+                        <p>Sign in to see your favorites</p>
                     </div>
                 </div>
             ) 

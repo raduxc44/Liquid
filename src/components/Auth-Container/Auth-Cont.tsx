@@ -1,5 +1,5 @@
 import './Auth-Cont.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
     GoogleAuthProvider, 
     signInWithEmailAndPassword, 
@@ -23,15 +23,17 @@ function AuthCont () {
     const [birthDate, setBirthDate] = useState('')
     const displayName = `${firstName} ${lastName}`
 
-    onAuthStateChanged(auth, (user) => {
-        if (user && !isUserLoggedIn) {
-            setIsUserLoggedIn(true);
-            setUser(user)
-        } else if (!user && isUserLoggedIn) {
-            setIsUserLoggedIn(false);
-            setUser(null)
-        }
-    });
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user && !isUserLoggedIn) {
+                setIsUserLoggedIn(true);
+                setUser(user)
+            } else if (!user && isUserLoggedIn) {
+                setIsUserLoggedIn(false);
+                setUser(null)
+            }
+        });
+    }, [isUserLoggedIn]);
 
     const handleSignUp = async (e: React.FormEvent) => {
         const calculateAge = (birthDate: string) => {
