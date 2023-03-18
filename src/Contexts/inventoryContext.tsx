@@ -14,15 +14,21 @@ export const InventoryContext = createContext<InventoryContextType>({
 export function InventoryContextProvider({ children }: any) {
     const [inventory, setInventory] = useState<Item[]>([]);
     
-
     useEffect(() => {
         const getInventory = async () => {
             const inventoryRef = collection(db, "inventory");
             const inventorySnapshot = await getDocs(inventoryRef);
             const items = inventorySnapshot.docs.map((doc) => doc.data() as Item);
             setInventory(items);
+            localStorage.setItem("inventory", JSON.stringify(items));
         };
-        getInventory();
+        const cachedInventory = localStorage.getItem("inventory");
+        if (cachedInventory) {
+            setInventory(JSON.parse(cachedInventory));
+        }
+        else {
+            getInventory();
+        }
     }, []);
 
     if (inventory.length === 0) {

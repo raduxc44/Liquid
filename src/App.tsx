@@ -5,6 +5,7 @@ import IndividualProdPage from './pages/individualProdPage';
 import FilteredProducts from './pages/filteredProductsPage';
 import { SelectedProdProvider } from './Contexts/selectedProductContext';
 import { SelectedFilterProvider } from './Contexts/selectedFilterContext';
+import { InventoryContextProvider } from './Contexts/inventoryContext';
 // import { AuthProvider } from './Contexts/authContext';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
   return (
     <SelectedProdProvider>
     <SelectedFilterProvider>
+    <InventoryContextProvider>
     {/* <AuthProvider> */}
       <BrowserRouter>
         <Routes>
@@ -26,6 +28,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     {/* </AuthProvider> */}
+    </InventoryContextProvider>
     </SelectedFilterProvider> 
     </SelectedProdProvider>
   );  
