@@ -3,6 +3,7 @@ import * as MaterialIcon from '@mui/icons-material'
 import * as Material from '@mui/material'
 import { useContext, useState } from 'react';
 import { SelectedProdContext } from '../../Contexts/selectedProductContext';
+import { UserMethodsContext } from '../../Contexts/userMethods';
 import { InventoryContext } from '../../Contexts/inventoryContext';
 import { getAuth } from 'firebase/auth';
 import { db } from '../../firebase';
@@ -12,31 +13,21 @@ function SingleProd () {
     
     const { selectedProductToShow, quantityValue, setQuantityValue} = useContext(SelectedProdContext);
     const [isFavorite, setIsFavorite] = useState(false);
+    const { addToFavorites, removeFromFavorites } = useContext(UserMethodsContext);
     const auth = getAuth();
 
-    async function addToFavorites () {
-        // if(auth.currentUser) {
-        //     const userDocRef = doc(db, 'users', auth.currentUser.uid);
-        //     const userDoc = await getDoc(userDocRef);
-        //     const userFavorites = userDoc.data()?.favorites;
-        //     const newFavorites = [...userFavorites, selectedProductToShow];
-        //     await updateDoc(userDocRef, {favorites: newFavorites});
-        //     setIsFavorite(!isFavorite);
-        //     console.log('Added to favorites');
-        // }
-    }
 
-    async function removeFromFavorites () {
-        // if(auth.currentUser) {
-        //     const userDocRef = doc(db, 'users', auth.currentUser.uid);
-        //     const userDoc = await getDoc(userDocRef);
-        //     const userFavorites = userDoc.data()?.favorites;
-        //     const newFavorites = userFavorites.filter((item: any) => item.id !== selectedProductToShow?.id);
-        //     await updateDoc(userDocRef, {favorites: newFavorites});
-        //     setIsFavorite(!isFavorite);
-        //     console.log('Removed from favorites');
-        // }
-    }
+    // async function removeFromFavorites () {
+    //     // if(auth.currentUser) {
+    //     //     const userDocRef = doc(db, 'users', auth.currentUser.uid);
+    //     //     const userDoc = await getDoc(userDocRef);
+    //     //     const userFavorites = userDoc.data()?.favorites;
+    //     //     const newFavorites = userFavorites.filter((item: any) => item.id !== selectedProductToShow?.id);
+    //     //     await updateDoc(userDocRef, {favorites: newFavorites});
+    //     //     setIsFavorite(!isFavorite);
+    //     //     console.log('Removed from favorites');
+    //     // }
+    // }
 
     function QuantityInput() {
         
@@ -124,9 +115,9 @@ function SingleProd () {
                     <div className='rating-price-cont'>
                         {
                             isFavorite ?
-                            <span className='material-symbols-outlined favorite-inactive' onClick={() => addToFavorites()}>favorite</span>
+                            <span className='material-symbols-outlined favorite-inactive' onClick={() => addToFavorites(selectedProductToShow)}>favorite</span>
                             :
-                            <span className='material-symbols-outlined favorite-active' onClick={() => addToFavorites()}>favorite</span>
+                            <span className='material-symbols-outlined favorite-active' onClick={() => removeFromFavorites(selectedProductToShow)}>favorite</span>
                         }
                         <div className='rating-cont'>
                             <p className='price-cont'>${selectedProductToShow?.price}</p>
