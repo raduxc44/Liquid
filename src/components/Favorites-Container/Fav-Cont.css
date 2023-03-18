@@ -58,18 +58,29 @@
 }
 
 @media screen and (max-width: 1000px) {
-    .account-preview-container{
-        width: 75dvw;
-        height: 50dvh
-    }
-}
-@media screen and (max-width: 500px) {
-    .account-preview-container{
+    .favorites-preview-container{
         width: 75dvw;
         height: 50dvh;
+    }
+    .favorite-details p{
+        font-size: 1.5rem;
+    }
+    .favorite-item img {
+        min-width: 20dvw;
+        min-height: 15dvh;
+        max-width: 20dvw;
+        max-height: 15dvh;
+    }
+
+}
+@media screen and (max-width: 500px) {
+    .favorite-details p{
         font-size: 1rem;
     }
-    .logo-auth{
-        font-size: 2rem;
+    .favorite-item img {
+        min-width: 20dvw;
+        min-height: 15dvh;
+        max-width: 20dvw;
+        max-height: 15dvh;
     }
 }
