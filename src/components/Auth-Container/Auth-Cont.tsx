@@ -1,6 +1,5 @@
 import './Auth-Cont.css'
 import { useState } from 'react'
-import { Item } from '../../data/types'
 import {
     GoogleAuthProvider, 
     signInWithEmailAndPassword, 
@@ -13,18 +12,6 @@ import { auth, db, updateProfile } from '../../firebase'
 import { doc, setDoc, deleteDoc, collection, query, where, getDocs } from 'firebase/firestore'
 
 function AuthCont () {
-
-    type User = {
-        id: string;
-        firstName: string;
-        lastName: string;
-        email: string;
-        birthDate: number;
-        age: number;
-        createdAt: Date;
-        favorites: Item[];
-        cart: Item[];
-    }
 
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
     const [user, setUser] = useState<any>(null)

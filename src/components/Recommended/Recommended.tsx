@@ -2,10 +2,10 @@ import './Recommended.css'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
-import Inventory from '../../data/inventory.json';
 import { Link } from 'react-router-dom';
 import { Item } from '../../data/types';
 import { useContext } from 'react';
+import { InventoryContext } from '../../Contexts/inventoryContext';
 import { SelectedProdContext } from '../../Contexts/selectedProductContext';
 import { SelectedFilterContext } from '../../Contexts/selectedFilterContext';
 
@@ -17,6 +17,7 @@ function Recommended () {
 
     const {selectedProductToShow, setSelectedProductToShow} = useContext(SelectedProdContext)
     const {setSelectedFilter} = useContext(SelectedFilterContext)
+    const {inventory} = useContext(InventoryContext)
 
     function handleUserSelection (item: Item) {
         window.scroll(0,0)
@@ -38,7 +39,7 @@ function Recommended () {
                 
             let itemsArr:Item[] = [];
             
-            Object.entries(Inventory.Items).forEach(item => {
+            Object.entries(inventory).forEach(item => {
                 itemsArr.push(item[1]);
             })
             while(randomItemsArr.length < 10) {

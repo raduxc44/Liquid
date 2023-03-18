@@ -1,20 +1,24 @@
 import './Nav.css'
 import 'animate.css';
 import { useState, useRef, useContext } from 'react';
-import Inventory from '../../data/inventory.json'
 import { Item } from '../../data/types';
 import { Link, useNavigate } from 'react-router-dom';
 import { SelectedProdContext } from '../../Contexts/selectedProductContext';
 import { SelectedFilterContext } from '../../Contexts/selectedFilterContext';
+import { InventoryContext } from '../../Contexts/inventoryContext';
 import AuthCont from '../Auth-Container/Auth-Cont';
+// import FavCont from '../Favorites-Container/Fav-Cont';
 
 function Nav () {
 
     const navigate = useNavigate();
     const { setSelectedProductToShow } = useContext(SelectedProdContext);
     const { setSelectedFilter } = useContext(SelectedFilterContext);
+    const { inventory } = useContext(InventoryContext);
     const [selectedMainCategory, setSelectedMainCategory] = useState('spirits');
-    const [deviceType, setDeviceType] = useState('desktop');
+    const [deviceType, setDeviceType] = useState(
+        window.innerWidth < 1000 ? 'mobile' : 'desktop'
+    );
     const alreadyOpenedCateg = useRef(false);
     const alreadyOpenedSearch = useRef(false);
     let categAnimationDelay = useRef(0)
@@ -31,9 +35,7 @@ function Nav () {
             setDeviceType('desktop');
         }
     }
-    window.onload = changeDeviceType;
-    window.onresize = changeDeviceType;
-    window.onreset = changeDeviceType;
+    window.addEventListener('resize', changeDeviceType);
 
     function hideMobileElement (element: HTMLElement, animationClass: string) {
         if(!element.classList.contains('in-transition')) {
@@ -105,14 +107,14 @@ function Nav () {
 
     function filterHandler (filter: string) {
         let filteredItems:Item[] = [];
-        Object.entries(Inventory.Items).forEach(([key, value]) => {
-            if(value.category === filter) {
-                filteredItems.push(value);
-                setSelectedFilter(filteredItems);
+        Object.entries(inventory).forEach(item => {
+            if(item[1].category) {
+                if(item[1].category === filter)
+                filteredItems.push(item[1])
             }
-            window.scroll(0,0);
         })
-        setSelectedMainCategory('spirits')
+        setSelectedMainCategory('spirits');
+        setSelectedFilter(filteredItems);
     }
 
     //Handles the secondary menu content
@@ -190,8 +192,8 @@ function Nav () {
                                 </div>
                             </Link>
                             <Link
-                                to={`/category/Champagne`}
-                                onClick={() => filterHandler('Champagne')}
+                                to={`/category/Liquor`}
+                                onClick={() => filterHandler('Liquor')}
                                 className="secondary-categ-item seven-categs"
                             >
                                 <div>
@@ -325,27 +327,39 @@ function Nav () {
                 if(window.innerWidth >= 1000) {
                     return (
                         <>
-                            <div className="secondary-categ-item three-categs"
-                            onClick={() => {filterHandler('Red-Wine')}}
+                            <Link
+                                to={`/category/Red-Wine`}
+                                onClick={() => filterHandler('Red-Wine')}
+                                className="secondary-categ-item three-categs"
                             >
-                                <li>
-                                    <p>Red Wine</p>
-                                </li>
-                            </div>
-                            <div className="secondary-categ-item three-categs"
-                            onClick={() => {filterHandler('White-Wine')}}
+                                <div>
+                                    <li>
+                                        <p>Red Wine</p>
+                                    </li>
+                                </div>
+                            </Link>
+                            <Link
+                                to={`/category/White-Wine`}
+                                onClick={() => filterHandler('White-Wine')}
+                                className="secondary-categ-item three-categs"
                             >
-                                <li>
-                                    <p>White Wine</p>
-                                </li>
-                            </div>
-                            <div className="secondary-categ-item three-categs"
-                            onClick={() => {filterHandler('Rose-Wine')}}
+                                <div>
+                                    <li>
+                                        <p>White Wine</p>
+                                    </li>
+                                </div>
+                            </Link>
+                            <Link
+                                to={`/category/Rose-Wine`}
+                                onClick={() => filterHandler('Rose-Wine')}
+                                className="secondary-categ-item three-categs"
                             >
-                                <li>
-                                    <p>Rose Wine</p>
-                                </li>
-                            </div>
+                                <div>
+                                    <li>
+                                        <p>Rose Wine</p>
+                                    </li>
+                                </div>
+                            </Link>
                         </>
                     )
                 }
@@ -407,20 +421,28 @@ function Nav () {
                 if(window.innerWidth >= 1000) {
                     return (
                         <>
-                            <div className="secondary-categ-item two-categs"
-                            onClick={() => {filterHandler('Beer')}}
+                            <Link
+                                to={`/category/Beer`}
+                                onClick={() => filterHandler('Beer')}
+                                className="secondary-categ-item two-categs"
                             >
-                                <li>
-                                    <p>Beer</p>
-                                </li>
-                            </div>
-                            <div className="secondary-categ-item two-categs"
-                            onClick={() => {filterHandler('Beverage')}}
+                                <div>
+                                    <li>
+                                        <p>Beer</p>
+                                    </li>
+                                </div>
+                            </Link>
+                            <Link
+                                to={`/category/Beverage`}
+                                onClick={() => filterHandler('Beverage')}
+                                className="secondary-categ-item two-categs"
                             >
-                                <li>
-                                    <p>Beverage</p>
-                                </li>
-                            </div>
+                                <div>
+                                    <li>
+                                        <p>Beverages</p>
+                                    </li>
+                                </div>
+                            </Link>
                         </>
                     )
                 }
@@ -515,13 +537,13 @@ function Nav () {
             resultsList.classList.add('search-results-container-anim');
             searchResultsArr = []
             resultsList.innerHTML = ''
-            let inventory: string[] = [];
             if(searchInput.value !== '') {
                 searchResultsAnim('desktop', 'start')
-                Object.entries(Inventory.Items).forEach(item => {
-                    inventory.push(item[0]);
-                    if(item[0].toLowerCase().includes(searchInput.value.toLowerCase())) 
-                    {searchResultsArr.push(item[1])}
+                Object.entries(inventory).forEach(item => {
+                    if(item[1].name) {
+                        if(item[1].name.toLowerCase().includes(searchInput.value.toLowerCase()))
+                        {searchResultsArr.push(item[1])}
+                    }
                 })
             }
             else if(searchInput.value === '') {searchResultsAnim('desktop', 'end')}
@@ -564,13 +586,13 @@ function Nav () {
             resultsList.classList.add('search-results-container-anim');
             searchResultsArr = []
             resultsList.innerHTML = ''
-            let inventory: string[] = [];
             if(searchInput.value !== '') {
                 searchResultsAnim('mobile', 'start')
-                Object.entries(Inventory.Items).forEach(item => {
-                    inventory.push(item[0]);
-                    if(item[0].toLowerCase().includes(searchInput.value.toLowerCase())) 
-                    {searchResultsArr.push(item[1])}
+                Object.entries(inventory).forEach(item => {
+                    if(item[1].name) {
+                        if(item[1].name.toLowerCase().includes(searchInput.value.toLowerCase()))
+                        {searchResultsArr.push(item[1])}
+                    }
                 })
             }
             else if(searchInput.value === '') {searchResultsAnim('mobile', 'end')}
@@ -647,7 +669,20 @@ function Nav () {
                             </ul>
                         </div>
                     </div>
-                    <div><span className="material-symbols-outlined nav-icon">favorite</span></div>
+                    <div className='account-container'>
+                        <span onClick={
+                            () => {
+                                let favoritesDiv:HTMLElement = document.querySelector('div.favorites-preview-container')!;
+                                if(favoritesDiv.style.display === 'flex') {
+                                    hideMobileElement(favoritesDiv, 'animate__fadeOutRight')
+                                }
+                                else {
+                                    showMobileElement(favoritesDiv, 'animate__fadeInRight')
+                                }
+                            }
+                        } className='material-symbols-outlined nav-icon'>favorite</span>
+                        {/* {FavCont()} */}
+                    </div>
                     <div className='account-container'>
                         <span onClick={
                             () => {
