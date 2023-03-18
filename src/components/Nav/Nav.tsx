@@ -569,6 +569,7 @@ function Nav () {
                 resultItemCont.onclick = () => {
                     setSelectedProductToShow(item);
                     navigate(`/product/${item.name}`);
+                    searchInput.value = '';
                 }
                 resultItemDetails.classList.add('search-result-details')
                 resultItemP.innerText = `${item.name}`

@@ -5,36 +5,49 @@ import { auth } from '../firebase';
 import { db } from '../firebase';
 import { Item } from '../data/types';
 
-export const UserMethodsContext = createContext({
-    addToCart: (item: Item) => {},
-    removeFromCart: (item: Item) => {},
-    addToFavorites: (item: Item) => {},
-    removeFromFavorites: (item: Item) => {},
-    addToOrders: (order: any) => {},
+interface UserMethodsContextType {
+    addToCart: (item: Item) => void;
+    removeFromCart: (item: Item) => void;
+    checkIfFavorite: (item: Item) => boolean;
+    addToFavorites: (item: Item) => void;
+    removeFromFavorites: (item: Item) => void;
+    addToOrders: (order: any) => void;
+}
+
+export const UserMethodsContext = createContext<UserMethodsContextType>({
+    addToCart: () => {},
+    removeFromCart: () => {},
+    checkIfFavorite: () => false,
+    addToFavorites: () => {},
+    removeFromFavorites: () => {},
+    addToOrders: () => {},
 });
 
-export const UserProvider = ({children}: any) => {
+export const UserMethodsProvider = ({children}: any) => {
     const [user, setUser] = useState<any>(null);
     const [cart, setCart] = useState<any>([]);
     const [favorites, setFavorites] = useState<any>([]);
     const [orders, setOrders] = useState<any>([]);
 
     useEffect(() => {
-        onAuthStateChanged(auth, async (user) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
-                const userRef = doc(db, 'users', user.uid);
-                const userDocSnap = await getDoc(userRef);
-                const userDocData = userDocSnap.data();
-                if(userDocData) {
-                    setCart(userDocData.cart);
-                    setFavorites(userDocData.favorites);
-                    setOrders(userDocData.orders);
-                }
+                const getUserData = async () => {
+                    const userDoc = await getDoc(doc(db, 'users', user.uid));
+                    const userData = userDoc.data();
+                    if (userData) {
+                        setCart(userData.cart);
+                        setFavorites(userData.favorites);
+                        setOrders(userData.orders);
+                    }
+                };
+                getUserData();
             } else {
                 setUser(null);
             }
         });
+        return () => unsubscribe();
     }, []);
 
     const addToCart = (item: any) => {
@@ -53,8 +66,29 @@ export const UserProvider = ({children}: any) => {
         }
     };
 
+    const checkIfFavorite = (item: Item) => {
+        if(user) {
+            if(
+                favorites.filter((favoriteItem: Item) => favoriteItem.imageTag === item.imageTag).length > 0
+            ) {
+                console.log('true');
+                console.log(favorites)
+                return true;
+            }
+            else {
+                console.log('false');
+                console.log(favorites)
+                return false;
+            }
+        }
+        else return false;
+    };
+
     const addToFavorites = (item: Item) => {
         if(user) {
+            if(
+                checkIfFavorite(item) === true
+            ) return;
             const newFavorites = [...favorites, item];
             setFavorites(newFavorites);
             updateDoc(doc(db, 'users', user.uid), {favorites: newFavorites});
@@ -76,11 +110,13 @@ export const UserProvider = ({children}: any) => {
             updateDoc(doc(db, 'users', user.uid), {orders: newOrders});
         }
     };
+
     
     return (
         <UserMethodsContext.Provider value={{
             addToCart,
             removeFromCart,
+            checkIfFavorite,
             addToFavorites,
             removeFromFavorites,
             addToOrders,

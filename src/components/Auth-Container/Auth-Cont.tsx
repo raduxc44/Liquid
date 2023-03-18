@@ -109,13 +109,9 @@ function AuthCont () {
     const handleDelete = async () => {
         if(auth.currentUser) {
             if(window.confirm('Are you sure you want to delete your account?')) {
-                await deleteDoc(doc(db, 'users', user.displayName));
-                auth.currentUser.delete()
-                    .then(() => {   
-                        setIsUserLoggedIn(false);
-                        setUser(null);
-                    })
-                    .catch((error) => console.log(error));
+                await deleteDoc(doc(db, 'users', auth.currentUser.uid));
+                await auth.currentUser.delete();
+                setIsUserLoggedIn(false);
             }
         }
     };
@@ -158,8 +154,8 @@ function AuthCont () {
                     </div>
                 </div>
                 <div className='account-form-btns'>
-                    <button onClick={handleSignInWithGoogle}>Sign in with Google</button>
-                    <button onClick={() => setSelectedForm('signUp')}>Don't have an account? Sign up</button>
+                    <button type='button' onClick={handleSignInWithGoogle}>Sign in with Google</button>
+                    <button type='button' onClick={() => setSelectedForm('signUp')}>Don't have an account? Sign up</button>
                 </div>
             </form>
             }
@@ -201,8 +197,8 @@ function AuthCont () {
                     <button type='submit'>Register</button>
                 </div>
                 <div className='account-form-btns'>
-                    <button onClick={handleSignInWithGoogle}>Sign in with Google</button>
-                    <button onClick={() => setSelectedForm('signIn')}>Already have an account? Sign in</button>
+                    <button type='button' onClick={handleSignInWithGoogle}>Sign in with Google</button>
+                    <button type='button' onClick={() => setSelectedForm('signIn')}>Already have an account? Sign in</button>
                 </div>
             </form>
             }
@@ -219,8 +215,8 @@ function AuthCont () {
                     <button type='submit'>Reset Password</button>
                 </div>
                 <div className='account-form-btns'>
-                    <button onClick={handleSignInWithGoogle}>Sign in with Google</button>
-                    <button onClick={() => setSelectedForm('signIn')}>Already have an account? Sign in</button>
+                    <button type='button' onClick={handleSignInWithGoogle}>Sign in with Google</button>
+                    <button type='button' onClick={() => setSelectedForm('signIn')}>Already have an account? Sign in</button>
                 </div>
             </form>
             }
@@ -231,8 +227,8 @@ function AuthCont () {
                     <p>{auth.currentUser?.displayName}</p>
                     <p>{auth.currentUser?.email}</p>
                     <button>Order History</button>
-                    <button onClick={() => auth.signOut()}>Log out</button>
-                    <button onClick={() => handleDelete()}>Delete Account</button>
+                    <button type='button' onClick={() => auth.signOut()}>Log out</button>
+                    <button type='button' onClick={() => handleDelete()}>Delete Account</button>
                 </div>
             </div>
             }

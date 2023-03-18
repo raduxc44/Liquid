@@ -22,7 +22,6 @@ function Recommended () {
     function handleUserSelection (item: Item) {
         window.scroll(0,0)
         setSelectedProductToShow(item);
-        console.log(selectedProductToShow)
     }
 
     (function randomizer () {
@@ -37,8 +36,7 @@ function Recommended () {
         let beerChosen: boolean = false;
         let beverageChosen: boolean = false
                 
-            let itemsArr:Item[] = [];
-            
+            let itemsArr:Item[] = [];            
             Object.entries(inventory).forEach(item => {
                 itemsArr.push(item[1]);
             })

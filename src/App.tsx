@@ -6,10 +6,12 @@ import FilteredProducts from './pages/filteredProductsPage';
 import { SelectedProdProvider } from './Contexts/selectedProductContext';
 import { SelectedFilterProvider } from './Contexts/selectedFilterContext';
 import { InventoryContextProvider } from './Contexts/inventoryContext';
+import { UserMethodsProvider } from './Contexts/userMethodsContext';
 
 function App() {
 
   return (
+    <UserMethodsProvider>
     <InventoryContextProvider>
     <SelectedProdProvider>
     <SelectedFilterProvider>
@@ -28,6 +30,7 @@ function App() {
     </SelectedFilterProvider> 
     </SelectedProdProvider>
     </InventoryContextProvider>
+    </UserMethodsProvider>
   );  
 }
 

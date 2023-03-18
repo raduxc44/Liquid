@@ -1,33 +1,19 @@
 import './single-prod.css'
 import * as MaterialIcon from '@mui/icons-material'
 import * as Material from '@mui/material'
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { SelectedProdContext } from '../../Contexts/selectedProductContext';
-import { UserMethodsContext } from '../../Contexts/userMethods';
-import { InventoryContext } from '../../Contexts/inventoryContext';
-import { getAuth } from 'firebase/auth';
-import { db } from '../../firebase';
-import { getDoc, updateDoc, doc } from 'firebase/firestore';
+import { UserMethodsContext } from '../../Contexts/userMethodsContext';
 
 function SingleProd () {
     
     const { selectedProductToShow, quantityValue, setQuantityValue} = useContext(SelectedProdContext);
-    const [isFavorite, setIsFavorite] = useState(false);
-    const { addToFavorites, removeFromFavorites } = useContext(UserMethodsContext);
-    const auth = getAuth();
+    const { checkIfFavorite, addToFavorites, removeFromFavorites } = useContext(UserMethodsContext);
+    const [isFavorite, setIsFavorite] = useState(checkIfFavorite(selectedProductToShow!));
 
-
-    // async function removeFromFavorites () {
-    //     // if(auth.currentUser) {
-    //     //     const userDocRef = doc(db, 'users', auth.currentUser.uid);
-    //     //     const userDoc = await getDoc(userDocRef);
-    //     //     const userFavorites = userDoc.data()?.favorites;
-    //     //     const newFavorites = userFavorites.filter((item: any) => item.id !== selectedProductToShow?.id);
-    //     //     await updateDoc(userDocRef, {favorites: newFavorites});
-    //     //     setIsFavorite(!isFavorite);
-    //     //     console.log('Removed from favorites');
-    //     // }
-    // }
+    useEffect(() => {
+        setIsFavorite(checkIfFavorite(selectedProductToShow!));
+    }, [selectedProductToShow, checkIfFavorite]);
 
     function QuantityInput() {
         
@@ -115,9 +101,9 @@ function SingleProd () {
                     <div className='rating-price-cont'>
                         {
                             isFavorite ?
-                            <span className='material-symbols-outlined favorite-inactive' onClick={() => addToFavorites(selectedProductToShow)}>favorite</span>
+                            <span className='material-symbols-outlined favorite-active' onClick={() => {removeFromFavorites(selectedProductToShow); setIsFavorite(!isFavorite)}}>favorite</span>
                             :
-                            <span className='material-symbols-outlined favorite-active' onClick={() => removeFromFavorites(selectedProductToShow)}>favorite</span>
+                            <span className='material-symbols-outlined favorite-inactive' onClick={() => {addToFavorites(selectedProductToShow); setIsFavorite(!isFavorite)}}>favorite</span>
                         }
                         <div className='rating-cont'>
                             <p className='price-cont'>${selectedProductToShow?.price}</p>
