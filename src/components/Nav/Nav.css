@@ -31,9 +31,6 @@ nav {
     align-items: center;
 }
 .nav-icon:hover {
-    animation-name: icon-pulse;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
     cursor: pointer;
     font-variation-settings: 
     'FILL' 1;
@@ -41,9 +38,6 @@ nav {
 .nav-utilities {
     display: flex;
     align-items: center;
-}
-.nav-utilities > div span {
-    margin: 0 1vw;
 }
 .search-bar{
     display: flex;
@@ -126,32 +120,35 @@ nav {
         object-fit: cover;
         border-radius: 10px;
     }
-/* .account-container{
-    display: flex;
-    flex-direction: column;
-} */
-.cart-container{
-    display: flex;
-    justify-content: flex-end;
+.nav-icon-container {
+    position: relative;
 }
-.cart-container:hover{
+.nav-icon-container:hover {
+    cursor: pointer;
     animation-name: icon-pulse;
-    animation-duration: 1s;
+    animation-duration: 0.5s;
     animation-fill-mode: forwards;
 }
-.cart-container div{
-    background-color: gold;
-    color: black;
-    width: 1.5rem;
+.nav-icon{
     display: flex;
     justify-content: center;
-    border-radius: 50%;
-    z-index: 2;
-    position: absolute;
-    user-select: none;
+    position: relative;
+    width: 7vw;
+    height: 7vw;
 }
-.cart-container span:hover {
-    animation: none;
+.nav-icon-counter {
+    top: 1.5vw;
+    right: 1vw;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 2.2vw;
+    height: 2.2vw;
+    font-size: 1rem;
+    background-color: gold;
+    color: black;
 }
 .nav-lower-desktop{
     width: 75%;
@@ -271,6 +268,32 @@ nav {
         display: flex;
         justify-content: flex-end;
         align-items: center;
+    }
+    .nav-icon{
+        display: flex;
+        justify-content: center;
+        position: relative;
+        width: 15vw;
+        height: 15vw;
+    }
+    .nav-icon:hover{
+        animation-name: icon-pulse;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
+    .nav-icon-counter {
+        top: 4vw;
+        right: 3vw;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 3.5vw;
+        height: 3.5vw;
+        font-size: 1.5rem;
+        background-color: gold;
+        color: black;
     }
     .nav-mobile-search-cont{
         width: 100%;
@@ -479,12 +502,39 @@ nav {
 }
 
 @media screen and (max-width: 500px) {
+
     .nav-lower-mobile {
         z-index: 2;
         position: relative;
     }
     .nav-utilities div > span {
         scale: 0.8;
+    }
+    .nav-icon{
+        display: flex;
+        justify-content: center;
+        position: relative;
+        width: 12vw;
+        height: 12vw;
+    }
+    .nav-icon:hover{
+        animation-name: icon-pulse;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
+    .nav-icon-counter {
+        top: 1vw;
+        right: 1vw;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 5vw;
+        height: 5vw;
+        font-size: 1rem;
+        background-color: gold;
+        color: black;
     }
     .search-icon-mobile{
         scale: 0.8;
@@ -506,7 +556,7 @@ nav {
 
 @keyframes icon-pulse {
     100% {
-        scale: 1.2;
+        scale: 1.1;
     }
 }
 @keyframes icon-pulse-small {

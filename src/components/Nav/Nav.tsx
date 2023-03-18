@@ -7,7 +7,7 @@ import { SelectedProdContext } from '../../Contexts/selectedProductContext';
 import { SelectedFilterContext } from '../../Contexts/selectedFilterContext';
 import { InventoryContext } from '../../Contexts/inventoryContext';
 import AuthCont from '../Auth-Container/Auth-Cont';
-// import FavCont from '../Favorites-Container/Fav-Cont';
+import FavCont from '../Favorites-Container/Fav-Cont';
 
 function Nav () {
 
@@ -670,39 +670,44 @@ function Nav () {
                             </ul>
                         </div>
                     </div>
-                    <div className='account-container'>
+                    <div className='nav-icon-container'>
                         <span onClick={
                             () => {
                                 let favoritesDiv:HTMLElement = document.querySelector('div.favorites-preview-container')!;
+                                let accountDiv:HTMLElement = document.querySelector('div.account-preview-container')!;
                                 if(favoritesDiv.style.display === 'flex') {
                                     hideMobileElement(favoritesDiv, 'animate__fadeOutRight')
                                 }
                                 else {
+                                    hideMobileElement(accountDiv, 'animate__fadeOutRight')
                                     showMobileElement(favoritesDiv, 'animate__fadeInRight')
                                 }
                             }
                         } className='material-symbols-outlined nav-icon'>favorite</span>
-                        {/* {FavCont()} */}
+                        <div className='nav-icon-counter'>98</div>
                     </div>
-                    <div className='account-container'>
+                    <div className='nav-icon-container'>
                         <span onClick={
                             () => {
+                                let favoritesDiv:HTMLElement = document.querySelector('div.favorites-preview-container')!;
                                 let accountDiv:HTMLElement = document.querySelector('div.account-preview-container')!;
                                 if(accountDiv.style.display === 'flex') {
                                     hideMobileElement(accountDiv, 'animate__fadeOutRight')
                                 }
                                 else {
+                                    hideMobileElement(favoritesDiv, 'animate__fadeOutRight')
                                     showMobileElement(accountDiv, 'animate__fadeInRight')
                                 }
                             }
                         } className='material-symbols-outlined nav-icon'>account_circle</span>
-                        {AuthCont()}
                     </div>
-                    <div className='cart-container'>
+                    <div className='nav-icon-container'>
                         <span className="material-symbols-outlined nav-icon">shopping_bag</span>
-                        <div className='cart-count'>98</div>
+                        <div className='nav-icon-counter'>98</div>
                     </div>
                 </div>
+                {FavCont()}
+                {AuthCont()}
             </div>
             {deviceType === 'mobile' && 
             <>

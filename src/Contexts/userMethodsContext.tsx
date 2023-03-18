@@ -71,13 +71,9 @@ export const UserMethodsProvider = ({children}: any) => {
             if(
                 favorites.filter((favoriteItem: Item) => favoriteItem.imageTag === item.imageTag).length > 0
             ) {
-                console.log('true');
-                console.log(favorites)
                 return true;
             }
             else {
-                console.log('false');
-                console.log(favorites)
                 return false;
             }
         }
