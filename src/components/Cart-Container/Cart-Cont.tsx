@@ -1,4 +1,4 @@
-import './Fav-Cont.css'
+import './Cart-Cont.css'
 import { useState, useContext, useEffect } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth, db } from '../../firebase'
@@ -7,12 +7,18 @@ import { Item } from '../../data/types'
 import { useNavigate } from 'react-router-dom'
 import { SelectedProdContext } from '../../Contexts/selectedProductContext'
 
-function FavCont () {
+function CartCont () {
+
+    type CartItem = {
+        quantity: number,
+        item: Item
+    }
+    type Cart = CartItem[] | []
 
     const navigate = useNavigate()
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
     const [user, setUser] = useState<any>(null)
-    const [favorites, setFavorites] = useState<Item[]>([])
+    const [cart, setCart] = useState<Cart>([])
     const { setSelectedProductToShow } = useContext(SelectedProdContext)
 
     useEffect(() => {
@@ -22,7 +28,7 @@ function FavCont () {
                 onSnapshot(userRef, (doc) => {
                     if(doc.exists()) {
                         setUser(doc.data())
-                        setFavorites(doc.data().favorites)
+                        setCart(doc.data().cart)
                         setIsUserLoggedIn(true)
                     }
                     else {
@@ -37,24 +43,28 @@ function FavCont () {
     }, []);
 
     return (
-        <div className='favorites-preview-container animate__animated'>
+        <div className='cart-preview-container animate__animated'>
             {isUserLoggedIn ? (
-                <div className='favorites-preview'>
-                    <div className='favorites-preview__favorites'>
-                        <ul className='favorites-list'>
-                            {favorites.map((item, index) => {
+                <div className='cart-preview'>
+                    <div className='cart-preview-cart'>
+                        <ul className='cart-list'>
+                            {cart.map((cartItem, index) => {
                                 return (
-                                    <li className='favorite-item' key={index}
+                                    <li className='cart-item' key={index}
                                         onClick={() => {
-                                            setSelectedProductToShow(item)
-                                            navigate(`/product/${item.name}`);
+                                            setSelectedProductToShow(cartItem.item)
+                                            navigate(`/product/${cartItem.item.name}`);
                                         }}
                                     >
-                                        <div className='favorite-details'>
-                                            <p>{item.name}</p>
-                                            <p>{item.quantity}/{item.strength}</p>
+                                        <div>
+                                            <p>{cartItem.quantity}</p>
+                                            <p>{cartItem.quantity * cartItem.item.price}</p>
                                         </div>
-                                        <img src={require(`../../images/${item.category}/desktop/${item.imageTag}.webp`)} alt="" />
+                                        <div className='cart-item-details'>
+                                            <p>{cartItem.item.name}</p>
+                                            <p>{cartItem.item.quantity}/{cartItem.item.strength}</p>
+                                        </div>
+                                        <img src={require(`../../images/${cartItem.item.category}/desktop/${cartItem.item.imageTag}.webp`)} alt="" />
                                     </li>
                                 )
                             })}
@@ -64,10 +74,10 @@ function FavCont () {
                 ) 
                 : 
                 (
-                <div className='account-preview'>
+                <div className='cart-preview'>
                     <div>
                         <p className='logo-auth'>Liquid</p>
-                        <p>Sign in to see your favorites</p>
+                        <p>Sign in to start shopping right away!</p>
                     </div>
                 </div>
             ) 
@@ -75,4 +85,4 @@ function FavCont () {
         </div>
     )
 }
-export default FavCont
+export default CartCont

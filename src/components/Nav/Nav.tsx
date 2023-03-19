@@ -6,8 +6,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { SelectedProdContext } from '../../Contexts/selectedProductContext';
 import { SelectedFilterContext } from '../../Contexts/selectedFilterContext';
 import { InventoryContext } from '../../Contexts/inventoryContext';
+import { UserMethodsContext } from '../../Contexts/userMethodsContext';
 import AuthCont from '../Auth-Container/Auth-Cont';
 import FavCont from '../Favorites-Container/Fav-Cont';
+import CartCont from '../Cart-Container/Cart-Cont';
 
 function Nav () {
 
@@ -15,6 +17,7 @@ function Nav () {
     const { setSelectedProductToShow } = useContext(SelectedProdContext);
     const { setSelectedFilter } = useContext(SelectedFilterContext);
     const { inventory } = useContext(InventoryContext);
+    const {favoritesCounter, cartCounter} = useContext(UserMethodsContext);
     const [selectedMainCategory, setSelectedMainCategory] = useState('spirits');
     const [deviceType, setDeviceType] = useState(
         window.innerWidth < 1000 ? 'mobile' : 'desktop'
@@ -675,39 +678,58 @@ function Nav () {
                             () => {
                                 let favoritesDiv:HTMLElement = document.querySelector('div.favorites-preview-container')!;
                                 let accountDiv:HTMLElement = document.querySelector('div.account-preview-container')!;
+                                let cartDiv:HTMLElement = document.querySelector('div.cart-preview-container')!;
                                 if(favoritesDiv.style.display === 'flex') {
                                     hideMobileElement(favoritesDiv, 'animate__fadeOutRight')
                                 }
                                 else {
                                     hideMobileElement(accountDiv, 'animate__fadeOutRight')
+                                    hideMobileElement(cartDiv, 'animate__fadeOutRight')
                                     showMobileElement(favoritesDiv, 'animate__fadeInRight')
                                 }
                             }
                         } className='material-symbols-outlined nav-icon'>favorite</span>
-                        <div className='nav-icon-counter'>98</div>
+                        <div className='nav-icon-counter'>{favoritesCounter}</div>
                     </div>
                     <div className='nav-icon-container'>
                         <span onClick={
                             () => {
                                 let favoritesDiv:HTMLElement = document.querySelector('div.favorites-preview-container')!;
                                 let accountDiv:HTMLElement = document.querySelector('div.account-preview-container')!;
+                                let cartDiv:HTMLElement = document.querySelector('div.cart-preview-container')!;
                                 if(accountDiv.style.display === 'flex') {
                                     hideMobileElement(accountDiv, 'animate__fadeOutRight')
                                 }
                                 else {
                                     hideMobileElement(favoritesDiv, 'animate__fadeOutRight')
+                                    hideMobileElement(cartDiv, 'animate__fadeOutRight')
                                     showMobileElement(accountDiv, 'animate__fadeInRight')
                                 }
                             }
                         } className='material-symbols-outlined nav-icon'>account_circle</span>
                     </div>
-                    <div className='nav-icon-container'>
+                    <div onClick={
+                        () => {
+                            let favoritesDiv:HTMLElement = document.querySelector('div.favorites-preview-container')!;
+                            let accountDiv:HTMLElement = document.querySelector('div.account-preview-container')!;
+                            let cartDiv:HTMLElement = document.querySelector('div.cart-preview-container')!;
+                            if(cartDiv.style.display === 'flex') {
+                                hideMobileElement(cartDiv, 'animate__fadeOutRight')
+                            }
+                            else {
+                                hideMobileElement(favoritesDiv, 'animate__fadeOutRight')
+                                hideMobileElement(accountDiv, 'animate__fadeOutRight')
+                                showMobileElement(cartDiv, 'animate__fadeInRight')
+                            }
+                        }
+                    } className='nav-icon-container'>
                         <span className="material-symbols-outlined nav-icon">shopping_bag</span>
-                        <div className='nav-icon-counter'>98</div>
+                        <div className='nav-icon-counter'>{cartCounter}</div>
                     </div>
                 </div>
                 {FavCont()}
                 {AuthCont()}
+                {CartCont()}
             </div>
             {deviceType === 'mobile' && 
             <>

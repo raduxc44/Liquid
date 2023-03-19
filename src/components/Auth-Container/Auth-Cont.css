@@ -102,13 +102,11 @@ button:hover {
 @media screen and (max-width: 1000px) {
     .account-preview-container{
         width: 75dvw;
-        height: 50dvh
     }
 }
 @media screen and (max-width: 500px) {
     .account-preview-container{
         width: 75dvw;
-        height: 50dvh;
         font-size: 1rem;
     }
     .logo-auth{

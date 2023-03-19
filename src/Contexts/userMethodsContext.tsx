@@ -6,27 +6,33 @@ import { db } from '../firebase';
 import { Item } from '../data/types';
 
 interface UserMethodsContextType {
-    addToCart: (item: Item) => void;
+    addToCart: (item: Item, quantity: number) => void;
     removeFromCart: (item: Item) => void;
+    cartCounter: number;
     checkIfFavorite: (item: Item) => boolean;
     addToFavorites: (item: Item) => void;
     removeFromFavorites: (item: Item) => void;
+    favoritesCounter: number;
     addToOrders: (order: any) => void;
 }
 
 export const UserMethodsContext = createContext<UserMethodsContextType>({
     addToCart: () => {},
     removeFromCart: () => {},
+    cartCounter: 0,
     checkIfFavorite: () => false,
     addToFavorites: () => {},
     removeFromFavorites: () => {},
+    favoritesCounter: 0,
     addToOrders: () => {},
 });
 
 export const UserMethodsProvider = ({children}: any) => {
     const [user, setUser] = useState<any>(null);
     const [cart, setCart] = useState<any>([]);
+    const [cartCounter, setCartCounter] = useState<number>(0);
     const [favorites, setFavorites] = useState<any>([]);
+    const [favoritesCounter, setFavoritesCounter] = useState<number>(0);
     const [orders, setOrders] = useState<any>([]);
 
     useEffect(() => {
@@ -38,7 +44,9 @@ export const UserMethodsProvider = ({children}: any) => {
                     const userData = userDoc.data();
                     if (userData) {
                         setCart(userData.cart);
+                        setCartCounter(userData.cart.length);
                         setFavorites(userData.favorites);
+                        setFavoritesCounter(userData.favorites.length);
                         setOrders(userData.orders);
                     }
                 };
@@ -50,11 +58,31 @@ export const UserMethodsProvider = ({children}: any) => {
         return () => unsubscribe();
     }, []);
 
-    const addToCart = (item: any) => {
+    const addToCart = (item: Item, quantity: number) => {
         if(user) {
-            const newCart = [...cart, item];
-            setCart(newCart);
-            updateDoc(doc(db, 'users', user.uid), {cart: newCart});
+            const alreadyInCart = cart.find((cartItem: any) => cartItem.item.imageTag === item.imageTag);
+            if(alreadyInCart){
+                const updatedCart = cart.map((cartItem: any) => {
+                    if(cartItem.item.imageTag === item.imageTag) {
+                        return {
+                            ...cartItem,
+                            quantity: cartItem.quantity + quantity
+                        };
+                    }
+                    else {
+                        return cartItem;
+                    }
+                });
+                setCart(updatedCart);
+                updateDoc(doc(db, 'users', user.uid), {cart: updatedCart});
+            }
+            else {
+                const updatedCart = [...cart, {item, quantity}];
+                const updatedCartCounter = cartCounter + 1;
+                setCart(updatedCart);
+                setCartCounter(updatedCartCounter);
+                updateDoc(doc(db, 'users', user.uid), {cart: updatedCart});
+            }
         }
     };
 
@@ -86,7 +114,9 @@ export const UserMethodsProvider = ({children}: any) => {
                 checkIfFavorite(item) === true
             ) return;
             const newFavorites = [...favorites, item];
+            const newFavoritesCounter = favoritesCounter + 1;
             setFavorites(newFavorites);
+            setFavoritesCounter(newFavoritesCounter);
             updateDoc(doc(db, 'users', user.uid), {favorites: newFavorites});
         }
     };
@@ -94,7 +124,9 @@ export const UserMethodsProvider = ({children}: any) => {
     const removeFromFavorites = (item: Item) => {
         if(user) {
             const newFavorites = favorites.filter((favoriteItem: any) => favoriteItem.imageTag !== item.imageTag);
+            const newFavoritesCounter = favoritesCounter - 1;
             setFavorites(newFavorites);
+            setFavoritesCounter(newFavoritesCounter);
             updateDoc(doc(db, 'users', user.uid), {favorites: newFavorites});
         }
     };
@@ -112,9 +144,11 @@ export const UserMethodsProvider = ({children}: any) => {
         <UserMethodsContext.Provider value={{
             addToCart,
             removeFromCart,
+            cartCounter,
             checkIfFavorite,
             addToFavorites,
             removeFromFavorites,
+            favoritesCounter,
             addToOrders,
         }}>
             {children}

@@ -8,7 +8,7 @@ import { UserMethodsContext } from '../../Contexts/userMethodsContext';
 function SingleProd () {
     
     const { selectedProductToShow, quantityValue, setQuantityValue} = useContext(SelectedProdContext);
-    const { checkIfFavorite, addToFavorites, removeFromFavorites } = useContext(UserMethodsContext);
+    const { checkIfFavorite, addToFavorites, removeFromFavorites, addToCart } = useContext(UserMethodsContext);
     const [isFavorite, setIsFavorite] = useState(checkIfFavorite(selectedProductToShow!));
 
     useEffect(() => {
@@ -126,6 +126,7 @@ function SingleProd () {
                                         backgroundColor: "black"
                                     }
                                 }}
+                                onClick={() => addToCart(selectedProductToShow!, quantityValue)}
                                 startIcon={<MaterialIcon.AddShoppingCartRounded/>}>
                                 Add to Cart
                             </Material.Button>
