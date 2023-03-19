@@ -8,6 +8,7 @@ import { AppearenceMethodsContext } from './appeareanceContext';
 
 interface UserMethodsContextType {
     addToCart: (item: Item, quantity: number) => void;
+    getTotalPrice: (cart: any) => number;
     handleIncrement: (item: Item) => void;
     handleDecrement: (item: Item) => void;
     removeFromCart: (item: Item) => void;
@@ -21,6 +22,7 @@ interface UserMethodsContextType {
 
 export const UserMethodsContext = createContext<UserMethodsContextType>({
     addToCart: () => {},
+    getTotalPrice: () => 0,
     handleIncrement: () => {},
     handleDecrement: () => {},
     removeFromCart: () => {},
@@ -39,7 +41,7 @@ export const UserMethodsProvider = ({children}: any) => {
     const [favorites, setFavorites] = useState<any>([]);
     const [favoritesCounter, setFavoritesCounter] = useState<number>(0);
     const [orders, setOrders] = useState<any>([]);
-    const {showElement, hideElement} = useContext(AppearenceMethodsContext);
+    const {hideElement} = useContext(AppearenceMethodsContext);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -90,6 +92,14 @@ export const UserMethodsProvider = ({children}: any) => {
                 updateDoc(doc(db, 'users', user.uid), {cart: updatedCart});
             }
         }
+    };
+
+    const getTotalPrice = (cart: any) => {
+        let totalPrice = 0;
+        cart.forEach((cartItem: any) => {
+            totalPrice += cartItem.item.price * cartItem.quantity;
+        });
+        return totalPrice;
     };
 
     const handleIncrement = (item: Item) => {
@@ -187,6 +197,7 @@ export const UserMethodsProvider = ({children}: any) => {
     return (
         <UserMethodsContext.Provider value={{
             addToCart,
+            getTotalPrice,
             handleIncrement,
             handleDecrement,
             removeFromCart,

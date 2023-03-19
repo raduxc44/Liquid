@@ -22,7 +22,7 @@ function CartCont () {
     const [user, setUser] = useState<any>(null)
     const [cart, setCart] = useState<Cart>([])
     const { setSelectedProductToShow } = useContext(SelectedProdContext)
-    const { handleIncrement, handleDecrement, removeFromCart } = useContext(UserMethodsContext)
+    const { getTotalPrice, handleIncrement, handleDecrement, removeFromCart } = useContext(UserMethodsContext)
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -139,6 +139,27 @@ function CartCont () {
                             )
                         }
                     </div>
+                    {cart.length > 0 && (
+                        <div className='checkout-container'>
+                            <p className='total-price'>Total: ${getTotalPrice(cart)}</p>
+                            <Material.Button
+                                variant="contained"
+                                sx={{
+                                    background: 'black',
+                                    color: 'goldenrod',
+                                    height: '100%',
+                                    width: '50%',
+                                    borderRadius: '15px',
+                                    marginTop: '10px',
+                                    marginBottom: '10px',
+                                }}
+                                onClick={() => navigate('/checkout')}
+                            >
+                                Checkout
+                            </Material.Button>
+                        </div>
+                    )    
+                }
                 </div>
                 ) 
                 : 
