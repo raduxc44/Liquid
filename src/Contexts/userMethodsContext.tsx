@@ -8,6 +8,8 @@ import { AppearenceMethodsContext } from './appeareanceContext';
 
 interface UserMethodsContextType {
     addToCart: (item: Item, quantity: number) => void;
+    handleIncrement: (item: Item) => void;
+    handleDecrement: (item: Item) => void;
     removeFromCart: (item: Item) => void;
     cartCounter: number;
     checkIfFavorite: (item: Item) => boolean;
@@ -19,6 +21,8 @@ interface UserMethodsContextType {
 
 export const UserMethodsContext = createContext<UserMethodsContextType>({
     addToCart: () => {},
+    handleIncrement: () => {},
+    handleDecrement: () => {},
     removeFromCart: () => {},
     cartCounter: 0,
     checkIfFavorite: () => false,
@@ -88,6 +92,38 @@ export const UserMethodsProvider = ({children}: any) => {
         }
     };
 
+    const handleIncrement = (item: Item) => {
+        const updatedCart = cart.map((cartItem: any) => {
+            if(cartItem.item.imageTag === item.imageTag) {
+                return {
+                    ...cartItem,
+                    quantity: cartItem.quantity + 1
+                };
+            }
+            else {
+                return cartItem;
+            }
+        });
+        setCart(updatedCart);
+        updateDoc(doc(db, 'users', user.uid), {cart: updatedCart});
+    };
+
+    const handleDecrement = (item: Item) => {
+        const updatedCart = cart.map((cartItem: any) => {
+            if(cartItem.item.imageTag === item.imageTag) {
+                return {
+                    ...cartItem,
+                    quantity: cartItem.quantity - 1
+                };
+            }
+            else {
+                return cartItem;
+            }
+        });
+        setCart(updatedCart);
+        updateDoc(doc(db, 'users', user.uid), {cart: updatedCart});
+    };
+
     const removeFromCart = (item: Item) => {
         if(user) {
             const newCart = cart.filter((cartItem: any) => cartItem.item.imageTag !== item.imageTag);
@@ -151,6 +187,8 @@ export const UserMethodsProvider = ({children}: any) => {
     return (
         <UserMethodsContext.Provider value={{
             addToCart,
+            handleIncrement,
+            handleDecrement,
             removeFromCart,
             cartCounter,
             checkIfFavorite,
