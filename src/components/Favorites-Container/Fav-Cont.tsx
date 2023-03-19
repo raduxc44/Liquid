@@ -6,6 +6,7 @@ import { doc, onSnapshot } from 'firebase/firestore'
 import { Item } from '../../data/types'
 import { useNavigate } from 'react-router-dom'
 import { SelectedProdContext } from '../../Contexts/selectedProductContext'
+import { UserMethodsContext } from '../../Contexts/userMethodsContext'
 
 function FavCont () {
 
@@ -14,6 +15,7 @@ function FavCont () {
     const [user, setUser] = useState<any>(null)
     const [favorites, setFavorites] = useState<Item[]>([])
     const { setSelectedProductToShow } = useContext(SelectedProdContext)
+    const { removeFromFavorites } = useContext(UserMethodsContext)
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -55,6 +57,11 @@ function FavCont () {
                                             <p>{item.quantity}/{item.strength}</p>
                                         </div>
                                         <img src={require(`../../images/${item.category}/desktop/${item.imageTag}.webp`)} alt="" />
+                                        <span 
+                                            onClick={() => removeFromFavorites(item)}
+                                            className="material-symbols-outlined favorite-remove">
+                                            heart_broken
+                                        </span>
                                     </li>
                                 )
                             })}

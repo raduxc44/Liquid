@@ -40,7 +40,7 @@ function Nav () {
     }
     window.addEventListener('resize', changeDeviceType);
 
-    function hideMobileElement (element: HTMLElement, animationClass: string) {
+    function hideElement (element: HTMLElement, animationClass: string) {
         if(!element.classList.contains('in-transition')) {
             element.classList.toggle('in-transition')
             element.classList.toggle(animationClass)
@@ -54,7 +54,7 @@ function Nav () {
         }
     }
 
-    function showMobileElement (element: HTMLElement, animationClass: string) {
+    function showElement (element: HTMLElement, animationClass: string) {
         if(!element.classList.contains('in-transition')) {
             element.classList.toggle('in-transition')
             element.style.display = 'flex';
@@ -216,7 +216,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Whisky')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -232,7 +232,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Vodka')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -248,7 +248,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Cognac')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -264,7 +264,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Gin')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -280,7 +280,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Rum')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -296,7 +296,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Tequila')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -312,7 +312,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Liquor')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -374,7 +374,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Red-Wine')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -390,7 +390,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('White-Wine')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -406,7 +406,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Rose-Wine')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -457,7 +457,7 @@ function Nav () {
                                 onClick={() => {
                                     filterHandler('Beer')
                                     switchMenus('secondary', 'primary')
-                                    hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                    hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                                 }}
                                 className='primary-categ-item'
                             >
@@ -473,7 +473,7 @@ function Nav () {
                                 onClick={() => {
                                     filterHandler('Beverage')
                                     switchMenus('secondary', 'primary')
-                                    hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                    hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                                 }}
                                 className='primary-categ-item'
                             >
@@ -680,12 +680,12 @@ function Nav () {
                                 let accountDiv:HTMLElement = document.querySelector('div.account-preview-container')!;
                                 let cartDiv:HTMLElement = document.querySelector('div.cart-preview-container')!;
                                 if(favoritesDiv.style.display === 'flex') {
-                                    hideMobileElement(favoritesDiv, 'animate__fadeOutRight')
+                                    hideElement(favoritesDiv, 'animate__fadeOutRight')
                                 }
                                 else {
-                                    hideMobileElement(accountDiv, 'animate__fadeOutRight')
-                                    hideMobileElement(cartDiv, 'animate__fadeOutRight')
-                                    showMobileElement(favoritesDiv, 'animate__fadeInRight')
+                                    hideElement(accountDiv, 'animate__fadeOutRight')
+                                    hideElement(cartDiv, 'animate__fadeOutRight')
+                                    hideElement(favoritesDiv, 'animate__fadeInRight')
                                 }
                             }
                         } className='material-symbols-outlined nav-icon'>favorite</span>
@@ -698,12 +698,12 @@ function Nav () {
                                 let accountDiv:HTMLElement = document.querySelector('div.account-preview-container')!;
                                 let cartDiv:HTMLElement = document.querySelector('div.cart-preview-container')!;
                                 if(accountDiv.style.display === 'flex') {
-                                    hideMobileElement(accountDiv, 'animate__fadeOutRight')
+                                    hideElement(accountDiv, 'animate__fadeOutRight')
                                 }
                                 else {
-                                    hideMobileElement(favoritesDiv, 'animate__fadeOutRight')
-                                    hideMobileElement(cartDiv, 'animate__fadeOutRight')
-                                    showMobileElement(accountDiv, 'animate__fadeInRight')
+                                    hideElement(favoritesDiv, 'animate__fadeOutRight')
+                                    hideElement(cartDiv, 'animate__fadeOutRight')
+                                    showElement(accountDiv, 'animate__fadeInRight')
                                 }
                             }
                         } className='material-symbols-outlined nav-icon'>account_circle</span>
@@ -714,12 +714,12 @@ function Nav () {
                             let accountDiv:HTMLElement = document.querySelector('div.account-preview-container')!;
                             let cartDiv:HTMLElement = document.querySelector('div.cart-preview-container')!;
                             if(cartDiv.style.display === 'flex') {
-                                hideMobileElement(cartDiv, 'animate__fadeOutRight')
+                                hideElement(cartDiv, 'animate__fadeOutRight')
                             }
                             else {
-                                hideMobileElement(favoritesDiv, 'animate__fadeOutRight')
-                                hideMobileElement(accountDiv, 'animate__fadeOutRight')
-                                showMobileElement(cartDiv, 'animate__fadeInRight')
+                                hideElement(favoritesDiv, 'animate__fadeOutRight')
+                                hideElement(accountDiv, 'animate__fadeOutRight')
+                                showElement(cartDiv, 'animate__fadeInRight')
                             }
                         }
                     } className='nav-icon-container'>
@@ -739,13 +739,13 @@ function Nav () {
                             let categories:HTMLElement = document.querySelector('div.nav-mobile-categs')!;
                             let searchCont:HTMLElement = document.querySelector('div.nav-mobile-search-cont')!;
                             if(searchCont.classList.contains('in-transition')) return;
-                            if(alreadyOpenedSearch.current) hideMobileElement(searchCont, 'animate__fadeOutUp')
+                            if(alreadyOpenedSearch.current) hideElement(searchCont, 'animate__fadeOutUp')
                             if(categories.style.display !== 'flex') {
-                                showMobileElement(categories, 'animate__fadeInLeft')
+                                showElement(categories, 'animate__fadeInLeft')
                                 alreadyOpenedCateg.current = true;
                             }
                             else {
-                                hideMobileElement(categories, 'animate__fadeOutLeft')
+                                hideElement(categories, 'animate__fadeOutLeft')
                                 alreadyOpenedCateg.current = false;
                             }
                             }} className="material-symbols-outlined">menu</span>
@@ -756,13 +756,13 @@ function Nav () {
                             let categories:HTMLElement = document.querySelector('div.nav-mobile-categs')!;
                             let searchCont:HTMLElement = document.querySelector('div.nav-mobile-search-cont')!;
                             if(categories.classList.contains('in-transition')) return;
-                            if(alreadyOpenedCateg.current) hideMobileElement(categories, 'animate__fadeOutLeft')
+                            if(alreadyOpenedCateg.current) hideElement(categories, 'animate__fadeOutLeft')
                             if(searchCont.style.display !== 'flex') {
-                                showMobileElement(searchCont, 'animate__fadeInDown')
+                                showElement(searchCont, 'animate__fadeInDown')
                                 alreadyOpenedSearch.current = true;
                             }
                             else {
-                                hideMobileElement(searchCont, 'animate__fadeOutUp')
+                                hideElement(searchCont, 'animate__fadeOutUp')
                                 alreadyOpenedSearch.current = false;
                             }
                         }} className='material-symbols-outlined search-icon-mobile'>search</span>
@@ -812,7 +812,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Champagne')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -837,7 +837,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Gift-Card')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >

@@ -56,7 +56,23 @@
     object-fit: cover;
     border-radius: 10px;
 }
-
+.favorite-remove {
+    font-size: 1.5rem;
+    margin: 0 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.favorite-remove:hover {
+    animation-name: delete-button-hover;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+@keyframes delete-button-hover {
+    100% {
+        transform: scale(1.3);
+    }
+}
 @media screen and (max-width: 1000px) {
     .favorites-preview-container{
         width: 75dvw;

@@ -6,6 +6,7 @@ import { doc, onSnapshot } from 'firebase/firestore'
 import { Item } from '../../data/types'
 import { useNavigate } from 'react-router-dom'
 import { SelectedProdContext } from '../../Contexts/selectedProductContext'
+import { UserMethodsContext } from '../../Contexts/userMethodsContext'
 
 function CartCont () {
 
@@ -20,6 +21,7 @@ function CartCont () {
     const [user, setUser] = useState<any>(null)
     const [cart, setCart] = useState<Cart>([])
     const { setSelectedProductToShow } = useContext(SelectedProdContext)
+    const { removeFromCart } = useContext(UserMethodsContext)
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -65,6 +67,11 @@ function CartCont () {
                                             <p>{cartItem.item.quantity}/{cartItem.item.strength}</p>
                                         </div>
                                         <img src={require(`../../images/${cartItem.item.category}/desktop/${cartItem.item.imageTag}.webp`)} alt="" />
+                                        <span
+                                            onClick={() => removeFromCart(cartItem.item)}
+                                            className="material-symbols-outlined favorite-remove">
+                                                remove_shopping_cart
+                                        </span>
                                     </li>
                                 )
                             })}

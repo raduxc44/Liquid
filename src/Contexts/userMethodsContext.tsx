@@ -88,8 +88,10 @@ export const UserMethodsProvider = ({children}: any) => {
 
     const removeFromCart = (item: Item) => {
         if(user) {
-            const newCart = cart.filter((cartItem: Item) => cartItem.imageTag !== item.imageTag);
+            const newCart = cart.filter((cartItem: any) => cartItem.item.imageTag !== item.imageTag);
+            const newCartCounter = cartCounter - 1;
             setCart(newCart);
+            setCartCounter(newCartCounter);
             updateDoc(doc(db, 'users', user.uid), {cart: newCart});
         }
     };
