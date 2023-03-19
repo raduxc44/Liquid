@@ -44,7 +44,6 @@
     border-radius: 25px;
 }
 .cart-item:hover {
-    cursor: pointer;
     animation-name: search-result-selecting;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
@@ -61,6 +60,7 @@
 }
 .cart-item img {
     min-width: 10dvw;
+    cursor: pointer;
     min-height: 15dvh;
     max-width: 10dvw;
     max-height: 15dvh;

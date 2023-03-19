@@ -40,7 +40,6 @@
     border-radius: 25px;
 }
 .favorite-item:hover {
-    cursor: pointer;
     animation-name: search-result-selecting;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
@@ -56,6 +55,7 @@
     font-family: 'Roboto';
 }
 .favorite-item img {
+    cursor: pointer;
     min-width: 10dvw;
     min-height: 15dvh;
     max-width: 10dvw;

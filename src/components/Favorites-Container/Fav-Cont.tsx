@@ -49,16 +49,17 @@ function FavCont () {
                                     {favorites.map((item, index) => {
                                         return (
                                             <li className='favorite-item' key={index}
-                                                onClick={() => {
-                                                    setSelectedProductToShow(item)
-                                                    navigate(`/product/${item.name}`);
-                                                }}
                                             >
                                                 <div className='favorite-details'>
                                                     <p>{item.name}</p>
                                                     <p>{item.quantity}/{item.strength}</p>
                                                 </div>
-                                                <img src={require(`../../images/${item.category}/desktop/${item.imageTag}.webp`)} alt="" />
+                                                <img 
+                                                onClick={() => {
+                                                    setSelectedProductToShow(item)
+                                                    navigate(`/product/${item.name}`);
+                                                }}
+                                                src={require(`../../images/${item.category}/desktop/${item.imageTag}.webp`)} alt="" />
                                                 <span 
                                                     onClick={() => removeFromFavorites(item)}
                                                     className="material-symbols-outlined favorite-remove">

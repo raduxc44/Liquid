@@ -69,10 +69,6 @@ function CartCont () {
                                     {cart.map((cartItem, index) => {
                                         return (
                                             <li className='cart-item' key={index}
-                                                onClick={() => {
-                                                    setSelectedProductToShow(cartItem.item)
-                                                    navigate(`/product/${cartItem.item.name}`);
-                                                }}
                                             >
                                                 <div className='cart-item-details'>
                                                     <p>{cartItem.item.name}</p>
@@ -119,7 +115,12 @@ function CartCont () {
                                                         <Material.Button onClick={() => handleIncrement(cartItem.item)} style={sideButtonsStyles}>+</Material.Button>
                                                         </Material.Box>
                                                 </div>
-                                                <img src={require(`../../images/${cartItem.item.category}/desktop/${cartItem.item.imageTag}.webp`)} alt="" />
+                                                <img 
+                                                onClick={() => {
+                                                    setSelectedProductToShow(cartItem.item)
+                                                    navigate(`/product/${cartItem.item.name}`);
+                                                }}
+                                                src={require(`../../images/${cartItem.item.category}/desktop/${cartItem.item.imageTag}.webp`)} alt="" />
                                                 <span
                                                     onClick={() => removeFromCart(cartItem.item)}
                                                     className="material-symbols-outlined favorite-remove">

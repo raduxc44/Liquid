@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/home';
 import IndividualProdPage from './pages/individualProdPage';
 import FilteredProducts from './pages/filteredProductsPage';
+import Checkout from './pages/checkout';
 import { SelectedProdProvider } from './Contexts/selectedProductContext';
 import { SelectedFilterProvider } from './Contexts/selectedFilterContext';
 import { InventoryContextProvider } from './Contexts/inventoryContext';
@@ -26,6 +27,10 @@ function App() {
             <Route
             path={`category/:categoryName`}
             element={<FilteredProducts />}
+            />
+            <Route
+            path='/checkout'
+            element={<Checkout />}
             />
         </Routes>
       </BrowserRouter>
