@@ -1,9 +1,10 @@
-import {createContext, useState, useEffect} from 'react';
+import {createContext, useContext, useState, useEffect} from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { auth } from '../firebase';
 import { db } from '../firebase';
 import { Item } from '../data/types';
+import { AppearenceMethodsContext } from './appeareanceContext';
 
 interface UserMethodsContextType {
     addToCart: (item: Item, quantity: number) => void;
@@ -34,6 +35,7 @@ export const UserMethodsProvider = ({children}: any) => {
     const [favorites, setFavorites] = useState<any>([]);
     const [favoritesCounter, setFavoritesCounter] = useState<number>(0);
     const [orders, setOrders] = useState<any>([]);
+    const {showElement, hideElement} = useContext(AppearenceMethodsContext);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -92,6 +94,8 @@ export const UserMethodsProvider = ({children}: any) => {
             const newCartCounter = cartCounter - 1;
             setCart(newCart);
             setCartCounter(newCartCounter);
+            let cartDiv:HTMLElement = document.querySelector('div.cart-preview-container')!;
+            if(newCart.length === 0) {hideElement(cartDiv, 'animate__fadeOutRight')}
             updateDoc(doc(db, 'users', user.uid), {cart: newCart});
         }
     };
@@ -129,6 +133,8 @@ export const UserMethodsProvider = ({children}: any) => {
             const newFavoritesCounter = favoritesCounter - 1;
             setFavorites(newFavorites);
             setFavoritesCounter(newFavoritesCounter);
+            let favoritesDiv:HTMLElement = document.querySelector('div.favorites-preview-container')!;
+            if(newFavorites.length === 0) {hideElement(favoritesDiv, 'animate__fadeOutRight')}
             updateDoc(doc(db, 'users', user.uid), {favorites: newFavorites});
         }
     };

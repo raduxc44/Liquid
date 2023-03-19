@@ -49,33 +49,44 @@ function CartCont () {
             {isUserLoggedIn ? (
                 <div className='cart-preview'>
                     <div className='cart-preview-cart'>
-                        <ul className='cart-list'>
-                            {cart.map((cartItem, index) => {
-                                return (
-                                    <li className='cart-item' key={index}
-                                        onClick={() => {
-                                            setSelectedProductToShow(cartItem.item)
-                                            navigate(`/product/${cartItem.item.name}`);
-                                        }}
-                                    >
-                                        <div>
-                                            <p>{cartItem.quantity}</p>
-                                            <p>{cartItem.quantity * cartItem.item.price}</p>
-                                        </div>
-                                        <div className='cart-item-details'>
-                                            <p>{cartItem.item.name}</p>
-                                            <p>{cartItem.item.quantity}/{cartItem.item.strength}</p>
-                                        </div>
-                                        <img src={require(`../../images/${cartItem.item.category}/desktop/${cartItem.item.imageTag}.webp`)} alt="" />
-                                        <span
-                                            onClick={() => removeFromCart(cartItem.item)}
-                                            className="material-symbols-outlined favorite-remove">
-                                                remove_shopping_cart
-                                        </span>
-                                    </li>
-                                )
-                            })}
-                        </ul>
+                        {
+                            cart.length > 0 ? (
+                                <ul className='cart-list'>
+                                    {cart.map((cartItem, index) => {
+                                        return (
+                                            <li className='cart-item' key={index}
+                                                onClick={() => {
+                                                    setSelectedProductToShow(cartItem.item)
+                                                    navigate(`/product/${cartItem.item.name}`);
+                                                }}
+                                            >
+                                                <div>
+                                                    <p>{cartItem.quantity}</p>
+                                                    <p>{cartItem.quantity * cartItem.item.price}</p>
+                                                </div>
+                                                <div className='cart-item-details'>
+                                                    <p>{cartItem.item.name}</p>
+                                                    <p>{cartItem.item.quantity}/{cartItem.item.strength}</p>
+                                                </div>
+                                                <img src={require(`../../images/${cartItem.item.category}/desktop/${cartItem.item.imageTag}.webp`)} alt="" />
+                                                <span
+                                                    onClick={() => removeFromCart(cartItem.item)}
+                                                    className="material-symbols-outlined favorite-remove">
+                                                        remove_shopping_cart
+                                                </span>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            ) : (
+                                <div className='cart-preview'>
+                                    <div className='cart-empty'>
+                                        <p className='logo-auth'>Liquid</p>
+                                        <p>Your cart is empty!</p>
+                                    </div>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
                 ) 

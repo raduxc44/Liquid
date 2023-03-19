@@ -7,6 +7,7 @@ import { SelectedProdContext } from '../../Contexts/selectedProductContext';
 import { SelectedFilterContext } from '../../Contexts/selectedFilterContext';
 import { InventoryContext } from '../../Contexts/inventoryContext';
 import { UserMethodsContext } from '../../Contexts/userMethodsContext';
+import { AppearenceMethodsContext } from '../../Contexts/appeareanceContext';
 import AuthCont from '../Auth-Container/Auth-Cont';
 import FavCont from '../Favorites-Container/Fav-Cont';
 import CartCont from '../Cart-Container/Cart-Cont';
@@ -22,10 +23,9 @@ function Nav () {
     const [deviceType, setDeviceType] = useState(
         window.innerWidth < 1000 ? 'mobile' : 'desktop'
     );
+    const {showElement, hideElement} = useContext(AppearenceMethodsContext);
     const alreadyOpenedCateg = useRef(false);
     const alreadyOpenedSearch = useRef(false);
-    let categAnimationDelay = useRef(0)
-    let searchAnimationDelay = useRef(0)
     let searchResultsAnimationDelay = useRef(0);
     let alreadyInTransition = useRef(false);
     let searchResultsArr: Item[] = []; 
@@ -39,32 +39,6 @@ function Nav () {
         }
     }
     window.addEventListener('resize', changeDeviceType);
-
-    function hideElement (element: HTMLElement, animationClass: string) {
-        if(!element.classList.contains('in-transition')) {
-            element.classList.toggle('in-transition')
-            element.classList.toggle(animationClass)
-            setTimeout(() => {
-                element.classList.toggle('in-transition')
-                element.classList.toggle(animationClass)
-                element.style.removeProperty('display')
-                categAnimationDelay.current = 0
-                searchAnimationDelay.current = 0;
-            }, 1000)
-        }
-    }
-
-    function showElement (element: HTMLElement, animationClass: string) {
-        if(!element.classList.contains('in-transition')) {
-            element.classList.toggle('in-transition')
-            element.style.display = 'flex';
-            element.classList.toggle(animationClass)
-            setTimeout(() => {
-                element.classList.toggle(animationClass)
-                element.classList.toggle('in-transition')
-            }, 1000)
-        }
-    }
     
     //Handles the secondary menu animations - mobile
     function switchMenus (start:string, end:string) {
@@ -685,7 +659,7 @@ function Nav () {
                                 else {
                                     hideElement(accountDiv, 'animate__fadeOutRight')
                                     hideElement(cartDiv, 'animate__fadeOutRight')
-                                    hideElement(favoritesDiv, 'animate__fadeInRight')
+                                    showElement(favoritesDiv, 'animate__fadeInRight')
                                 }
                             }
                         } className='material-symbols-outlined nav-icon'>favorite</span>

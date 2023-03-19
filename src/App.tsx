@@ -7,10 +7,12 @@ import { SelectedProdProvider } from './Contexts/selectedProductContext';
 import { SelectedFilterProvider } from './Contexts/selectedFilterContext';
 import { InventoryContextProvider } from './Contexts/inventoryContext';
 import { UserMethodsProvider } from './Contexts/userMethodsContext';
+import { AppearenceMethodsProvider } from './Contexts/appeareanceContext';
 
 function App() {
 
   return (
+    <AppearenceMethodsProvider>
     <UserMethodsProvider>
     <InventoryContextProvider>
     <SelectedProdProvider>
@@ -31,6 +33,7 @@ function App() {
     </SelectedProdProvider>
     </InventoryContextProvider>
     </UserMethodsProvider>
+    </AppearenceMethodsProvider>
   );  
 }
 

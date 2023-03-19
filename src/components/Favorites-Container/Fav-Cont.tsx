@@ -43,29 +43,38 @@ function FavCont () {
             {isUserLoggedIn ? (
                 <div className='favorites-preview'>
                     <div className='favorites-preview__favorites'>
-                        <ul className='favorites-list'>
-                            {favorites.map((item, index) => {
-                                return (
-                                    <li className='favorite-item' key={index}
-                                        onClick={() => {
-                                            setSelectedProductToShow(item)
-                                            navigate(`/product/${item.name}`);
-                                        }}
-                                    >
-                                        <div className='favorite-details'>
-                                            <p>{item.name}</p>
-                                            <p>{item.quantity}/{item.strength}</p>
-                                        </div>
-                                        <img src={require(`../../images/${item.category}/desktop/${item.imageTag}.webp`)} alt="" />
-                                        <span 
-                                            onClick={() => removeFromFavorites(item)}
-                                            className="material-symbols-outlined favorite-remove">
-                                            heart_broken
-                                        </span>
-                                    </li>
-                                )
-                            })}
-                        </ul>
+                        {
+                            favorites.length > 0 ? (
+                                <ul className='favorites-list'>
+                                    {favorites.map((item, index) => {
+                                        return (
+                                            <li className='favorite-item' key={index}
+                                                onClick={() => {
+                                                    setSelectedProductToShow(item)
+                                                    navigate(`/product/${item.name}`);
+                                                }}
+                                            >
+                                                <div className='favorite-details'>
+                                                    <p>{item.name}</p>
+                                                    <p>{item.quantity}/{item.strength}</p>
+                                                </div>
+                                                <img src={require(`../../images/${item.category}/desktop/${item.imageTag}.webp`)} alt="" />
+                                                <span 
+                                                    onClick={() => removeFromFavorites(item)}
+                                                    className="material-symbols-outlined favorite-remove">
+                                                    heart_broken
+                                                </span>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            ) : (
+                                <div className='favorites-empty'>
+                                    <p className='logo-auth'>Liquid</p>
+                                    <p>You have no favorites yet.</p>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
                 ) 
@@ -77,7 +86,7 @@ function FavCont () {
                         <p>Sign in to see your favorites</p>
                     </div>
                 </div>
-            ) 
+                ) 
             }
         </div>
     )
