@@ -15,6 +15,9 @@
     top: 10vh;
     overflow: auto;
 }
+.cart-preview-cart {
+    width: 100%;
+}
 .cart-preview{
     width:100%;
     height: 100%;
