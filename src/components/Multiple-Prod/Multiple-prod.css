@@ -1,12 +1,12 @@
 .multiple-prod-wrap {
     display: flex;
-    width: 90dvw;
+    width: 90vw;
     border-radius: 5px;
     background-color: goldenrod;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 5dvw;
+    gap: 5vw;
     padding: 7.5vh 2vw;
 }
 .multiple-prod-card {
@@ -18,7 +18,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    height: 50dvh;
+    height: 50vh;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }

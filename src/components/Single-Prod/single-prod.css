@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5dvw;
+    gap: 5vw;
 }
 .product-container{
     display: flex;
@@ -18,7 +18,7 @@
     align-items: center;
     justify-content: center;
     width: 40%;
-    height: 70dvh;
+    height: 70vh;
     gap: 5%;
     padding-left: 2.5vw;
 }
@@ -27,14 +27,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 70dvh;
+    height: 70vh;
     gap: 10%;
-    padding-bottom: 5dvh;
-    padding-right: 2.5dvw;
+    padding-bottom: 5vh;
+    padding-right: 2.5vw;
 }
 .rating-price-cont {
     width: 100%;
-    height: 25dvh;
+    height: 25vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,15 +51,15 @@
 .stock {
     display: flex;
     align-items: center;
-    gap: 1dvw;
+    gap: 1vw;
 }
 .buy-cont {
     display: flex;
     width: 100%;
-    height: 10dvh;
+    height: 10vh;
     justify-content: center;
     align-items: center;
-    gap: 1dvw;
+    gap: 1vw;
 }
 .details-cont {
     width: 100%;
@@ -70,7 +70,7 @@
 }
 .product-details {
     width: 100%;
-    gap: 2dvh;
+    gap: 2vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -81,7 +81,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    gap: 10dvw;
+    gap: 10vw;
 }
 .product-detail p {
     width: 40%;
@@ -177,13 +177,13 @@ p {
     }
     .product-container {
         width: 100%;
-        height: 50dvh;
+        height: 50vh;
         padding-left: 0;
     }
     .product-details-container {
         width: 100%;
         justify-content: center;
-        height: 55dvh;
+        height: 55vh;
         padding-right: 0;
     }
     .product-details {

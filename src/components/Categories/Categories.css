@@ -107,8 +107,8 @@ picture {
         height: 40vh;
     }
     .categ-pic-sm {
-        width: 25dvw;
-        height: 30dvh;
+        width: 25vw;
+        height: 30vh;
     }
 
 }
@@ -118,7 +118,7 @@ picture {
         height: 90vh;
     }
     .categ-pic-sm {
-        height: 20dvh;
+        height: 20vh;
     }
     .lower-categ {
         height: 90vh;
