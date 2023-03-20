@@ -1,17 +1,18 @@
 import './Categories.css'
-import Inventory from '../../data/inventory.json';
 import { Item } from '../../data/types';
 import { useContext } from 'react';
 import { SelectedFilterContext } from '../../Contexts/selectedFilterContext';
 import { Link } from 'react-router-dom';
+import { InventoryContext } from '../../Contexts/inventoryContext';
 
 function Categories () {
 
     const { setSelectedFilter } = useContext(SelectedFilterContext);
+    const { inventory } = useContext(InventoryContext);
 
     function filterHandler (filter: string) {
         let filteredItems:Item[] = [];
-        Object.entries(Inventory.Items).forEach(([key, value]) => {
+        Object.entries(inventory).forEach(([key, value]) => {
             if(value.category === filter) {
                 filteredItems.push(value);
                 setSelectedFilter(filteredItems);
