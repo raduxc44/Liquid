@@ -1,7 +1,7 @@
 import "./Checkout-Order.css";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../../firebase";
-import { doc, onSnapshot, setDoc } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { useState, useEffect, useContext} from "react";
 import { Item } from "../../data/types";
 import * as Material from '@mui/material'
@@ -17,7 +17,7 @@ const CheckoutOrder = () => {
     type Cart = CartItem[] | [];
 
     type Order = {
-        order: Cart;
+        orderItems: Cart;
         totalPrice: number;
         paymentMethod: string;
         date: Date

@@ -185,10 +185,10 @@ export const UserMethodsProvider = ({children}: any) => {
         }
     };
 
-    const addToOrders = (order: any, paymentMethod: string, date: Date, totalPrice: number) => {
+    const addToOrders = (orderItems: any, paymentMethod: string, date: Date, totalPrice: number) => {
         if(user) {
             const updatedOrders = [...orders, {
-                order,
+                orderItems,
                 paymentMethod,
                 date,
                 totalPrice
