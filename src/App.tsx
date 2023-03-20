@@ -4,6 +4,7 @@ import Home from './pages/home';
 import IndividualProdPage from './pages/individualProdPage';
 import FilteredProducts from './pages/filteredProductsPage';
 import Checkout from './pages/checkout';
+import OrderHistoryPage from './pages/orderHistoryPage';
 import { SelectedProdProvider } from './Contexts/selectedProductContext';
 import { SelectedFilterProvider } from './Contexts/selectedFilterContext';
 import { InventoryContextProvider } from './Contexts/inventoryContext';
@@ -31,6 +32,10 @@ function App() {
             <Route
             path='/checkout'
             element={<Checkout />}
+            />
+            <Route
+            path='/order-history'
+            element={<OrderHistoryPage />}
             />
         </Routes>
       </BrowserRouter>

@@ -12,9 +12,11 @@ import {
         } from 'firebase/auth'
 import { auth, db, updateProfile } from '../../firebase'
 import { doc, setDoc, deleteDoc, collection, query, where, getDocs } from 'firebase/firestore'
+import { useNavigate } from 'react-router-dom'
 
 function AuthCont () {
 
+    const navigate = useNavigate()
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
     const [user, setUser] = useState<any>(null)
     const [selectedForm, setSelectedForm] = useState('signUp')
@@ -256,7 +258,7 @@ function AuthCont () {
                 <div className='logged-user-info'>
                     <p>{auth.currentUser?.displayName}</p>
                     <p>{auth.currentUser?.email}</p>
-                    <button>Order History</button>
+                    <button type='button' onClick={() => navigate('/order-history') }>Order History</button>
                     <button type='button' onClick={() => auth.signOut()}>Log out</button>
                     <button type='button' onClick={() => handleDelete()}>Delete Account</button>
                 </div>

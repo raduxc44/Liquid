@@ -17,7 +17,7 @@ interface UserMethodsContextType {
     addToFavorites: (item: Item) => void;
     removeFromFavorites: (item: Item) => void;
     favoritesCounter: number;
-    addToOrders: (order: any) => void;
+    addToOrders: (order: any, paymentMethod: string, date: Date, totalPrice: number) => void;
 }
 
 export const UserMethodsContext = createContext<UserMethodsContextType>({
@@ -185,11 +185,18 @@ export const UserMethodsProvider = ({children}: any) => {
         }
     };
 
-    const addToOrders = (order: any) => {
+    const addToOrders = (order: any, paymentMethod: string, date: Date, totalPrice: number) => {
         if(user) {
-            const newOrders = [...orders, 'new order'];
-            setOrders(newOrders);
-            updateDoc(doc(db, 'users', user.uid), {orders: newOrders});
+            const updatedOrders = [...orders, {
+                order,
+                paymentMethod,
+                date,
+                totalPrice
+            }];
+            setOrders(updatedOrders);
+            setCart([]);
+            setCartCounter(0);
+            updateDoc(doc(db, 'users', user.uid), {orders: updatedOrders, cart: [], cartCounter: 0});
         }
     };
 

@@ -710,15 +710,18 @@ function Nav () {
                 <div className='nav-lower-mobile'>
                     <div className='nav-mobile-menu'>
                         <span onClick={() => {
+                            let body = document.querySelector('body')!;
                             let categories:HTMLElement = document.querySelector('div.nav-mobile-categs')!;
                             let searchCont:HTMLElement = document.querySelector('div.nav-mobile-search-cont')!;
                             if(searchCont.classList.contains('in-transition')) return;
                             if(alreadyOpenedSearch.current) hideElement(searchCont, 'animate__fadeOutUp')
                             if(categories.style.display !== 'flex') {
+                                body.style.overflow = 'hidden';
                                 showElement(categories, 'animate__fadeInLeft')
                                 alreadyOpenedCateg.current = true;
                             }
                             else {
+                                body.style.overflow = 'auto';
                                 hideElement(categories, 'animate__fadeOutLeft')
                                 alreadyOpenedCateg.current = false;
                             }

@@ -1,7 +1,7 @@
 import "./Checkout-Order.css";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../../firebase";
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot, setDoc } from "firebase/firestore";
 import { useState, useEffect, useContext} from "react";
 import { Item } from "../../data/types";
 import * as Material from '@mui/material'
@@ -16,11 +16,19 @@ const CheckoutOrder = () => {
     };
     type Cart = CartItem[] | [];
 
+    type Order = {
+        order: Cart;
+        totalPrice: number;
+        paymentMethod: string;
+        date: Date
+    };
+
     const navigate = useNavigate();
     const [cart, setCart] = useState<any>([]);
+    const [paymentMethod, setPaymentMethod] = useState<string>('Cash');
     const [user, setUser] = useState<any>(null);
     const [order, setOrder] = useState<any>({});
-    const { handleIncrement, handleDecrement, removeFromCart } = useContext(UserMethodsContext);
+    const { handleIncrement, handleDecrement, removeFromCart, getTotalPrice, addToOrders } = useContext(UserMethodsContext);
     const { setSelectedProductToShow } = useContext(SelectedProdContext)
 
     useEffect(() => {
@@ -31,6 +39,7 @@ const CheckoutOrder = () => {
             if (doc.exists()) {
                 setUser(doc.data());
                 setCart(doc.data().cart);
+                setOrder(doc.data().orders);
             } else {
                 console.log("No such document!");
             }
@@ -40,6 +49,17 @@ const CheckoutOrder = () => {
         }
         });
     }, []);
+
+    const handlePayment = () => {
+        if (paymentMethod === 'Cash') {
+            addToOrders(cart, paymentMethod, new Date(), getTotalPrice(cart));
+            setCart([]);
+            alert('Order placed successfully');
+            navigate('/order-history');
+        } else {
+            console.log('Credit Card')
+        }
+    }
 
     const sideButtonsStyles = {
         background: 'black',
@@ -147,12 +167,63 @@ const CheckoutOrder = () => {
                     })}
                 </ul>
             </div>
+                <div className="checkout-cart-total">
+                    <p>Total</p>
+                    <p>${getTotalPrice(cart)}</p>
+                    <Material.RadioGroup
+                    defaultValue={'Cash'}
+                    >
+                        <Material.FormControlLabel 
+                        value="Cash" control={<Material.Radio 
+                        onClick={() => setPaymentMethod('Cash')}
+                        sx={
+                            {
+                                color: 'gold',
+                                '&.Mui-checked': {
+                                    color: 'gold',
+                                },
+                            }
+                        }
+                        />} label="Cash" />
+                        <Material.FormControlLabel
+                        sx={
+                            {
+                                '&.Mui-checked': {
+                                    color: 'gold',
+                                },
+                                '&.Mui-disabled': {
+                                    color: 'gold',
+                                    '.MuiFormControlLabel-label	':{
+                                        color:'gold',
+                                        opacity: '0.5'
+                                    }
+                                },
+                            }
+                        }
+                        value="Credit Card" control={<Material.Radio 
+                        disabled
+                        sx={
+                            {
+                                '&.Mui-checked': {
+                                    color: 'gold',
+                                },
+                                '&.Mui-disabled': {
+                                    color: 'gold',
+                                    opacity: '0.5'
+                                },
+                            }
+                        }
+                        />} label="Credit Card" />
+                    </Material.RadioGroup>
+                </div>
             <div className="pay-warn">
-                <p>* Please use the following test credit card for payment *</p>
+                <p>* Please use the following test credit card for card payment *</p>
                 <p>4242 4242 4242 4242 - Exp: 01/24 - CVV: 123</p>
             </div>
-            <button className="pay-button">
-                <span>Pay</span>
+            <button className="pay-button" onClick={() => handlePayment()}>
+                <span>{
+                    paymentMethod === 'Cash' ? 'Place Order' : 'Pay'
+                    }</span>
             </button>
         </div>
     );
