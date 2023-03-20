@@ -21,7 +21,7 @@
     padding: 0.5% 2%;
     font-weight: bold;
     display: flex;
-    width: 10vw;
+    width: 10dvw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,8 +72,8 @@
 }
 .check-out-btn {
     border: 1px solid black;
-    width: 15vw;
-    height: 5vh;
+    width: 15dvw;
+    height: 5dvh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -130,6 +130,6 @@
         object-fit: cover;
     }
     .rec-section-all {
-        width: 20vw;
+        width: 20dvw;
     }
 }

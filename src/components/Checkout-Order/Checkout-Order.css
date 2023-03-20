@@ -54,10 +54,10 @@
     width: 50%;
 }
 .checkout-cart-item img {
-    min-width: 10vw;
-    min-height: 15vh;
-    max-width: 10vw;
-    max-height: 15vh;
+    min-width: 10dvw;
+    min-height: 15dvh;
+    max-width: 10dvw;
+    max-height: 15dvh;
     object-fit: cover;
     border-radius: 10px;
     cursor: pointer;
@@ -90,10 +90,10 @@
         margin: 10px 0;
     }
     .checkout-cart-item img {
-        min-width: 15vw;
-        min-height: 15vh;
-        max-width: 15vw;
-        max-height: 15vh;
+        min-width: 15dvw;
+        min-height: 15dvh;
+        max-width: 15dvw;
+        max-height: 15dvh;
         object-fit: cover;
         border-radius: 10px;
         cursor: pointer;
