@@ -5,6 +5,8 @@ import {
     signInWithEmailAndPassword, 
     createUserWithEmailAndPassword,
     signInWithPopup,
+    signInWithRedirect,
+    getRedirectResult,
     onAuthStateChanged,
     sendPasswordResetEmail,
         } from 'firebase/auth'
@@ -84,8 +86,9 @@ function AuthCont () {
             });
     };
     
-    const handleSignInWithGoogle = async () => {
-        signInWithPopup(auth, new GoogleAuthProvider())
+    const handleGoogleSignIn = () => {
+        if (window.innerWidth > 1000) {
+            signInWithPopup(auth, new GoogleAuthProvider())
             .then((result) => {
                 setIsUserLoggedIn(true);
                 const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -106,6 +109,31 @@ function AuthCont () {
                 });
             })
             .catch((error) => console.log(error));
+        } else {
+            signInWithRedirect(auth, new GoogleAuthProvider());
+            getRedirectResult(auth)
+                .then((result) => {
+                setIsUserLoggedIn(true);
+                if (!result) return;
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential?.accessToken;
+                const user = result.user;
+                updateProfile(user, {
+                    displayName: user.displayName,
+                });
+                setDoc(doc(db, "users", user.uid), {
+                    id: user.uid,
+                    firstName: user.displayName?.split(" ")[0],
+                    lastName: user.displayName?.split(" ")[1],
+                    email: user.email,
+                    createdAt: new Date(),
+                    favorites: [],
+                    cart: [],
+                    orders: [],
+                });
+                })
+            .catch((error) => console.log(error));
+        }
     };
 
     const handleDelete = async () => {
@@ -156,7 +184,7 @@ function AuthCont () {
                     </div>
                 </div>
                 <div className='account-form-btns'>
-                    <button type='button' onClick={handleSignInWithGoogle}>Sign in with Google</button>
+                    <button type='button' onClick={handleGoogleSignIn}>Sign in with Google</button>
                     <button type='button' onClick={() => setSelectedForm('signUp')}>Don't have an account? Sign up</button>
                 </div>
             </form>
@@ -199,7 +227,7 @@ function AuthCont () {
                     <button type='submit'>Register</button>
                 </div>
                 <div className='account-form-btns'>
-                    <button type='button' onClick={handleSignInWithGoogle}>Sign in with Google</button>
+                    <button type='button' onClick={handleGoogleSignIn}>Sign in with Google</button>
                     <button type='button' onClick={() => setSelectedForm('signIn')}>Already have an account? Sign in</button>
                 </div>
             </form>
@@ -217,7 +245,7 @@ function AuthCont () {
                     <button type='submit'>Reset Password</button>
                 </div>
                 <div className='account-form-btns'>
-                    <button type='button' onClick={handleSignInWithGoogle}>Sign in with Google</button>
+                    <button type='button' onClick={handleGoogleSignIn}>Sign in with Google</button>
                     <button type='button' onClick={() => setSelectedForm('signIn')}>Already have an account? Sign in</button>
                 </div>
             </form>
