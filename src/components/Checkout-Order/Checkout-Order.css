@@ -1,0 +1,128 @@
+.checkout-order {
+    display: flex;
+    background-color: goldenrod;
+    color: black;
+    font-size: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 5vh 0;
+    width: 90%;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+.checkout-cart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    background-color: black;
+    border-radius: 25px 25px 0 0;
+}
+.checkout-cart-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    border-radius: 25px;
+    overflow: auto;
+}
+.checkout-cart-item {
+    display: flex;
+    flex-direction: row;
+    color: gold;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 20vh;
+    padding: 0 20px;
+    background-color: black;
+    border-radius: 25px;
+    margin: 10px 0;
+}
+.checkout-cart-item-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 50%;
+}
+.checkout-cart-item img {
+    min-width: 10dvw;
+    min-height: 15dvh;
+    max-width: 10dvw;
+    max-height: 15dvh;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.favorite-remove {
+    cursor: pointer;
+}
+.pay-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    height: 5vh;
+    background-color: black;
+    border-radius: 25px;
+}
+.checkout-cart-total {
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    color: gold;
+    background-color: black;
+    margin: 0 0 10px 0;
+    border-radius: 0 0 25px 25px;
+}
+.pay-warn {
+    text-align: center;
+}
+
+@media screen and (max-width: 500px) {
+    .checkout-order{
+        font-size: 20px;
+    }
+    .checkout-cart-container {
+        width: 90%;
+        height: 50%;
+    }
+    .checkout-cart-item {
+        height: 20vh;
+        padding: 0 20px;
+        margin: 10px 0;
+    }
+    .checkout-cart-item img {
+        min-width: 15dvw;
+        min-height: 15dvh;
+        max-width: 15dvw;
+        max-height: 15dvh;
+        object-fit: cover;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    .checkout-cart-total{
+        width: 90%;
+    }
+    .pay-warn p{
+        font-size: 12px;
+    }
+    .pay-button {
+        width: 30%;
+        height: 5vh;
+        font-size: 12px;
+    }
+    .checkout-cart-item-details p{
+        font-size: 14px
+    }
+}

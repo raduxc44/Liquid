@@ -1,24 +1,31 @@
 import './Nav.css'
 import 'animate.css';
 import { useState, useRef, useContext } from 'react';
-import Inventory from '../../data/inventory.json'
 import { Item } from '../../data/types';
 import { Link, useNavigate } from 'react-router-dom';
 import { SelectedProdContext } from '../../Contexts/selectedProductContext';
 import { SelectedFilterContext } from '../../Contexts/selectedFilterContext';
+import { InventoryContext } from '../../Contexts/inventoryContext';
+import { UserMethodsContext } from '../../Contexts/userMethodsContext';
+import { AppearenceMethodsContext } from '../../Contexts/appeareanceContext';
 import AuthCont from '../Auth-Container/Auth-Cont';
+import FavCont from '../Favorites-Container/Fav-Cont';
+import CartCont from '../Cart-Container/Cart-Cont';
 
 function Nav () {
 
     const navigate = useNavigate();
     const { setSelectedProductToShow } = useContext(SelectedProdContext);
     const { setSelectedFilter } = useContext(SelectedFilterContext);
+    const { inventory } = useContext(InventoryContext);
+    const {favoritesCounter, cartCounter} = useContext(UserMethodsContext);
     const [selectedMainCategory, setSelectedMainCategory] = useState('spirits');
-    const [deviceType, setDeviceType] = useState('desktop');
+    const [deviceType, setDeviceType] = useState(
+        window.innerWidth < 1000 ? 'mobile' : 'desktop'
+    );
+    const {showElement, hideElement} = useContext(AppearenceMethodsContext);
     const alreadyOpenedCateg = useRef(false);
     const alreadyOpenedSearch = useRef(false);
-    let categAnimationDelay = useRef(0)
-    let searchAnimationDelay = useRef(0)
     let searchResultsAnimationDelay = useRef(0);
     let alreadyInTransition = useRef(false);
     let searchResultsArr: Item[] = []; 
@@ -31,35 +38,7 @@ function Nav () {
             setDeviceType('desktop');
         }
     }
-    window.onload = changeDeviceType;
-    window.onresize = changeDeviceType;
-    window.onreset = changeDeviceType;
-
-    function hideMobileElement (element: HTMLElement, animationClass: string) {
-        if(!element.classList.contains('in-transition')) {
-            element.classList.toggle('in-transition')
-            element.classList.toggle(animationClass)
-            setTimeout(() => {
-                element.classList.toggle('in-transition')
-                element.classList.toggle(animationClass)
-                element.style.removeProperty('display')
-                categAnimationDelay.current = 0
-                searchAnimationDelay.current = 0;
-            }, 1000)
-        }
-    }
-
-    function showMobileElement (element: HTMLElement, animationClass: string) {
-        if(!element.classList.contains('in-transition')) {
-            element.classList.toggle('in-transition')
-            element.style.display = 'flex';
-            element.classList.toggle(animationClass)
-            setTimeout(() => {
-                element.classList.toggle(animationClass)
-                element.classList.toggle('in-transition')
-            }, 1000)
-        }
-    }
+    window.addEventListener('resize', changeDeviceType);
     
     //Handles the secondary menu animations - mobile
     function switchMenus (start:string, end:string) {
@@ -105,14 +84,14 @@ function Nav () {
 
     function filterHandler (filter: string) {
         let filteredItems:Item[] = [];
-        Object.entries(Inventory.Items).forEach(([key, value]) => {
-            if(value.category === filter) {
-                filteredItems.push(value);
-                setSelectedFilter(filteredItems);
+        Object.entries(inventory).forEach(item => {
+            if(item[1].category) {
+                if(item[1].category === filter)
+                filteredItems.push(item[1])
             }
-            window.scroll(0,0);
         })
-        setSelectedMainCategory('spirits')
+        setSelectedMainCategory('spirits');
+        setSelectedFilter(filteredItems);
     }
 
     //Handles the secondary menu content
@@ -190,8 +169,8 @@ function Nav () {
                                 </div>
                             </Link>
                             <Link
-                                to={`/category/Champagne`}
-                                onClick={() => filterHandler('Champagne')}
+                                to={`/category/Liquor`}
+                                onClick={() => filterHandler('Liquor')}
                                 className="secondary-categ-item seven-categs"
                             >
                                 <div>
@@ -211,7 +190,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Whisky')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -227,7 +206,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Vodka')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -243,7 +222,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Cognac')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -259,7 +238,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Gin')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -275,7 +254,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Rum')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -291,7 +270,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Tequila')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -307,7 +286,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Liquor')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -325,27 +304,39 @@ function Nav () {
                 if(window.innerWidth >= 1000) {
                     return (
                         <>
-                            <div className="secondary-categ-item three-categs"
-                            onClick={() => {filterHandler('Red-Wine')}}
+                            <Link
+                                to={`/category/Red-Wine`}
+                                onClick={() => filterHandler('Red-Wine')}
+                                className="secondary-categ-item three-categs"
                             >
-                                <li>
-                                    <p>Red Wine</p>
-                                </li>
-                            </div>
-                            <div className="secondary-categ-item three-categs"
-                            onClick={() => {filterHandler('White-Wine')}}
+                                <div>
+                                    <li>
+                                        <p>Red Wine</p>
+                                    </li>
+                                </div>
+                            </Link>
+                            <Link
+                                to={`/category/White-Wine`}
+                                onClick={() => filterHandler('White-Wine')}
+                                className="secondary-categ-item three-categs"
                             >
-                                <li>
-                                    <p>White Wine</p>
-                                </li>
-                            </div>
-                            <div className="secondary-categ-item three-categs"
-                            onClick={() => {filterHandler('Rose-Wine')}}
+                                <div>
+                                    <li>
+                                        <p>White Wine</p>
+                                    </li>
+                                </div>
+                            </Link>
+                            <Link
+                                to={`/category/Rose-Wine`}
+                                onClick={() => filterHandler('Rose-Wine')}
+                                className="secondary-categ-item three-categs"
                             >
-                                <li>
-                                    <p>Rose Wine</p>
-                                </li>
-                            </div>
+                                <div>
+                                    <li>
+                                        <p>Rose Wine</p>
+                                    </li>
+                                </div>
+                            </Link>
                         </>
                     )
                 }
@@ -357,7 +348,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Red-Wine')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -373,7 +364,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('White-Wine')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -389,7 +380,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Rose-Wine')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -407,20 +398,28 @@ function Nav () {
                 if(window.innerWidth >= 1000) {
                     return (
                         <>
-                            <div className="secondary-categ-item two-categs"
-                            onClick={() => {filterHandler('Beer')}}
+                            <Link
+                                to={`/category/Beer`}
+                                onClick={() => filterHandler('Beer')}
+                                className="secondary-categ-item two-categs"
                             >
-                                <li>
-                                    <p>Beer</p>
-                                </li>
-                            </div>
-                            <div className="secondary-categ-item two-categs"
-                            onClick={() => {filterHandler('Beverage')}}
+                                <div>
+                                    <li>
+                                        <p>Beer</p>
+                                    </li>
+                                </div>
+                            </Link>
+                            <Link
+                                to={`/category/Beverage`}
+                                onClick={() => filterHandler('Beverage')}
+                                className="secondary-categ-item two-categs"
                             >
-                                <li>
-                                    <p>Beverage</p>
-                                </li>
-                            </div>
+                                <div>
+                                    <li>
+                                        <p>Beverages</p>
+                                    </li>
+                                </div>
+                            </Link>
                         </>
                     )
                 }
@@ -432,7 +431,7 @@ function Nav () {
                                 onClick={() => {
                                     filterHandler('Beer')
                                     switchMenus('secondary', 'primary')
-                                    hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                    hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                                 }}
                                 className='primary-categ-item'
                             >
@@ -448,7 +447,7 @@ function Nav () {
                                 onClick={() => {
                                     filterHandler('Beverage')
                                     switchMenus('secondary', 'primary')
-                                    hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                    hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                                 }}
                                 className='primary-categ-item'
                             >
@@ -515,13 +514,13 @@ function Nav () {
             resultsList.classList.add('search-results-container-anim');
             searchResultsArr = []
             resultsList.innerHTML = ''
-            let inventory: string[] = [];
             if(searchInput.value !== '') {
                 searchResultsAnim('desktop', 'start')
-                Object.entries(Inventory.Items).forEach(item => {
-                    inventory.push(item[0]);
-                    if(item[0].toLowerCase().includes(searchInput.value.toLowerCase())) 
-                    {searchResultsArr.push(item[1])}
+                Object.entries(inventory).forEach(item => {
+                    if(item[1].name) {
+                        if(item[1].name.toLowerCase().includes(searchInput.value.toLowerCase()))
+                        {searchResultsArr.push(item[1])}
+                    }
                 })
             }
             else if(searchInput.value === '') {searchResultsAnim('desktop', 'end')}
@@ -547,6 +546,7 @@ function Nav () {
                 resultItemCont.onclick = () => {
                     setSelectedProductToShow(item);
                     navigate(`/product/${item.name}`);
+                    searchInput.value = '';
                 }
                 resultItemDetails.classList.add('search-result-details')
                 resultItemP.innerText = `${item.name}`
@@ -564,13 +564,13 @@ function Nav () {
             resultsList.classList.add('search-results-container-anim');
             searchResultsArr = []
             resultsList.innerHTML = ''
-            let inventory: string[] = [];
             if(searchInput.value !== '') {
                 searchResultsAnim('mobile', 'start')
-                Object.entries(Inventory.Items).forEach(item => {
-                    inventory.push(item[0]);
-                    if(item[0].toLowerCase().includes(searchInput.value.toLowerCase())) 
-                    {searchResultsArr.push(item[1])}
+                Object.entries(inventory).forEach(item => {
+                    if(item[1].name) {
+                        if(item[1].name.toLowerCase().includes(searchInput.value.toLowerCase()))
+                        {searchResultsArr.push(item[1])}
+                    }
                 })
             }
             else if(searchInput.value === '') {searchResultsAnim('mobile', 'end')}
@@ -647,42 +647,82 @@ function Nav () {
                             </ul>
                         </div>
                     </div>
-                    <div><span className="material-symbols-outlined nav-icon">favorite</span></div>
-                    <div className='account-container'>
+                    <div className='nav-icon-container'>
                         <span onClick={
                             () => {
+                                let favoritesDiv:HTMLElement = document.querySelector('div.favorites-preview-container')!;
                                 let accountDiv:HTMLElement = document.querySelector('div.account-preview-container')!;
-                                if(accountDiv.style.display === 'flex') {
-                                    hideMobileElement(accountDiv, 'animate__fadeOutRight')
+                                let cartDiv:HTMLElement = document.querySelector('div.cart-preview-container')!;
+                                if(favoritesDiv.style.display === 'flex') {
+                                    hideElement(favoritesDiv, 'animate__fadeOutRight')
                                 }
                                 else {
-                                    showMobileElement(accountDiv, 'animate__fadeInRight')
+                                    hideElement(accountDiv, 'animate__fadeOutRight')
+                                    hideElement(cartDiv, 'animate__fadeOutRight')
+                                    showElement(favoritesDiv, 'animate__fadeInRight')
+                                }
+                            }
+                        } className='material-symbols-outlined nav-icon'>favorite</span>
+                        <div className='nav-icon-counter'>{favoritesCounter}</div>
+                    </div>
+                    <div className='nav-icon-container'>
+                        <span onClick={
+                            () => {
+                                let favoritesDiv:HTMLElement = document.querySelector('div.favorites-preview-container')!;
+                                let accountDiv:HTMLElement = document.querySelector('div.account-preview-container')!;
+                                let cartDiv:HTMLElement = document.querySelector('div.cart-preview-container')!;
+                                if(accountDiv.style.display === 'flex') {
+                                    hideElement(accountDiv, 'animate__fadeOutRight')
+                                }
+                                else {
+                                    hideElement(favoritesDiv, 'animate__fadeOutRight')
+                                    hideElement(cartDiv, 'animate__fadeOutRight')
+                                    showElement(accountDiv, 'animate__fadeInRight')
                                 }
                             }
                         } className='material-symbols-outlined nav-icon'>account_circle</span>
-                        {AuthCont()}
                     </div>
-                    <div className='cart-container'>
+                    <div onClick={
+                        () => {
+                            let favoritesDiv:HTMLElement = document.querySelector('div.favorites-preview-container')!;
+                            let accountDiv:HTMLElement = document.querySelector('div.account-preview-container')!;
+                            let cartDiv:HTMLElement = document.querySelector('div.cart-preview-container')!;
+                            if(cartDiv.style.display === 'flex') {
+                                hideElement(cartDiv, 'animate__fadeOutRight')
+                            }
+                            else {
+                                hideElement(favoritesDiv, 'animate__fadeOutRight')
+                                hideElement(accountDiv, 'animate__fadeOutRight')
+                                showElement(cartDiv, 'animate__fadeInRight')
+                            }
+                        }
+                    } className='nav-icon-container'>
                         <span className="material-symbols-outlined nav-icon">shopping_bag</span>
-                        <div className='cart-count'>98</div>
+                        <div className='nav-icon-counter'>{cartCounter}</div>
                     </div>
                 </div>
+                {FavCont()}
+                {AuthCont()}
+                {CartCont()}
             </div>
             {deviceType === 'mobile' && 
             <>
                 <div className='nav-lower-mobile'>
                     <div className='nav-mobile-menu'>
                         <span onClick={() => {
+                            let body = document.querySelector('body')!;
                             let categories:HTMLElement = document.querySelector('div.nav-mobile-categs')!;
                             let searchCont:HTMLElement = document.querySelector('div.nav-mobile-search-cont')!;
                             if(searchCont.classList.contains('in-transition')) return;
-                            if(alreadyOpenedSearch.current) hideMobileElement(searchCont, 'animate__fadeOutUp')
+                            if(alreadyOpenedSearch.current) hideElement(searchCont, 'animate__fadeOutUp')
                             if(categories.style.display !== 'flex') {
-                                showMobileElement(categories, 'animate__fadeInLeft')
+                                body.style.overflow = 'hidden';
+                                showElement(categories, 'animate__fadeInLeft')
                                 alreadyOpenedCateg.current = true;
                             }
                             else {
-                                hideMobileElement(categories, 'animate__fadeOutLeft')
+                                body.style.overflow = 'auto';
+                                hideElement(categories, 'animate__fadeOutLeft')
                                 alreadyOpenedCateg.current = false;
                             }
                             }} className="material-symbols-outlined">menu</span>
@@ -693,13 +733,13 @@ function Nav () {
                             let categories:HTMLElement = document.querySelector('div.nav-mobile-categs')!;
                             let searchCont:HTMLElement = document.querySelector('div.nav-mobile-search-cont')!;
                             if(categories.classList.contains('in-transition')) return;
-                            if(alreadyOpenedCateg.current) hideMobileElement(categories, 'animate__fadeOutLeft')
+                            if(alreadyOpenedCateg.current) hideElement(categories, 'animate__fadeOutLeft')
                             if(searchCont.style.display !== 'flex') {
-                                showMobileElement(searchCont, 'animate__fadeInDown')
+                                showElement(searchCont, 'animate__fadeInDown')
                                 alreadyOpenedSearch.current = true;
                             }
                             else {
-                                hideMobileElement(searchCont, 'animate__fadeOutUp')
+                                hideElement(searchCont, 'animate__fadeOutUp')
                                 alreadyOpenedSearch.current = false;
                             }
                         }} className='material-symbols-outlined search-icon-mobile'>search</span>
@@ -749,7 +789,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Champagne')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >
@@ -774,7 +814,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Gift-Card')
                                 switchMenus('secondary', 'primary')
-                                hideMobileElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
+                                hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
                         >

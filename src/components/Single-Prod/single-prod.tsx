@@ -1,12 +1,19 @@
 import './single-prod.css'
 import * as MaterialIcon from '@mui/icons-material'
 import * as Material from '@mui/material'
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { SelectedProdContext } from '../../Contexts/selectedProductContext';
+import { UserMethodsContext } from '../../Contexts/userMethodsContext';
 
 function SingleProd () {
     
     const { selectedProductToShow, quantityValue, setQuantityValue} = useContext(SelectedProdContext);
+    const { checkIfFavorite, addToFavorites, removeFromFavorites, addToCart } = useContext(UserMethodsContext);
+    const [isFavorite, setIsFavorite] = useState(checkIfFavorite(selectedProductToShow!));
+
+    useEffect(() => {
+        setIsFavorite(checkIfFavorite(selectedProductToShow!));
+    }, [selectedProductToShow, checkIfFavorite]);
 
     function QuantityInput() {
         
@@ -92,11 +99,13 @@ function SingleProd () {
                 </div>
                 <div className='product-details-container'>
                     <div className='rating-price-cont'>
+                        {
+                            isFavorite ?
+                            <span className='material-symbols-outlined favorite-active' onClick={() => {removeFromFavorites(selectedProductToShow); setIsFavorite(!isFavorite)}}>favorite</span>
+                            :
+                            <span className='material-symbols-outlined favorite-inactive' onClick={() => {addToFavorites(selectedProductToShow); setIsFavorite(!isFavorite)}}>favorite</span>
+                        }
                         <div className='rating-cont'>
-                            <div className='rating'>
-                                <Material.Rating name="half-rating" defaultValue={4.5} sx={{color: 'black'}} precision={0.5} />
-                            </div>
-                            <p>0 Reviews for this product</p>
                             <p className='price-cont'>${selectedProductToShow?.price}</p>
                             <div className='stock'>
                                 <span className="material-symbols-outlined">check_circle</span>
@@ -117,6 +126,7 @@ function SingleProd () {
                                         backgroundColor: "black"
                                     }
                                 }}
+                                onClick={() => addToCart(selectedProductToShow!, quantityValue)}
                                 startIcon={<MaterialIcon.AddShoppingCartRounded/>}>
                                 Add to Cart
                             </Material.Button>

@@ -3,16 +3,22 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/home';
 import IndividualProdPage from './pages/individualProdPage';
 import FilteredProducts from './pages/filteredProductsPage';
+import Checkout from './pages/checkout';
+import OrderHistoryPage from './pages/orderHistoryPage';
 import { SelectedProdProvider } from './Contexts/selectedProductContext';
 import { SelectedFilterProvider } from './Contexts/selectedFilterContext';
-// import { AuthProvider } from './Contexts/authContext';
+import { InventoryContextProvider } from './Contexts/inventoryContext';
+import { UserMethodsProvider } from './Contexts/userMethodsContext';
+import { AppearenceMethodsProvider } from './Contexts/appeareanceContext';
 
 function App() {
 
   return (
+    <AppearenceMethodsProvider>
+    <UserMethodsProvider>
+    <InventoryContextProvider>
     <SelectedProdProvider>
     <SelectedFilterProvider>
-    {/* <AuthProvider> */}
       <BrowserRouter>
         <Routes>
             <Route index element= {<Home/>}></Route>
@@ -23,11 +29,21 @@ function App() {
             path={`category/:categoryName`}
             element={<FilteredProducts />}
             />
+            <Route
+            path='/checkout'
+            element={<Checkout />}
+            />
+            <Route
+            path='/order-history'
+            element={<OrderHistoryPage />}
+            />
         </Routes>
       </BrowserRouter>
-    {/* </AuthProvider> */}
     </SelectedFilterProvider> 
     </SelectedProdProvider>
+    </InventoryContextProvider>
+    </UserMethodsProvider>
+    </AppearenceMethodsProvider>
   );  
 }
 

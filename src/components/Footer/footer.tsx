@@ -1,7 +1,7 @@
 import './footer.css'
 import Heart from '../../images/Icons/heart.svg'
 import React from '../../images/Icons/react.svg'
-import Typescript from '../../images/Icons/typescript.svg'
+import Firebase from '../../images/Icons/firebase.svg'
 
 export default function Footer () {
     return(
@@ -12,7 +12,7 @@ export default function Footer () {
                 ,
                 <img src={React} alt="" />
                 and 
-                <img src={Typescript} alt="" />
+                <img src={Firebase} alt="" />
             </p>
         </footer>
     )
