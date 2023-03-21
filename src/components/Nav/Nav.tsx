@@ -93,6 +93,7 @@ function Nav () {
         setSelectedMainCategory('spirits');
         setSelectedFilter(filteredItems);
         window.scrollTo(0, 0);
+        document.querySelector('body')!.style.overflow = 'auto';
     }
 
     //Handles the secondary menu content
@@ -488,7 +489,6 @@ function Nav () {
         else if(type === 'mobile') {
             let resultsDiv:HTMLElement = document.querySelector('div.mobile-search-results')!;
             if(time === 'start' && searchResultsAnimationDelay.current === 0) { 
-                // document.querySelector('body')!.style.overflow = 'hidden';
                 resultsDiv.classList.toggle('animate__fadeIn');
                 resultsDiv.style.display = 'flex'
                 setTimeout(() => {
@@ -497,7 +497,6 @@ function Nav () {
                 }, 500)
             }
             else if(time === 'end' && searchResultsAnimationDelay.current === 1) {
-                // document.querySelector('body')!.style.overflow = 'visible';
                 resultsDiv.classList.toggle('animate__fadeOut');
                 setTimeout(() => {
                     resultsDiv.style.display = 'none'
