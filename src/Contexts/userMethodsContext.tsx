@@ -44,7 +44,7 @@ export const UserMethodsProvider = ({children}: any) => {
     const {hideElement} = useContext(AppearenceMethodsContext);
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
                 const getUserData = async () => {
@@ -63,7 +63,6 @@ export const UserMethodsProvider = ({children}: any) => {
                 setUser(null);
             }
         });
-        return () => unsubscribe();
     }, []);
 
     const addToCart = (item: Item, quantity: number) => {
