@@ -92,6 +92,7 @@ function Nav () {
         })
         setSelectedMainCategory('spirits');
         setSelectedFilter(filteredItems);
+        window.scrollTo(0, 0);
     }
 
     //Handles the secondary menu content
@@ -99,7 +100,7 @@ function Nav () {
     const secondaryMenu = () => {
         switch (selectedMainCategory) {
             case 'spirits':
-                if(window.innerWidth >= 1000) {
+                if(deviceType === 'desktop') {
                     return (
                         <>
                             <Link
@@ -301,7 +302,7 @@ function Nav () {
                     )
                 }
             case 'wines':
-                if(window.innerWidth >= 1000) {
+                if(deviceType === 'desktop') {
                     return (
                         <>
                             <Link
@@ -395,7 +396,7 @@ function Nav () {
                     )
                 }
             case 'others':
-                if(window.innerWidth >= 1000) {
+                if(deviceType === 'desktop') {
                     return (
                         <>
                             <Link
@@ -789,6 +790,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Champagne')
                                 switchMenus('secondary', 'primary')
+                                window.scrollTo(0, 0)
                                 hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
@@ -814,6 +816,7 @@ function Nav () {
                             onClick={() => {
                                 filterHandler('Gift-Card')
                                 switchMenus('secondary', 'primary')
+                                window.scrollTo(0, 0)
                                 hideElement(document.querySelector('div.nav-mobile-categs')!, 'animate__fadeOutLeft')
                             }}
                             className='primary-categ-item'
