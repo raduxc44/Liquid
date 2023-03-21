@@ -1,5 +1,4 @@
-import {createContext, useState} from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
+import {createContext} from 'react';
 
 type appearenceMethodsContextType = {
     showElement: (element: HTMLElement, animationClass:string) => void;
