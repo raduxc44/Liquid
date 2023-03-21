@@ -16,8 +16,7 @@ const OrderHistory = () => {
                         const data = doc.data();
                         if (data) {
                             const { orders } = data;
-                            setOrders(orders);
-                            console.log(orders)
+                            setOrders(orders.sort((a:any, b:any) =>  b.date.toDate() - a.date.toDate()));
                         }
                     }
                 })
@@ -34,7 +33,6 @@ const OrderHistory = () => {
             <h1>Your order history</h1>
             <ul className="order-history-list">
                 {orders.map((order, index) => {
-                    console.log(order.orderItems)
                     return (
                         <div className="order" key={index}>
                             <div className="order-header">

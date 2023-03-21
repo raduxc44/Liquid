@@ -13,7 +13,8 @@ function SingleProd () {
 
     useEffect(() => {
         setIsFavorite(checkIfFavorite(selectedProductToShow!));
-    }, [selectedProductToShow, checkIfFavorite]);
+        setQuantityValue(1);
+    }, [selectedProductToShow, checkIfFavorite, setQuantityValue]);
 
     function QuantityInput() {
         

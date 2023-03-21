@@ -29,6 +29,8 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-variation-settings: 
+    'FILL' 0;
 }
 .nav-icon:hover {
     cursor: pointer;
@@ -394,8 +396,6 @@ nav {
         animation-duration: 0.5s;
         animation-fill-mode: forwards;
         cursor: pointer;
-        font-variation-settings: 
-        'FILL' 1;
     }
     .nav-lower-desktop {
         display: none;

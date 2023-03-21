@@ -513,16 +513,10 @@ function Nav () {
             let searchInput:HTMLInputElement = document.querySelector('div.search-bar > input')!;
             let resultsList:HTMLElement = document.querySelector('div.search-results-container > ul')!;
             resultsList.classList.add('search-results-container-anim');
-            searchResultsArr = []
+            searchResultsArr = Object.values(inventory).filter(item => item.name?.toLowerCase().includes(searchInput.value.toLowerCase()))
             resultsList.innerHTML = ''
             if(searchInput.value !== '') {
                 searchResultsAnim('desktop', 'start')
-                Object.entries(inventory).forEach(item => {
-                    if(item[1].name) {
-                        if(item[1].name.toLowerCase().includes(searchInput.value.toLowerCase()))
-                        {searchResultsArr.push(item[1])}
-                    }
-                })
             }
             else if(searchInput.value === '') {searchResultsAnim('desktop', 'end')}
             searchResultsArr.forEach((item) =>  {
